@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Kubernetes on Macho000</title><link>https://macho000.github.io/tags/kubernetes/</link><description>Recent content in Kubernetes on Macho000</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Fri, 09 Sep 2022 11:28:39 +0900</lastBuildDate><atom:link href="https://macho000.github.io/tags/kubernetes/index.xml" rel="self" type="application/rss+xml"/><item><title>k8sでできること</title><link>https://macho000.github.io/blogs/20220901_k8s%E3%81%A7%E3%81%A7%E3%81%8D%E3%82%8B%E3%81%93%E3%81%A8%E8%A7%A3%E8%AA%AC/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/blogs/20220901_k8s%E3%81%A7%E3%81%A7%E3%81%8D%E3%82%8B%E3%81%93%E3%81%A8%E8%A7%A3%E8%AA%AC/</guid><description>&lt;h1 id="1-k8skubernetesとは">1. k8s（kubernetes）とは&lt;/h1>
+&lt;p>&lt;code>Kubernetesとは、コンピュータ・クラスター内およびコンピュータ・クラスター間でのアプリケーションコンテナの配置および実行を調整する、プロダクショングレードのオープンソースプラットフォームのこと&lt;/code>
+&lt;code>機能としては、単一のユニットとして機能するように接続された、可用性の高いコンピュータのクラスターをまとめあげる機能である&lt;/code>と公式HPには書かれています。&lt;/p>
+&lt;p>これだけだと分かりづらいのK8sクラスターの図を以下に示す&lt;/p>
+&lt;p>&lt;img src="40efb62d8e5e3b643b4345ddb86cd5f7d6a5e77d722ef90d5e04fe4156fe5782.png" alt="picture 1">&lt;/p>
+&lt;p>この図のようにK8sクラスターはクラスターを管理する&lt;code>マスター&lt;/code>とアプリケーションを動かすワーカーとなる&lt;code>ノード&lt;/code>からなる。&lt;/p>
+&lt;h1 id="2-kubernetes-deployementsとは">2. Kubernetes Deployementsとは&lt;/h1>
+&lt;p>Kubernetesクラスターを実行すると、その上にコンテナ化アプリケーションをデプロイできる。&lt;/p>
+&lt;p>これを図にしたものを以下に示す&lt;/p>
+&lt;p>&lt;img src="e1055c1758c5e4e812e93dd5f13dbb51ddbc6c9f1813493e077a6dae177838e1.png" alt="picture 2">&lt;/p>
+&lt;p>デプロイを行うことによって先程作成したコンテナの上にアプリケーションを乗せることができる&lt;/p>
+&lt;h1 id="3-kubernetes-podとは">3. Kubernetes Podとは&lt;/h1>
+&lt;p>&lt;code>Podは１つ以上のアプリケーションコンテナのグループであり、共有ストレージ、IPアドレス、それらの実行方法に関する情報が含まれている&lt;/code>&lt;/p>
+&lt;p>これを図にすると以下の通り&lt;/p>
+&lt;p>&lt;img src="91c99d3e3939bee4df24c04bde8c7df4f7f2be51875bcce7237aaac3e086f148.png" alt="picture 3">&lt;/p>
+&lt;p>１つのPodに１つのアプリがある場合もあれば、１つのPodに複数のアプリと共有コンテナが共存する場合もある&lt;/p>
+&lt;h1 id="4-kubernetes-ノードとは">4. Kubernetes ノードとは&lt;/h1>
+&lt;p>Podは常にノード上で動作をする。ノードは複数のPodを持つことができ、Kubernetesマスターはクラスター内のノード間でPodのスケジュールを自動的に処理をする。&lt;/p>
+&lt;p>これを図にすると以下の通り&lt;/p>
+&lt;p>&lt;img src="819ee281130b89fa85f178ea6695f88832f7979eb48cc35b7c1db74a8dca4f03.png" alt="picture 4">&lt;/p>
+&lt;p>ノードの中には複数のPodが存在している&lt;/p>
+&lt;h1 id="5-kubernetesserviceとは">5. Kubernetes　Serviceとは&lt;/h1>
+&lt;p>&lt;code>Serviceは、Podの論理セットを定義し、それらのPodに対する外部トラフィックの公開、負荷分散、およびサービス検出を可能にする抽象化層のこと&lt;/code>&lt;/p>
+&lt;p>これを図にすると以下の通り&lt;/p>
+&lt;p>&lt;img src="cf97d9933fb951d48037a224b2a91ddfea676d1af624cd6ec83b3ec5b1dfa2e2.png" alt="picture 5">&lt;/p>
+&lt;p>Serviceは、一連のPodにトライフィックをルーティングする。さらにServiceは、アプリケーションに影響を与えることなく、Podが死んだり複製したりすることを可能にする抽象概念のことである。
+K8sの肝であるルーティングや、自動スケーリング、Podが死んでも立ち直るのはこのServiceがあるおかげである。&lt;/p>
+&lt;h2 id="51-serviceの種類">5.1. Serviceの種類&lt;/h2>
+&lt;ul>
+&lt;li>ClusterIP(既定値) - クラスター内の内部IPでServiceを公開する&lt;/li>
+&lt;li>NodePort - NATを使用して、クラスター内の選択された各ノードの同じポートにServiceを公開する。&lt;/li>
+&lt;li>LoadBalancer - 現在のクラウドに外部ロードバランサを作成し、Serviceni固定の外部IPを割り当てる&lt;/li>
+&lt;li>ExternalName - 使用の&lt;code>externalName&lt;/code>で指定した名前のCNAMEレコードを返す&lt;/li>
+&lt;/ul>
+&lt;h1 id="6-アプリケーションのスケーリング">6. アプリケーションのスケーリング&lt;/h1>
+&lt;p>ユーザーの需要に対応するためにアプリケーションをスケール必要がある&lt;/p>
+&lt;p>&lt;code>kubectl create deploymentコマンドの--replicasパラメーターを使用することで、最初から複数のインスタンスを含むDeploymentを作成できる&lt;/code>&lt;/p>
+&lt;h2 id="61-スケーリングの概要1">6.1. スケーリングの概要1&lt;/h2>
+&lt;p>&lt;img src="c058dab6b85ccc01ea15950d3813a8f0c48944a3ad9d4709c4ed741223c80a99.png" alt="picture 8">&lt;/p>
+&lt;h2 id="62-スケーリングの概要2">6.2. スケーリングの概要2&lt;/h2>
+&lt;p>&lt;img src="75edbdd7dd743e05af55c190c63d87e2c1ae4a52281a25b3b2009931dc7cb27e.png" alt="picture 9">&lt;/p>
+&lt;h1 id="7-ローリングアップデートの実行">7. ローリングアップデートの実行&lt;/h1>
+&lt;p>&lt;code>ローリングアップデートでは、Podを新しいインスタンスで段階的にアップデートすることで、ダウンタイムなしDeploymentをアップデートできる&lt;/code>&lt;/p></description></item><item><title>k8sで用いるコマンド一覧</title><link>https://macho000.github.io/blogs/20220901_k8s%E3%81%A7%E7%94%A8%E3%81%84%E3%82%8B%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E4%B8%80%E8%A6%A7/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/blogs/20220901_k8s%E3%81%A7%E7%94%A8%E3%81%84%E3%82%8B%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E4%B8%80%E8%A6%A7/</guid><description>&lt;h1 id="クラスターの作成">クラスターの作成&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">## start k8s
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">minikube start
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">## see running cluster-info
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">kubectl cluster-info 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">## shows all nodes that can be used to host application
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">kubectl get nodes 
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="アプリケーションのデプロイ">アプリケーションのデプロイ&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">## deploy app on kubernetes
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">kubectl create deployment 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">## deploy and set app image location
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">kubectl create deployment kubernetes-bootcamp --image=gcr.io/google-samples/kubernetes-bootcamp:v1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">## list your deployments
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">kubectl get deployments
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Open second window&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl"># to run proxy
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">echo&lt;/span> -e &lt;span class="s2">&amp;#34;\n\n\n\e[92mStarting Proxy. After starting it will not output a response. Please click the first Terminal Tab\n&amp;#34;&lt;/span>; 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">kubectl proxy
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>and then we have a connection between our host and k8s cluster.&lt;/p></description></item></channel></rss>

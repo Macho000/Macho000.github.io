@@ -1,0 +1,49 @@
+<!doctype html><html lang=ja><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>flutterでデータを渡して画面遷移する方法 · Macho000</title><meta name=description content="StatelessWidget でデータを受け取る場合 画面遷移元から受け取るデータの引数を宣言 引数付きコンストラクタを作成し、引数として受け取るデータの変数を宣言 class NextPage extends StatelessWidget { // 画面遷移元からのデータを受け取る変数 final int …"><link rel=canonical href=https://macho000.github.io/blogs/20220923_flutter%E3%81%A7%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E6%B8%A1%E3%81%97%E3%81%A6%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95/><link rel=stylesheet href=/css/site.css><link rel=alternate type=application/rss+xml title="Macho000 RSS" href=/index.xml></head><body><a class=skip href=#main>本文へ</a><div class=shell><header><a class=brand href=/>Macho000<span class=dot>.</span></a><nav aria-label=メインナビゲーション><a href=/>Home</a><a href=/blog/ aria-current=page>Blog</a><a href=https://github.com/Macho000>GitHub ↗</a></nav></header><main id=main><article><div class=article-heading><a class=muted href=/blog/>← Blog</a><p class=eyebrow>2022.09.23</p><h1>flutterでデータを渡して画面遷移する方法</h1><div class=tags><a href=/tags/flutter/>flutter</a></div></div><div class=prose><h1 id=statelesswidget-でデータを受け取る場合>StatelessWidget でデータを受け取る場合</h1><ul><li>画面遷移元から受け取るデータの引数を宣言</li><li>引数付きコンストラクタを作成し、引数として受け取るデータの変数を宣言</li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-dart data-lang=dart><span class=line><span class=cl><span class=kd>class</span> <span class=nc>NextPage</span> <span class=kd>extends</span> <span class=n>StatelessWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// 画面遷移元からのデータを受け取る変数
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=kd>final</span> <span class=kt>int</span> <span class=n>value</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// コンストラクタ
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=kd>const</span> <span class=n>NextPage</span><span class=p>({</span><span class=n>Key</span><span class=o>?</span> <span class=n>key</span><span class=p>,</span> <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>value</span><span class=p>})</span> <span class=o>:</span> <span class=k>super</span><span class=p>(</span><span class=nl>key:</span> <span class=n>key</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Scaffold</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=err>…</span> <span class=p>,</span>  <span class=c1>// 省略
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><h1 id=statefulwidget-でデータを受け取る場合>StatefulWidget でデータを受け取る場合</h1><p>StatelessWidgetの手順に加えて、Statefulではデータ（変数）にアクセスするにはwidget.変数を用いる</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-dart data-lang=dart><span class=line><span class=cl><span class=kd>class</span> <span class=nc>NextPage</span> <span class=kd>extends</span> <span class=n>StatefulWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// 画面遷移元からのデータを受け取る変数
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=kd>final</span> <span class=kt>int</span> <span class=n>value</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// コンストラクタ
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=kd>const</span> <span class=n>NextPage</span><span class=p>({</span><span class=n>Key</span><span class=o>?</span> <span class=n>key</span><span class=p>,</span> <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>value</span><span class=p>})</span> <span class=o>:</span> <span class=k>super</span><span class=p>(</span><span class=nl>key:</span> <span class=n>key</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>State</span><span class=o>&lt;</span><span class=n>NextPage</span><span class=o>&gt;</span> <span class=n>createState</span><span class=p>()</span> <span class=o>=&gt;</span> <span class=n>_NextPageState</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=err></span><span class=nc>_NextPageState</span> <span class=kd>extends</span> <span class=n>State</span><span class=o>&lt;</span><span class=n>NextPage</span><span class=o>&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// 状態を管理する変数
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=n>late</span> <span class=kt>int</span> <span class=n>state</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=kt>void</span> <span class=n>initState</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>super</span><span class=p>.</span><span class=n>initState</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// 受け取ったデータを状態を管理する変数に格納
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=n>state</span> <span class=o>=</span> <span class=n>widget</span><span class=p>.</span><span class=n>value</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Scaffold</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=err>…</span> <span class=p>,</span>  <span class=c1>// 省略
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><h1 id=データの受け渡し方>データの受け渡し方</h1><p>わたす変数のデータを引数として渡す。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-dart data-lang=dart><span class=line><span class=cl><span class=n>Navigator</span><span class=p>.</span><span class=n>push</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>  <span class=n>context</span><span class=p>,</span> 
+</span></span><span class=line><span class=cl>  <span class=n>MaterialPageRoute</span><span class=p>(</span><span class=nl>builder:</span> <span class=p>(</span><span class=n>context</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>NextPage</span><span class=p>(</span><span class=nl>value:</span> <span class=m>100</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl><span class=p>);</span>
+</span></span></code></pre></div><h1 id=参考文献>参考文献</h1><p><a href=https://hiyoko-programming.com/1347/>https://hiyoko-programming.com/1347/</a></p></div><script type=text/x-mathjax-config>MathJax.Hub.Config({tex2jax:{inlineMath:[["$","$"],["\\(","\\)"]],processEscapes:true}});</script><script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><div class=article-end><a href=/blog/>← 記事一覧へ</a></div></article></main><footer><span>© 2026 Macho000</span><a href=/index.xml>RSS ↗</a></footer></div></body></html>

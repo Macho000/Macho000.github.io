@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>評価指標 on Macho000</title><link>https://macho000.github.io/tags/%E8%A9%95%E4%BE%A1%E6%8C%87%E6%A8%99/</link><description>Recent content in 評価指標 on Macho000</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Fri, 09 Sep 2022 11:28:39 +0900</lastBuildDate><atom:link href="https://macho000.github.io/tags/%E8%A9%95%E4%BE%A1%E6%8C%87%E6%A8%99/index.xml" rel="self" type="application/rss+xml"/><item><title> BLEU解説</title><link>https://macho000.github.io/research_blog/20220813_bleu%E8%A7%A3%E8%AA%AC/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/research_blog/20220813_bleu%E8%A7%A3%E8%AA%AC/</guid><description>&lt;script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax:{inlineMath:[['\$','\$'],['\\(','\\)']],processEscapes:true},CommonHTML: {matchFontHeight:false}});&lt;/script>
+&lt;script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">&lt;/script>
+&lt;p>BLEUスコアのスコアの算出方法はズバリ以下のとおりです
+$BLEU=BP \cdot exp(\Sigma_{n=1}^{N}w_nlogp_n)$
+でスコアを算出します。&lt;/p>
+&lt;p>簡単に説明するとモデルの出力の1-gram, 2-gram, 3-gram, 4-gramが正解質問(Reference)がどの程度含まれているかを表す指標です&lt;/p>
+&lt;p>用語の説明をしていきます&lt;/p>
+&lt;h2 id="p_nの定義">$p_n$の定義&lt;/h2>
+&lt;p>$p_n$ はprecisionスコアと呼ばれるもので以下の式で計算される
+$p_n= \frac{\Sigma_{C\in {Candidates}} \Sigma_{n-gram \in C} Count_{clip}(n-gram)}{\Sigma_{C&amp;rsquo;\in {Candidates}} \Sigma_{n-gram&amp;rsquo; \in C&amp;rsquo;} Count(n-gram&amp;rsquo;)}$
+で定義される&lt;/p>
+&lt;p>ここで、$Count_{clip}(n-gram)=min(Count(n-gram), MaxRefCount(n-gram))$
+と定義される&lt;/p>
+&lt;p>$Count(n-gram)$は、Candidateに含まれるn-gramの数を表す .例えば、$Count(1-gram)$は、Candidateに含まれる1-gramの数を表す .&lt;/p>
+&lt;p>$MaxRefCount(n-gram)$は、candidateに含まれるn-gramがReference文中に観測される回数を表す&lt;/p>
+&lt;p>例えばCandidateに「the cat sat at chair」、Referenceに「the cat sat on the table」だったら1-gramのときは $Count(1-gram)=5, MaxRefCount(1-gram)=3$となるので $Count_{clip}(n-gram)=3$となる。したがって、このような状況の場合precisionは　$p_n=\frac{3}{5}=0.6$となる。&lt;/p>
+&lt;p>簡単に言えば、precisionは、candidateに含まれるn-gramがreferenceに含まれる割合を表す
+precisionが高い場合は、n-gram単位でreferenceと単語の一致度が高いということを意味する
+一方precisionが低い場合は、n-gram単位でreferenceと単語の一致度が低いということを意味し、関係のない単語が出力されている可能性が高い。&lt;/p>
+&lt;h2 id="bpとは">BPとは&lt;/h2>
+&lt;p>BPとは下記の式で定義されます&lt;/p>
+&lt;p>$
+\text{BP}
+\begin{cases}
+1 &amp;amp; c &amp;gt; r \
+e^{1-r/c} &amp;amp; c \leqq r
+\end{cases}
+$&lt;/p>
+&lt;p>$c:candidate$の長さ
+$r:reference$の長さ&lt;/p></description></item><item><title>BERTSCore解説</title><link>https://macho000.github.io/research_blog/20220808_bertscore%E8%A7%A3%E8%AA%AC/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/research_blog/20220808_bertscore%E8%A7%A3%E8%AA%AC/</guid><description>&lt;script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax:{inlineMath:[['\$','\$'],['\\(','\\)']],processEscapes:true},CommonHTML: {matchFontHeight:false}});&lt;/script>
+&lt;script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">&lt;/script>
+&lt;h1 id="bertscoreとは">BERTScoreとは&lt;/h1>
+&lt;p>テキスト生成に対する自動評価指標のこと&lt;/p>
+&lt;h1 id="bertscore計算方法">BERTScore計算方法&lt;/h1>
+&lt;h2 id="準備">準備&lt;/h2>
+&lt;p>入力として正解文字列を$$x=&amp;lt;x_1, x_2, &amp;hellip;, x_k &amp;gt; $$
+出力文字列を$$ \hat{x}=&amp;lt;\hat{x_1}, \hat{x_2},&amp;hellip;,\hat{x_m}&amp;gt; $$
+と置く。&lt;/p>
+&lt;h2 id="bertscore">BERTSCORE&lt;/h2>
+&lt;p>$$
+R_{BERT}=\frac{1}{|x|} \Sigma_{x_i \in x}max_{\hat{x}_j \in \hat{x}} \mathbf x_i^T \mathbf{\hat{x}}_j
+$$&lt;/p>
+&lt;p>$$
+P_{BERT}=\frac{1}{|\hat{x}|}\Sigma_{\hat x_j \in \hat x} max_{x_i \in x} \mathbf x_i^T \mathbf{\hat{x}}_j
+$$&lt;/p>
+&lt;p>$$
+F_{BERT}=2\frac{P_{BERT}\cdot R_{BERT}}{P_{BERT}+R_{BERT}}
+$$&lt;/p>
+&lt;h2 id="計算例">計算例&lt;/h2>
+&lt;p>例えば正解文字列(TARGET)が&amp;quot;alphabet&amp;quot;で、生成文字列(OUTPUT)が”writing system”である場合を考える。&lt;/p>
+&lt;p>数式で表すと
+正解文字列を$x=&amp;lt;x_1&amp;gt;=&amp;lt;alphabet&amp;gt; $
+出力文字列を$ \hat{x}=&amp;lt;\hat{x_1}, \hat{x_2}&amp;gt;=&amp;lt;writing, system&amp;gt; $と表せる&lt;/p>
+&lt;h3 id="recallの計算例">Recallの計算例&lt;/h3>
+&lt;p>このときまず&lt;/p>
+&lt;p>$$
+R_{BERT}=
+\frac{1}{|x|} \Sigma_{x_i \in x}max_{\hat{x}_j \in \hat x} \mathbf x_i^T \mathbf{\hat{x}}_j
+$$&lt;/p></description></item><item><title>Precision Recall F1スコア解説</title><link>https://macho000.github.io/research_blog/20220830_precisionrecallf1%E3%82%B9%E3%82%B3%E3%82%A2%E8%A7%A3%E8%AA%AC/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/research_blog/20220830_precisionrecallf1%E3%82%B9%E3%82%B3%E3%82%A2%E8%A7%A3%E8%AA%AC/</guid><description>&lt;script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax:{inlineMath:[['\$','\$'],['\\(','\\)']],processEscapes:true},CommonHTML: {matchFontHeight:false}});&lt;/script>
+&lt;script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">&lt;/script>
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+&lt;script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous">&lt;/script>
+&lt;!-- Automatically render math in text elements -->
+&lt;script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous">&lt;/script>
+&lt;script>
+document.addEventListener("DOMContentLoaded", function() {
+ renderMathInElement(document.body, {
+ delimiters: [
+ {left: "$$", right: "$$", display: true},
+ {left: "$", right: "$", display: false},
+ ]
+ });
+});
+&lt;/script>
+&lt;h1 id="1-前提知識">1. 前提知識&lt;/h1>
+&lt;h2 id="11-分類問題における正解不正解パターン">1.1. 分類問題における正解・不正解パターン&lt;/h2>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: center">&lt;/th>
+ &lt;th style="text-align: center">正解（実測）&lt;/th>
+ &lt;th style="text-align: center">不正解（実測）&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: center">正解（予測）&lt;/td>
+ &lt;td style="text-align: center">TP&lt;/td>
+ &lt;td style="text-align: center">FP&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: center">不正解（予測）&lt;/td>
+ &lt;td style="text-align: center">FN&lt;/td>
+ &lt;td style="text-align: center">TN&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;p>TP (True Positive): 実測値、予測値がともに正であるもの&lt;/p>
+&lt;p>FP (False Positive)： 実測値が負なのに、間違えて予測値が正であると予測したもの&lt;/p>
+&lt;p>FN (True Negative)： 実測値が正なのに、間違えて予測値が負であると予測したもの&lt;/p>
+&lt;p>TN (False Negative)： 実測値、予測値がともに負であるもの&lt;/p>
+&lt;h1 id="2-precisionとは">2. Precisionとは&lt;/h1>
+&lt;p>Precisionは日本語だと適合率のことを言います。
+Precisionでは、「&lt;em>&lt;strong>正と予測したものが、どれだけ正しかったか&lt;/strong>&lt;/em>」を測る指標&lt;/p>
+&lt;p>数式にすると
+$$
+\frac{TP}{TP+FP}
+$$&lt;/p></description></item></channel></rss>

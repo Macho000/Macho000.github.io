@@ -1,0 +1,27 @@
+<!doctype html><html lang=ja><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>STM+CRF解説 · Macho000</title><meta name=description content="要約 下の図のように埋め込み表現と両方向LSTMを使用してCRF層に出力するモデルを提案
+LSTM-CRFモデルとは LSTM RNNはニューラルネットワークの一部で有、連続データを扱う。しかし、 RNNの問題点として、長い文章を扱う際に最も直近の入力に注目してしまうという問題点があった。
+この問題に対処するため …"><link rel=canonical href=https://macho000.github.io/research_blog/20220911_lstmcrf/><link rel=stylesheet href=/css/site.css><link rel=alternate type=application/rss+xml title="Macho000 RSS" href=/index.xml></head><body><a class=skip href=#main>本文へ</a><div class=shell><header><a class=brand href=/>Macho000<span class=dot>.</span></a><nav aria-label=メインナビゲーション><a href=/>Home</a><a href=/blog/ aria-current=page>Blog</a><a href=https://github.com/Macho000>GitHub ↗</a></nav></header><main id=main><article><div class=article-heading><a class=muted href=/blog/>← Blog</a><p class=eyebrow>2022.09.11</p><h1>STM+CRF解説</h1><div class=tags><a href=/tags/%E8%AB%96%E6%96%87%E8%A7%A3%E8%AA%AC/>論文解説</a></div></div><details class=toc><summary>目次</summary><nav id=TableOfContents><ul><li><a href=#lstm>LSTM</a></li><li><a href=#crfタグモデルとは>CRFタグモデルとは</a></li></ul></nav></details><div class=prose><h1 id=要約>要約</h1><p>下の図のように埋め込み表現と両方向LSTMを使用してCRF層に出力するモデルを提案</p><p><img src=0f9035421654bf88fb39ebfbdce6449921964626d0f44de2de9d5bcd8cc6a59b.png alt="picture 1"></p><h1 id=lstm-crfモデルとは>LSTM-CRFモデルとは</h1><h2 id=lstm>LSTM</h2><p>RNNはニューラルネットワークの一部で有、連続データを扱う。しかし、 RNNの問題点として、長い文章を扱う際に最も直近の入力に注目してしまうという問題点があった。</p><p>この問題に対処するためにLSTMモデルが提案された。LSTMは（Long Short-term Memory Networks）の略である。</p><p>LSTMでは、入力の情報を貯めるメモリー機構とそのメモリーをどの用いた機構である。</p><p>数式で表すと下記のようになる。</p><p>$$
+\begin{aligned}
+\mathbf i_t=& \sigma\left(\mathbf W_{x i} \mathbf x_t+\mathbf W_{h i} \mathbf h_{t-1}+\mathbf W_{c i} \mathbf c_{t-1}+\mathbf b_i\right) \
+\mathbf c_t=&\left(1-\mathbf i_t\right) \odot \mathbf c_{t-1}+\
+& \mathbf i_t \odot \tanh \left(\mathbf W_{x c} \mathbf x_t+\mathbf W_{h c} \mathbf h_{t-1}+\mathbf b_c\right) \
+\mathbf o_t=& \sigma\left(\mathbf W_{x o} \mathbf x_t+\mathbf W_{h o} \mathbf h_{t-1}+\mathbf W_{c o} \mathbf c_t+\mathbf b_o\right) \
+\mathbf h_t=& \mathbf o_t \odot \tanh \left(\mathbf c_t\right)
+\end{aligned}
+$$</p><p>$$
+\begin{aligned}
+\mathbf i_t=& \sigma\left(\mathbf W_{x i} \mathbf x_t+\mathbf W_{h i} \mathbf h_{t-1}+\mathbf W_{c i} \mathbf c_{t-1}+\mathbf b_i \right)
+\end{aligned}
+$$</p><h2 id=crfタグモデルとは>CRFタグモデルとは</h2><p>単純なタグモデルでは、隠れ状態 $\mathcal{h}_t$ に対する出力 $y_t$ を独立に決定する。</p><p>しかし、この単純なタグモデルでは、出力に対して依存関係のあるような対象を出力sルウことは難しい。</p><p>NERでは、文法構造が大事になっており単純なタグモデルを使用できない。</p><p>例えば、B-LOCの次にI＿PERが続くことはできない。</p><p>入力が下記のように与えられるとする</p><p>$$
+\mathbf{X}=(x_1, x_2,&mldr;,x_n)
+$$</p><p>この時、両方向LSTMによって得られたスコア関数の出力をP遠く。</p><p>Pのサイズは$n \times k$とする。</p><p>$P_{i,j}$は、文章中の$i^{th}$番目の単語の$j^{th}$タグに対するスコアを表す。</p><p>そして、全体的なスコアを下記のように定義する</p><p>$$
+s(\mathbf X, \mathbf y)=\Sigma_{i=0}^{n}A_{y_i, y_{i+1}}+\Sigma_{i=1}^{n}P_{i,y_i}
+$$</p><p>Aは、タグからタグへの移行スコアを表す</p><p>例えば、$A_{i,j}$は、タグiからタグjまでの移行スコアを表す</p><p>入力に対する全てのタグ出力yは下記のように表せる</p><p>$$
+p(\mathbf{y} \mid \mathbf{X})=\frac{e^{s(\mathbf{X}, \mathbf{y})}}{\sum_{\tilde{\mathbf{y}} \in \mathbf{Y}_{\mathbf{X}}} e^{s(\mathbf{X}, \tilde{\mathbf{y}})}}
+$$</p><p>訓練中は下記のログ確率を最大にするようなタグ列を求める</p><p>$$
+\begin{aligned}
+\log (p(\mathbf　y \mid \mathbf　X))
+&=s(\mathbf　X, \mathbf　y)-\log \left(\sum_{\tilde{\mathbf　y} \in \mathbf Y_{\mathbf X}} e^{s(\mathbf X, \tilde{\mathbf y})}\right) \
+&=s(\mathbf X, \mathbf y)-\underset{\tilde{\mathbf y} \in \mathbf Y_{\mathbf X}}{\operatorname{logadd}} s(\mathbf X, \tilde{\mathbf y})
+\end{aligned}
+$$</p><h1 id=参考文献>参考文献</h1><p>Lample, Guillaume, Miguel Ballesteros, Sandeep Subramanian, Kazuya Kawakami, and Chris Dyer. &ldquo;Neural architectures for named entity recognition.&rdquo; arXiv preprint arXiv:1603.01360 (2016).</p></div><script type=text/x-mathjax-config>MathJax.Hub.Config({tex2jax:{inlineMath:[["$","$"],["\\(","\\)"]],processEscapes:true}});</script><script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><div class=article-end><a href=/blog/>← 記事一覧へ</a></div></article></main><footer><span>© 2026 Macho000</span><a href=/index.xml>RSS ↗</a></footer></div></body></html>

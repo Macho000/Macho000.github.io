@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>環境構築 on Macho000</title><link>https://macho000.github.io/tags/%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/</link><description>Recent content in 環境構築 on Macho000</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Thu, 22 Sep 2022 14:13:26 +0900</lastBuildDate><atom:link href="https://macho000.github.io/tags/%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/index.xml" rel="self" type="application/rss+xml"/><item><title>pipenvのインストールと利用方法</title><link>https://macho000.github.io/blogs/20220921_pipenv%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%A8%E5%88%A9%E7%94%A8%E6%96%B9%E6%B3%95/</link><pubDate>Thu, 22 Sep 2022 14:13:26 +0900</pubDate><guid>https://macho000.github.io/blogs/20220921_pipenv%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%A8%E5%88%A9%E7%94%A8%E6%96%B9%E6%B3%95/</guid><description>&lt;h1 id="インストール方法">インストール方法&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">brew install pipenv
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="仮想環境の構築有効化">仮想環境の構築・有効化&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">pipenv shell
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="仮想環境から抜ける">仮想環境から抜ける&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">&lt;span class="k">exit&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>pandocでPDF生成する方法</title><link>https://macho000.github.io/blogs/20220920_pandoc%E3%81%A7pdf%E7%94%9F%E6%88%90%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95/</link><pubDate>Tue, 20 Sep 2022 09:08:08 +0900</pubDate><guid>https://macho000.github.io/blogs/20220920_pandoc%E3%81%A7pdf%E7%94%9F%E6%88%90%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95/</guid><description>&lt;ul>
+&lt;li>&lt;a href="#1-pandoc%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB">1. pandocのインストール&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#2-%E5%BC%95%E7%94%A8%E6%96%87%E7%8C%AE%E3%82%92%E8%BF%BD%E5%8A%A0%E3%81%97%E3%81%9F%E3%81%84%E5%A0%B4%E5%90%88%E3%81%AFbibtex%E3%81%A8sist02%E3%82%92%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB">2. 引用文献を追加したい場合はbibTexとsist02をインストール&lt;/a>
+&lt;ul>
+&lt;li>&lt;a href="#21-bibtex%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%A8%E3%81%AF">2.1. bibTexファイルとは&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#22-sist02%E3%82%92%E3%83%80%E3%82%A6%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89">2.2. sist02をダウンロード&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;a href="#3-pdf%E7%94%9F%E6%88%90">3. PDF生成&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#too-deeply-nested%E3%81%A8%E3%81%84%E3%81%86%E3%82%A8%E3%83%A9%E3%83%BC%E3%81%8C%E5%87%BA%E3%81%9F%E5%A0%B4%E5%90%88">Too deeply nestedというエラーが出た場合&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#4-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE">4. 参考文献&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h1 id="1-pandocのインストール">1. pandocのインストール&lt;/h1>
+&lt;p>&lt;a href="https://pandoc.org/installing.html">https://pandoc.org/installing.html&lt;/a>
+上記のサイトを参考にpandocをインストール&lt;/p>
+&lt;p>具体的にはMacであれば&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">brew install pandoc
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>その後、Python環境が整っている場合は、&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">brew install librsvg homebrew/cask/basictex
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>日本語用パッケージを追加&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">tlmgr update --self --all
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">tlmgr paper a4
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">tlmgr install collection-langjapanese collection-luatex lm-math
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>もしfonts not foundと表示される場合は&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">tlmgr install collection-fontsrecommended
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="2-引用文献を追加したい場合はbibtexとsist02をインストール">2. 引用文献を追加したい場合はbibTexとsist02をインストール&lt;/h1>
+&lt;h2 id="21-bibtexファイルとは">2.1. bibTexファイルとは&lt;/h2>
+&lt;p>引用文献として追加したいbibTexファイルを取得&lt;/p>
+&lt;p>bibTexファイルは以下のような形式になっている&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bib" data-lang="bib">&lt;span class="line">&lt;span class="cl">&lt;span class="nc">@BOOK&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="nl">noauthor_undated-qu&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">title&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s">&amp;#34;Graph Database&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nc">@ARTICLE&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="nl">noauthor_undated-tj&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">title&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s">&amp;#34;Recent trends in knowledge graphs: theory and practice&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="22-sist02をダウンロード">2.2. sist02をダウンロード&lt;/h2>
+&lt;p>参考文献用のスタイルファイル（CSLファイル）をダウンロードする&lt;/p></description></item><item><title>iOS Simulator起動方法</title><link>https://macho000.github.io/blogs/20220917_ios_simulator%E8%B5%B7%E5%8B%95%E6%96%B9%E6%B3%95/</link><pubDate>Sat, 17 Sep 2022 14:55:41 +0900</pubDate><guid>https://macho000.github.io/blogs/20220917_ios_simulator%E8%B5%B7%E5%8B%95%E6%96%B9%E6%B3%95/</guid><description>&lt;h1 id="xcodeの起動">XCodeの起動&lt;/h1>
+&lt;p>XCode→Open Developer Tool-&amp;gt;Simulatorをクリック
+&lt;img src="76736ac33e694baa45dd1e7bc05ab971b66c5ec630661baabe64948879d25306.png" alt="picture 1">&lt;/p>
+&lt;h1 id="もしsimulatorが起動できない場合に確認すること">もしSimulatorが起動できない場合に確認すること&lt;/h1>
+&lt;p>Preferenceを開き、Simulatorタブを開く&lt;/p>
+&lt;p>&lt;img src="991ebdf3d45c8cb0aeced0600e678df8855c8913a551c0bca8cc08e097cf10b4.png" alt="picture 2">&lt;/p>
+&lt;p>iOSのシミュレーターがモジュールがインストールされているかを確認する。&lt;/p></description></item><item><title>XCodeの再インストール</title><link>https://macho000.github.io/blogs/202207151335/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/blogs/202207151335/</guid><description>&lt;h1 id="xcodeの再インストール">XCodeの再インストール&lt;/h1>
+&lt;pre tabindex="0">&lt;code>sudo rm -rf /Applications/Xcode.app
+sudo rm -rf /Library/Preferences/com.apple.dt.Xcode.plist
+sudo rm -rf ~/Library/Preferences/com.apple.dt.Xcode.plist
+sudo rm -rf ~/Library/Caches/com.apple.dt.Xcode
+sudo rm -rf ~/Library/Application Support/Xcode
+sudo rm -rf ~/Library/Developer/Xcode
+sudo rm -rf ~/Library/Developer/CoreSimulator
+&lt;/code>&lt;/pre></description></item></channel></rss>

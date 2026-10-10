@@ -1,0 +1,54 @@
+<!doctype html><html lang=ja><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Anacondaアンインストール方法 · Macho000</title><meta name=description content="1. 現在の環境を確認 1.1. Anaconda3のホームディレクトリの確認 $ env | grep CONDA CONDA_SHLVL=2 CONDA_PROMPT_MODIFIER=(GBTI) CONDA_EXE=/opt/anaconda3/bin/conda _CE_CONDA= …"><link rel=canonical href=https://macho000.github.io/blogs/202200905_conda3uninstall/><link rel=stylesheet href=/css/site.css><link rel=alternate type=application/rss+xml title="Macho000 RSS" href=/index.xml></head><body><a class=skip href=#main>本文へ</a><div class=shell><header><a class=brand href=/>Macho000<span class=dot>.</span></a><nav aria-label=メインナビゲーション><a href=/>Home</a><a href=/blog/ aria-current=page>Blog</a><a href=https://github.com/Macho000>GitHub ↗</a></nav></header><main id=main><article><div class=article-heading><a class=muted href=/blog/>← Blog</a><p class=eyebrow>2022.09.09</p><h1>Anacondaアンインストール方法</h1><div class=tags><a href=/tags/python/>Python</a></div></div><details class=toc><summary>目次</summary><nav id=TableOfContents><ul><li><a href=#11-anaconda3のホームディレクトリの確認>1.1. Anaconda3のホームディレクトリの確認</a></li><li><a href=#12-anacondaへのpathの確認>1.2. AnacondaへのPathの確認</a></li></ul></nav></details><div class=prose><h1 id=1-現在の環境を確認>1. 現在の環境を確認</h1><h2 id=11-anaconda3のホームディレクトリの確認>1.1. Anaconda3のホームディレクトリの確認</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-cmd data-lang=cmd><span class=line><span class=cl>$ env <span class=p>|</span> grep CONDA
+</span></span><span class=line><span class=cl>CONDA_SHLVL=2
+</span></span><span class=line><span class=cl>CONDA_PROMPT_MODIFIER=(GBTI) 
+</span></span><span class=line><span class=cl>CONDA_EXE=/opt/anaconda3/bin/conda
+</span></span><span class=line><span class=cl>_CE_CONDA=
+</span></span><span class=line><span class=cl>CONDA_PREFIX_1=/opt/anaconda3
+</span></span><span class=line><span class=cl>CONDA_PREFIX=/opt/anaconda3/envs/GBTI
+</span></span><span class=line><span class=cl>CONDA_PYTHON_EXE=/opt/anaconda3/bin/python
+</span></span><span class=line><span class=cl>CONDA_DEFAULT_ENV=GBTI
+</span></span></code></pre></div><h2 id=12-anacondaへのpathの確認>1.2. AnacondaへのPathの確認</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-cmd data-lang=cmd><span class=line><span class=cl>$ cat ~/.bash_profile
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># <span class=p>&gt;&gt;</span>&gt; conda initialize <span class=p>&gt;&gt;</span>&gt;
+</span></span><span class=line><span class=cl># !! Contents within this block are managed by &#39;conda init&#39; !!
+</span></span><span class=line><span class=cl>__conda_setup=<span class=s2>&#34;$(&#39;/opt/anaconda3/bin/conda&#39; &#39;shell.bash&#39; &#39;hook&#39; 2&gt; /dev/null)&#34;</span>
+</span></span><span class=line><span class=cl><span class=k>if</span> [<span class=err> $? -eq 0 ]; then</span>
+</span></span><span class=line><span class=cl>    eval <span class=s2>&#34;$__conda_setup&#34;</span>
+</span></span><span class=line><span class=cl>else
+</span></span><span class=line><span class=cl>    <span class=k>if</span> [<span class=err> -f &#34;/opt/anaconda3/etc/profile.d/conda.sh&#34; ]; then</span>
+</span></span><span class=line><span class=cl>        . <span class=s2>&#34;/opt/anaconda3/etc/profile.d/conda.sh&#34;</span>
+</span></span><span class=line><span class=cl>    else
+</span></span><span class=line><span class=cl>        export PATH=<span class=s2>&#34;/opt/anaconda3/bin:$PATH&#34;</span>
+</span></span><span class=line><span class=cl>    fi
+</span></span><span class=line><span class=cl>fi
+</span></span><span class=line><span class=cl>unset __conda_setup
+</span></span><span class=line><span class=cl># <span class=p>&lt;</span>&lt;&lt; conda initialize <span class=p>&lt;</span>&lt;&lt;
+</span></span></code></pre></div><h1 id=2-anaconda-cleanを実行する>2. anaconda-cleanを実行する</h1><div class=highlight><pre tabindex=0 class=chroma><code class=language-cmd data-lang=cmd><span class=line><span class=cl>conda install anaconda-clean
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-cmd data-lang=cmd><span class=line><span class=cl>anaconda-clean
+</span></span><span class=line><span class=cl>$ anaconda-clean
+</span></span><span class=line><span class=cl>Delete .anaconda? (y/n): y
+</span></span><span class=line><span class=cl>Backup directory: /Users/kosukeaigo/.anaconda_backup/2022-09-05T224138
+</span></span><span class=line><span class=cl>Delete .conda? (y/n): y
+</span></span><span class=line><span class=cl>Delete .condarc? (y/n): y
+</span></span><span class=line><span class=cl>Delete .ipynb_checkpoints? (y/n): y
+</span></span><span class=line><span class=cl>Delete .ipython? (y/n): y
+</span></span><span class=line><span class=cl>Delete .jupyter? (y/n): y
+</span></span><span class=line><span class=cl>Delete .matplotlib? (y/n): y
+</span></span></code></pre></div><p>削除した際にバックアップディレクトリが<code>~/.anaconda_backup</code>に作成される</p><p>もし不要な場合は下記のコマンドで削除する</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-cmd data-lang=cmd><span class=line><span class=cl>rm -fr /anaconda3
+</span></span></code></pre></div><h1 id=3-bash_profile中のpathを追加する記述を削除する>3. .bash_profile中のPathを追加する記述を削除する</h1><div class=highlight><pre tabindex=0 class=chroma><code class=language-cmd data-lang=cmd><span class=line><span class=cl><span class=k>echo</span> $SHELL
+</span></span></code></pre></div><p>で、bashが表示された場合は</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-cmd data-lang=cmd><span class=line><span class=cl>vi ~/.bash_profile
+</span></span></code></pre></div><p>で下記のconda initializeで囲まれた部分を削除する</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># &gt;&gt;&gt; conda initialize &gt;&gt;&gt;</span>
+</span></span><span class=line><span class=cl><span class=c1># !! Contents within this block are managed by &#39;conda init&#39; !!</span>
+</span></span><span class=line><span class=cl><span class=nv>__conda_setup</span><span class=o>=</span><span class=s2>&#34;</span><span class=k>$(</span><span class=s1>&#39;/opt/anaconda3/bin/conda&#39;</span> <span class=s1>&#39;shell.bash&#39;</span> <span class=s1>&#39;hook&#39;</span> 2&gt; /dev/null<span class=k>)</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=o>[</span> <span class=nv>$?</span> -eq <span class=m>0</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+</span></span><span class=line><span class=cl>    <span class=nb>eval</span> <span class=s2>&#34;</span><span class=nv>$__conda_setup</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl><span class=k>else</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=o>[</span> -f <span class=s2>&#34;/opt/anaconda3/etc/profile.d/conda.sh&#34;</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+</span></span><span class=line><span class=cl>        . <span class=s2>&#34;/opt/anaconda3/etc/profile.d/conda.sh&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span>
+</span></span><span class=line><span class=cl>        <span class=nb>export</span> <span class=nv>PATH</span><span class=o>=</span><span class=s2>&#34;/opt/anaconda3/bin:</span><span class=nv>$PATH</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>fi</span>
+</span></span><span class=line><span class=cl><span class=k>fi</span>
+</span></span><span class=line><span class=cl><span class=nb>unset</span> __conda_setup
+</span></span><span class=line><span class=cl><span class=c1># &lt;&lt;&lt; conda initialize &lt;&lt;&lt;</span>
+</span></span></code></pre></div><h1 id=4-参考文献>4. 参考文献</h1><p><a href=https://weblabo.oscasierra.net/python-anaconda-uninstall-macos/>https://weblabo.oscasierra.net/python-anaconda-uninstall-macos/</a></p></div><script type=text/x-mathjax-config>MathJax.Hub.Config({tex2jax:{inlineMath:[["$","$"],["\\(","\\)"]],processEscapes:true}});</script><script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><div class=article-end><a href=/blog/>← 記事一覧へ</a></div></article></main><footer><span>© 2026 Macho000</span><a href=/index.xml>RSS ↗</a></footer></div></body></html>

@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Flutter on Macho000</title><link>https://macho000.github.io/tags/flutter/</link><description>Recent content in Flutter on Macho000</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Fri, 23 Sep 2022 20:00:50 +0900</lastBuildDate><atom:link href="https://macho000.github.io/tags/flutter/index.xml" rel="self" type="application/rss+xml"/><item><title>flutterでデータを渡して画面遷移する方法</title><link>https://macho000.github.io/blogs/20220923_flutter%E3%81%A7%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E6%B8%A1%E3%81%97%E3%81%A6%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95/</link><pubDate>Fri, 23 Sep 2022 20:00:50 +0900</pubDate><guid>https://macho000.github.io/blogs/20220923_flutter%E3%81%A7%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E6%B8%A1%E3%81%97%E3%81%A6%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95/</guid><description>&lt;h1 id="statelesswidget-でデータを受け取る場合">StatelessWidget でデータを受け取る場合&lt;/h1>
+&lt;ul>
+&lt;li>画面遷移元から受け取るデータの引数を宣言&lt;/li>
+&lt;li>引数付きコンストラクタを作成し、引数として受け取るデータの変数を宣言&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-dart" data-lang="dart">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">class&lt;/span> &lt;span class="nc">NextPage&lt;/span> &lt;span class="kd">extends&lt;/span> &lt;span class="n">StatelessWidget&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 画面遷移元からのデータを受け取る変数
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kd">final&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">value&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// コンストラクタ
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kd">const&lt;/span> &lt;span class="n">NextPage&lt;/span>&lt;span class="p">({&lt;/span>&lt;span class="n">Key&lt;/span>&lt;span class="o">?&lt;/span> &lt;span class="n">key&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kd">required&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">value&lt;/span>&lt;span class="p">})&lt;/span> &lt;span class="o">:&lt;/span> &lt;span class="k">super&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">key:&lt;/span> &lt;span class="n">key&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">@&lt;/span>&lt;span class="n">override&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Widget&lt;/span> &lt;span class="n">build&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">BuildContext&lt;/span> &lt;span class="n">context&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">Scaffold&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">…&lt;/span> &lt;span class="p">,&lt;/span> &lt;span class="c1">// 省略
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="statefulwidget-でデータを受け取る場合">StatefulWidget でデータを受け取る場合&lt;/h1>
+&lt;p>StatelessWidgetの手順に加えて、Statefulではデータ（変数）にアクセスするにはwidget.変数を用いる&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-dart" data-lang="dart">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">class&lt;/span> &lt;span class="nc">NextPage&lt;/span> &lt;span class="kd">extends&lt;/span> &lt;span class="n">StatefulWidget&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 画面遷移元からのデータを受け取る変数
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kd">final&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">value&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// コンストラクタ
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kd">const&lt;/span> &lt;span class="n">NextPage&lt;/span>&lt;span class="p">({&lt;/span>&lt;span class="n">Key&lt;/span>&lt;span class="o">?&lt;/span> &lt;span class="n">key&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kd">required&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">value&lt;/span>&lt;span class="p">})&lt;/span> &lt;span class="o">:&lt;/span> &lt;span class="k">super&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">key:&lt;/span> &lt;span class="n">key&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">@&lt;/span>&lt;span class="n">override&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">State&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">NextPage&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">createState&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">_NextPageState&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">class&lt;/span> &lt;span class="err">&lt;/span>&lt;span class="nc">_NextPageState&lt;/span> &lt;span class="kd">extends&lt;/span> &lt;span class="n">State&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">NextPage&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 状態を管理する変数
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">late&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">state&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">@&lt;/span>&lt;span class="n">override&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">void&lt;/span> &lt;span class="n">initState&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">super&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">initState&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 受け取ったデータを状態を管理する変数に格納
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">state&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">widget&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">value&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">@&lt;/span>&lt;span class="n">override&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Widget&lt;/span> &lt;span class="n">build&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">BuildContext&lt;/span> &lt;span class="n">context&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">Scaffold&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">…&lt;/span> &lt;span class="p">,&lt;/span> &lt;span class="c1">// 省略
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="データの受け渡し方">データの受け渡し方&lt;/h1>
+&lt;p>わたす変数のデータを引数として渡す。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-dart" data-lang="dart">&lt;span class="line">&lt;span class="cl">&lt;span class="n">Navigator&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">push&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">context&lt;/span>&lt;span class="p">,&lt;/span> 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">MaterialPageRoute&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">builder:&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">context&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">NextPage&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">value:&lt;/span> &lt;span class="m">100&lt;/span>&lt;span class="p">)),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="参考文献">参考文献&lt;/h1>
+&lt;p>&lt;a href="https://hiyoko-programming.com/1347/">https://hiyoko-programming.com/1347/&lt;/a>&lt;/p></description></item><item><title>Flutterタブで画面を切り替える方法</title><link>https://macho000.github.io/blogs/20220731_flutter%E3%82%BF%E3%83%96%E3%81%A7%E7%94%BB%E9%9D%A2%E3%82%92%E5%88%87%E3%82%8A%E6%9B%BF%E3%81%88%E3%82%8B%E6%96%B9%E6%B3%95/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/blogs/20220731_flutter%E3%82%BF%E3%83%96%E3%81%A7%E7%94%BB%E9%9D%A2%E3%82%92%E5%88%87%E3%82%8A%E6%9B%BF%E3%81%88%E3%82%8B%E6%96%B9%E6%B3%95/</guid><description>&lt;h1 id="flutterでタブを使って画面を切り替える方法の紹介">Flutterでタブを使って画面を切り替える方法の紹介&lt;/h1>
+&lt;h2 id="version">Version&lt;/h2>
+&lt;p>flutter 3.0.5
+Dart 2.17.6&lt;/p>
+&lt;h2 id="全体像">全体像&lt;/h2>
+&lt;p>&lt;img src="5be321f028ddb3ba2cf0688b6eeff5ddeb85472a6645ea046b19a92b16f4c613.gif" alt="picture 1">&lt;/p>
+&lt;p>ソースコードは以下の通り&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-Dart" data-lang="Dart">&lt;span class="line">&lt;span class="cl">&lt;span class="k">import&lt;/span> &lt;span class="s1">&amp;#39;package:flutter/material.dart&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="n">main&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">runApp&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kd">const&lt;/span> &lt;span class="n">MyApp&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">class&lt;/span> &lt;span class="nc">MyApp&lt;/span> &lt;span class="kd">extends&lt;/span> &lt;span class="n">StatelessWidget&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">const&lt;/span> &lt;span class="n">MyApp&lt;/span>&lt;span class="p">({&lt;/span>&lt;span class="n">Key&lt;/span>&lt;span class="o">?&lt;/span> &lt;span class="n">key&lt;/span>&lt;span class="p">})&lt;/span> &lt;span class="o">:&lt;/span> &lt;span class="k">super&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">key:&lt;/span> &lt;span class="n">key&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">@&lt;/span>&lt;span class="n">override&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Widget&lt;/span> &lt;span class="n">build&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">BuildContext&lt;/span> &lt;span class="n">context&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">MaterialApp&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nl">home:&lt;/span> &lt;span class="n">DefaultTabController&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nl">length:&lt;/span> &lt;span class="m">3&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nl">child:&lt;/span> &lt;span class="n">Scaffold&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nl">appBar:&lt;/span> &lt;span class="n">AppBar&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nl">title:&lt;/span> &lt;span class="kd">const&lt;/span> &lt;span class="n">Text&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;タブ画面移動サンプル&amp;#39;&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nl">bottom:&lt;/span> &lt;span class="kd">const&lt;/span> &lt;span class="n">TabBar&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">tabs:&lt;/span> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">Widget&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Tab&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">icon:&lt;/span> &lt;span class="n">Icon&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Icons&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">cloud_outlined&lt;/span>&lt;span class="p">)),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Tab&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">icon:&lt;/span> &lt;span class="n">Icon&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Icons&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">beach_access_sharp&lt;/span>&lt;span class="p">)),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Tab&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">icon:&lt;/span> &lt;span class="n">Icon&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Icons&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">brightness_5_sharp&lt;/span>&lt;span class="p">)),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">]),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nl">body:&lt;/span> &lt;span class="kd">const&lt;/span> &lt;span class="n">TabBarView&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nl">children:&lt;/span> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">Widget&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Center&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">child:&lt;/span> &lt;span class="n">Text&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;くもり&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nl">style:&lt;/span> &lt;span class="n">TextStyle&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">fontSize:&lt;/span> &lt;span class="m">50&lt;/span>&lt;span class="p">))),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Center&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">child:&lt;/span> &lt;span class="n">Text&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;雨&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nl">style:&lt;/span> &lt;span class="n">TextStyle&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">fontSize:&lt;/span> &lt;span class="m">50&lt;/span>&lt;span class="p">))),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Center&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">child:&lt;/span> &lt;span class="n">Text&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;晴れ&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nl">style:&lt;/span> &lt;span class="n">TextStyle&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">fontSize:&lt;/span> &lt;span class="m">50&lt;/span>&lt;span class="p">))),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="タブを下に持ってくる">タブを下に持ってくる&lt;/h2>
+&lt;p>&lt;img src="8635dd4678d6754cbbb87bc39cd58eb7b80a5c0a27c4ae9cf3927cec0b7acad0.gif" alt="picture 2">&lt;/p>
+&lt;p>先程はAppBarにWidgetを配置していたが、bottomNavigationBarにWidgetを配置し直す&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-Dart" data-lang="Dart">&lt;span class="line">&lt;span class="cl">&lt;span class="k">import&lt;/span> &lt;span class="s1">&amp;#39;package:flutter/material.dart&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="n">main&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">runApp&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kd">const&lt;/span> &lt;span class="n">MyApp&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">class&lt;/span> &lt;span class="nc">MyApp&lt;/span> &lt;span class="kd">extends&lt;/span> &lt;span class="n">StatelessWidget&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">const&lt;/span> &lt;span class="n">MyApp&lt;/span>&lt;span class="p">({&lt;/span>&lt;span class="n">Key&lt;/span>&lt;span class="o">?&lt;/span> &lt;span class="n">key&lt;/span>&lt;span class="p">})&lt;/span> &lt;span class="o">:&lt;/span> &lt;span class="k">super&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">key:&lt;/span> &lt;span class="n">key&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">@&lt;/span>&lt;span class="n">override&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Widget&lt;/span> &lt;span class="n">build&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">BuildContext&lt;/span> &lt;span class="n">context&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">MaterialApp&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nl">home:&lt;/span> &lt;span class="n">DefaultTabController&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nl">length:&lt;/span> &lt;span class="m">3&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nl">child:&lt;/span> &lt;span class="n">Scaffold&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nl">appBar:&lt;/span> &lt;span class="n">AppBar&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nl">title:&lt;/span> &lt;span class="kd">const&lt;/span> &lt;span class="n">Text&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;タブ画面移動サンプル&amp;#39;&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nl">bottomNavigationBar:&lt;/span> &lt;span class="n">Container&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nl">color:&lt;/span> &lt;span class="n">Theme&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">of&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">context&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="n">primaryColor&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nl">child:&lt;/span> &lt;span class="kd">const&lt;/span> &lt;span class="n">TabBar&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">tabs:&lt;/span> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">Widget&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Tab&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">icon:&lt;/span> &lt;span class="n">Icon&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Icons&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">cloud_outlined&lt;/span>&lt;span class="p">)),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Tab&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">icon:&lt;/span> &lt;span class="n">Icon&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Icons&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">beach_access_sharp&lt;/span>&lt;span class="p">)),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Tab&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">icon:&lt;/span> &lt;span class="n">Icon&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Icons&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">brightness_5_sharp&lt;/span>&lt;span class="p">)),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">]),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nl">body:&lt;/span> &lt;span class="kd">const&lt;/span> &lt;span class="n">TabBarView&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nl">children:&lt;/span> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">Widget&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Center&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">child:&lt;/span> &lt;span class="n">Text&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;くもり&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nl">style:&lt;/span> &lt;span class="n">TextStyle&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">fontSize:&lt;/span> &lt;span class="m">50&lt;/span>&lt;span class="p">))),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Center&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">child:&lt;/span> &lt;span class="n">Text&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;雨&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nl">style:&lt;/span> &lt;span class="n">TextStyle&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">fontSize:&lt;/span> &lt;span class="m">50&lt;/span>&lt;span class="p">))),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Center&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">child:&lt;/span> &lt;span class="n">Text&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;晴れ&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nl">style:&lt;/span> &lt;span class="n">TextStyle&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">fontSize:&lt;/span> &lt;span class="m">50&lt;/span>&lt;span class="p">))),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="タブをボタンをみなす方法">タブをボタンをみなす方法&lt;/h2>
+&lt;p>ソースコードは以下の通り&lt;/p></description></item><item><title>FlutterでGoogleMapの表示</title><link>https://macho000.github.io/blogs/20220731_flutter%E3%81%A7googlemap%E3%81%AE%E8%A1%A8%E7%A4%BA/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/blogs/20220731_flutter%E3%81%A7googlemap%E3%81%AE%E8%A1%A8%E7%A4%BA/</guid><description>&lt;h1 id="flutterでgoogle-mapの表示を行う">FlutterでGoogle Mapの表示を行う&lt;/h1>
+&lt;h2 id="google-cloud-platformでプロジェクトを作成する">Google Cloud Platformでプロジェクトを作成する&lt;/h2>
+&lt;p>1
+&lt;img src="d56e446aecc7b28b2d3db68d9f76356bee4918cb491ad8982caffb627afc02cd.png" alt="picture 3">&lt;/p>
+&lt;p>2
+&lt;img src="d25cf4e10af84416aa9747bc343ae4c73fc28c138e7bd79eae7739363c56f2e3.png" alt="picture 4">&lt;/p>
+&lt;p>3
+&lt;img src="ce9f7f4a3d2fbfaac1e953c19c38b36c5ede3f4117d740b916f7b9bce1af5b96.png" alt="picture 5">&lt;/p>
+&lt;p>4
+&lt;img src="a841a729833b5938229d71fe91a88a3da0c78173e96b6dbdd6c20864fbd05782.png" alt="picture 9">&lt;/p>
+&lt;p>5
+&lt;img src="a9a906c63c599f7dc26242b40e7b0ae05304741744a70c1ea484e99b22b8541d.png" alt="picture 10">&lt;/p>
+&lt;h2 id="maps-sdk-for-iosandroid-apiを有効にする">Maps SDK for iOS/Android APIを有効にする&lt;/h2>
+&lt;p>6
+&lt;img src="0a71bc228c2566522a185f99cc2aebad9be20535ffaaccd7ec88334517ca30bd.png" alt="picture 11">&lt;/p>
+&lt;p>7
+&lt;img src="5238e8b249b404f3275171aadd87d8d1ccba939399d9729ef500e92c4c7325da.png" alt="picture 12">&lt;/p>
+&lt;p>8
+&lt;img src="4c714f575fd5c81c9cb4b8ad6bb0161bbdaa116ad4fde23739f56777b13516f7.png" alt="picture 13">&lt;/p>
+&lt;p>9
+&lt;img src="09e20a9c3e323cede5eef685b7621f72101e1e0c00bab877e374d3940fd91d8b.png" alt="picture 14">&lt;/p>
+&lt;p>10
+&lt;img src="ad579f6b26da97b736614326ff1c5e49566d30e9ef33a748a2de32c995e8f60e.png" alt="picture 15">&lt;/p>
+&lt;p>11
+&lt;img src="e4d7e3554e2e5e915d5cad515d9d62b743c8cf7608d47f2709dc02c32f9cdc15.png" alt="picture 16">&lt;/p>
+&lt;p>12
+&lt;img src="dc606c95426acff15b4032601db2c6cd8e0520b194f128b359d04ff9e7657534.png" alt="picture 17">&lt;/p>
+&lt;p>13
+&lt;img src="500483beec451aecdfb21921770fa2b4768378d41de1b4818090c375d11bb3ed.png" alt="picture 18">&lt;/p>
+&lt;p>14
+APIキーが登録されたら完了！！
+&lt;img src="2444664ddcbb68f1485284f0f3de6b6f9c40067d676e0a6057dd874ecc41a2d5.png" alt="picture 19">&lt;/p>
+&lt;h2 id="パッケージをインストールする">パッケージをインストールする&lt;/h2>
+&lt;p>&lt;a href="https://pub.dev/packages/google_maps_flutter">flutter google maps&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">flutter pub add google_maps_flutter
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>を実施&lt;/p>
+&lt;p>pubspec.yamlに下記のようにgoogle_maps_flutterが格納されていることを確認&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">dependencies&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">google_maps_flutter&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">^2.1.10&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="androidの設定">Androidの設定&lt;/h3>
+&lt;ol>
+&lt;li>Android/app/build.gradle内のminSdkVersionを20以上に設定する&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gradle" data-lang="gradle">&lt;span class="line">&lt;span class="cl">&lt;span class="n">android&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">defaultConfig&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">minSdkVersion&lt;/span> &lt;span class="mi">20&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
+&lt;li>android/app/src/main/AndroidManifest.xmlで先程取得したAPIキーを設定する&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-xml" data-lang="xml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;manifest&lt;/span> &lt;span class="err">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">&amp;lt;application&lt;/span> &lt;span class="err">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">&amp;lt;meta-data&lt;/span> &lt;span class="na">android:name=&lt;/span>&lt;span class="s">&amp;#34;com.google.android.geo.API_KEY&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">android:value=&lt;/span>&lt;span class="s">&amp;#34;YOUR KEY HERE&amp;#34;&lt;/span>&lt;span class="nt">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="iosの設定">iOSの設定&lt;/h3>
+&lt;ol>
+&lt;li>ios/Runner/AppDelegate.swiftに先程設定したAPIキーを設定する&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="p">#&lt;/span>&lt;span class="n">include&lt;/span> &lt;span class="s">&amp;#34;AppDelegate.h&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">#&lt;/span>&lt;span class="n">include&lt;/span> &lt;span class="s">&amp;#34;GeneratedPluginRegistrant.h&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">#&lt;/span>&lt;span class="kd">import&lt;/span> &lt;span class="s">&amp;#34;GoogleMaps/GoogleMaps.h&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">@&lt;/span>&lt;span class="n">implementation&lt;/span> &lt;span class="n">AppDelegate&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">-&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">BOOL&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="n">application&lt;/span>&lt;span class="p">:(&lt;/span>&lt;span class="n">UIApplication&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="n">application&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">didFinishLaunchingWithOptions&lt;/span>&lt;span class="p">:(&lt;/span>&lt;span class="n">NSDictionary&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="n">launchOptions&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">GMSServices&lt;/span> &lt;span class="n">provideAPIKey&lt;/span>&lt;span class="p">:@&lt;/span>&lt;span class="s">&amp;#34;YOUR KEY HERE&amp;#34;&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">GeneratedPluginRegistrant&lt;/span> &lt;span class="n">registerWithRegistry&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="kc">self&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="kc">super&lt;/span> &lt;span class="n">application&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="n">application&lt;/span> &lt;span class="n">didFinishLaunchingWithOptions&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="n">launchOptions&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">@&lt;/span>&lt;span class="n">end&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Flutterでの環境変数のアクセス</title><link>https://macho000.github.io/blogs/20220731_flutter%E3%81%A7%E3%81%AE%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0%E3%81%AE%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/blogs/20220731_flutter%E3%81%A7%E3%81%AE%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0%E3%81%AE%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9/</guid><description>&lt;h2 id="前準備">前準備&lt;/h2>
+&lt;p>&lt;a href="https://pub.dev/packages/flutter_config">flutter_config&lt;/a>を下記のコマンドを使ってインスール&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">flutter pub add flutter_config
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="flutterアプリケーションのルート位置に新しくenvを作成">Flutterアプリケーションのルート位置に新しく.envを作成&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-env" data-lang="env">&lt;span class="line">&lt;span class="cl">&lt;span class="nv">API_KEY&lt;/span>&lt;span class="o">=&lt;/span>test_value // example
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="maindartですべての環境変数を読み込む">main.dartですべての環境変数を読み込む&lt;/h2>
+&lt;p>下記のコードを書くことによりアプリのどの場所でも環境変数を呼び出せる&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-dart" data-lang="dart">&lt;span class="line">&lt;span class="cl">&lt;span class="k">import&lt;/span> &lt;span class="s1">&amp;#39;package:flutter_config/flutter_config.dart&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="n">main&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="kd">async&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">WidgetsFlutterBinding&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">ensureInitialized&lt;/span>&lt;span class="p">();&lt;/span> &lt;span class="c1">// Required by FlutterConfig
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kd">await&lt;/span> &lt;span class="n">FlutterConfig&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">loadEnvVariables&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">runApp&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">MyApp&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="アプリ内での呼び出し">アプリ内での呼び出し&lt;/h2>
+&lt;h3 id="flutterアプリ内">Flutterアプリ内&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-dart" data-lang="dart">&lt;span class="line">&lt;span class="cl">&lt;span class="k">import&lt;/span> &lt;span class="s1">&amp;#39;package:flutter_config/flutter_config.dart&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">FlutterConfig&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="kd">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;API_KEY&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1">// returns &amp;#39;test_value&amp;#39;
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="ios側での呼び出し">iOS側での呼び出し&lt;/h3>
+&lt;p>swiftファイルでの呼び出し&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">import&lt;/span> &lt;span class="nc">UIKit&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">import&lt;/span> &lt;span class="nc">Flutter&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">import&lt;/span> &lt;span class="nc">flutter_config&lt;/span> &lt;span class="c1">//import忘れずに&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nc">import&lt;/span> &lt;span class="nc">GoogleMaps&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">@UIApplicationMain&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">@objc&lt;/span> &lt;span class="kd">class&lt;/span> &lt;span class="nc">AppDelegate&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">FlutterAppDelegate&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">override&lt;/span> &lt;span class="kd">func&lt;/span> &lt;span class="nf">application&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kc">_&lt;/span> &lt;span class="n">application&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">UIApplication&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">didFinishLaunchingWithOptions&lt;/span> &lt;span class="n">launchOptions&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">UIApplication&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">LaunchOptionsKey&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">Any&lt;/span>&lt;span class="p">]?&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">)&lt;/span> &lt;span class="p">-&amp;gt;&lt;/span> &lt;span class="nb">Bool&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">GMSServices&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">provideAPIKey&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">FlutterConfigPlugin&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">env&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">for&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s">&amp;#34;API_KEY&amp;#34;&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="c1">//API_KEY 呼び出し&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">GeneratedPluginRegistrant&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">register&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">with&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">self&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="kc">super&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">application&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">application&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">didFinishLaunchingWithOptions&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">launchOptions&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="android側での呼び出し">Android側での呼び出し&lt;/h3>
+&lt;h4 id="pluginの適用">pluginの適用&lt;/h4>
+&lt;p>android/app/build.gradle で一番最後の行を追加する&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gradle" data-lang="gradle">&lt;span class="line">&lt;span class="cl">&lt;span class="o">~~&lt;/span>&lt;span class="err">省略&lt;/span>&lt;span class="o">~~&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">apply&lt;/span> &lt;span class="nl">plugin:&lt;/span> &lt;span class="s1">&amp;#39;kotlin-android&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">apply&lt;/span> &lt;span class="nl">from:&lt;/span> &lt;span class="s2">&amp;#34;$flutterRoot/packages/flutter_tools/gradle/flutter.gradle&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">apply&lt;/span> &lt;span class="nl">from:&lt;/span> &lt;span class="n">project&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="s1">&amp;#39;:flutter_config&amp;#39;&lt;/span>&lt;span class="o">).&lt;/span>&lt;span class="na">projectDir&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="na">getPath&lt;/span>&lt;span class="o">()&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="s2">&amp;#34;/dotenv.gradle&amp;#34;&lt;/span> &lt;span class="c1">// 追加ライン
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">~~&lt;/span>&lt;span class="err">省略&lt;/span>&lt;span class="o">~~&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="呼び出し">呼び出し&lt;/h4>
+&lt;p>xmlファイルでの呼び出し&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-xml" data-lang="xml">&lt;span class="line">&lt;span class="cl">~~省略~~
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">android:hardwareAccelerated=&amp;#34;true&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">android:windowSoftInputMode=&amp;#34;adjustResize&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;meta-data&lt;/span> &lt;span class="na">android:name=&lt;/span>&lt;span class="s">&amp;#34;com.google.android.geo.API_KEY&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">android:value=&lt;/span>&lt;span class="s">&amp;#34;@string/API_KEY&amp;#34;&lt;/span>&lt;span class="nt">/&amp;gt;&lt;/span> // 追加ライン
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;meta-data&lt;/span> &lt;span class="na">android:name=&lt;/span>&lt;span class="s">&amp;#34;io.flutter.embedding.android.NormalTheme&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">android:resource=&lt;/span>&lt;span class="s">&amp;#34;@style/NormalTheme&amp;#34;&lt;/span>&lt;span class="nt">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">~~省略~~
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="参考サイト">参考サイト&lt;/h2>
+&lt;p>&lt;a href="https://zenn.dev/taitai9847/articles/0be7298408b7c8">AndroidManifest.xml、AppDelegate.swiftからenvにアクセス&lt;/a>&lt;/p></description></item></channel></rss>

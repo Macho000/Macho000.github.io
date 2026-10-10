@@ -1,0 +1,37 @@
+<!doctype html><html lang=ja><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>条件付き確率場を使った品詞タグづけ解説 · Macho000</title><meta name=description content="条件付き確率場とは 条件付き確率場は、入力xに対して品詞ラベルの系列yを出力する条件付き確率 $P(y|x)$　を計算するモデルのこと
+例えば、{私,は,日本人,です}という形態素に分割された文字列集合を入力として、出力に{名詞、助詞、名詞、助詞}という出力をするモデルを表す
+条件付き確率は以下のように与えられる
+$$ …"><link rel=canonical href=https://macho000.github.io/research_blog/20220907_%E6%9D%A1%E4%BB%B6%E4%BB%98%E3%81%8D%E7%A2%BA%E7%8E%87%E5%A0%B4%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%9F%E5%93%81%E8%A9%9E%E3%82%BF%E3%82%B0%E4%BB%98%E3%81%91%E8%A7%A3%E8%AA%AC/><link rel=stylesheet href=/css/site.css><link rel=alternate type=application/rss+xml title="Macho000 RSS" href=/index.xml></head><body><a class=skip href=#main>本文へ</a><div class=shell><header><a class=brand href=/>Macho000<span class=dot>.</span></a><nav aria-label=メインナビゲーション><a href=/>Home</a><a href=/blog/ aria-current=page>Blog</a><a href=https://github.com/Macho000>GitHub ↗</a></nav></header><main id=main><article><div class=article-heading><a class=muted href=/blog/>← Blog</a><p class=eyebrow>2022.09.09</p><h1>条件付き確率場を使った品詞タグづけ解説</h1><div class=tags><a href=/tags/%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0/>アルゴリズム</a></div></div><div class=prose><h1 id=条件付き確率場とは>条件付き確率場とは</h1><p>条件付き確率場は、入力xに対して品詞ラベルの系列yを出力する条件付き確率 $P(y|x)$　を計算するモデルのこと</p><p>例えば、{私,は,日本人,です}という形態素に分割された文字列集合を入力として、出力に{名詞、助詞、名詞、助詞}という出力をするモデルを表す</p><p>条件付き確率は以下のように与えられる</p><p>$$
+P(y|x)=\frac{exp(h(x,y))}{Z}=\frac{exp(w \cdot \phi(x,y))}{Z}
+$$</p><p>$\textbf{w}$は$K$次元のパラメータ・ベクトルのこと</p><p>また、$\phi(\cdot)$は素性関数と呼ばれるもので、例えば以下のような特性を持つ関数のことである。</p><p>$$
+\phi_k(x,y)=
+\begin{cases}
+1 & t-1番目の品詞が名詞かつt番目の品詞が動詞 \
+0 & それ以外
+\end{cases}
+$$</p><p>というように特定の条件に合致する場合は１をそれ以外の場合は０を出力する関数のことをすじょう関数という。</p><p>この素性関数はモデルごとに適切な条件を指定する</p><p>そして、こういった素性を$K$個並べた$K$次元のベクトルが $\phi(x,y) \in \mathbb{R}^k$と表し、これを<code>素性ベクトル</code>という。</p><p>$Z$ は、$\Sigma_{\textbf y \in \mathcal{Y(\textbf x)}}P(\textbf y | \textbf x) = 1$ となる正規化項である</p><p>そして、具体的には</p><p>$$
+Z := \Sigma_{\mathbf y \in \mathcal Y_{(\mathbf x)}} exp(\mathbf w \cdot \phi (\mathbf x, \mathbf y))
+$$</p><p>と表すことができる</p><p>#　条件付き確率場の過程</p><p>条件付き確率馬ではこれらを単純化して<code>１階のマルコフ性と素性関数の線形性を仮定する</code></p><p>つまり
+$$
+\phi (\mathbf x , \mathbf y)= \Sigma_{x} \phi_t (\mathbf x , y_{t-1}, y_t)
+$$</p><p>より条件付き確率は下記のように表せる</p><p>$$
+P(\mathbf y | \mathbf x) = \frac{exp(\Sigma_t \mathbf w \cdot \phi_t(\mathbf x, y_{t-1}, y_t))}{Z}
+$$</p><p>これは、t番目の素性はインプットとなる単語全体とt番目、tー１番目のラベルだけで決まり、それらの和を素性とするもの</p><p>なので、t番目のラベルはtー２番目以前の単語のラベルとは無関係であるという仮定のもと、その仮定を満たすような素性を設計する必要がある。</p><h1 id=ラベルの推定>ラベルの推定</h1><p>パラメータwがわかっていると仮定すると最適なラベルの推定方法を考える
+最適なラベル列は以下の式で表せる</p><p>$$
+\begin{aligned}
+\hat{\mathbf y} &= argmax_y P(\mathbf y | \mathbf x) \
+&= argmax_y \frac{exp(\mathbf w \cdot \phi(\mathbf x, \mathbf y))}{Z} \
+&= argmax_y \mathbf w \cdot \phi(\mathbf x, \mathbf y)\
+&= argmax_y \Sigma_t \mathbf w \cdot \phi_t(\mathbf x, y_{t-1}, y_t)
+\end{aligned}
+$$</p><p>従って、$\Sigma_t \mathbf w \cdot \phi_t(\mathbf x, y_{t-1}, y_t)$ が最大になるようなラベル列yを求めることが最適なラベルの系列となる</p><p>ここで注意点として$\phi_t(\mathbf x, y_{t-1}, y_t)$ の素性関数は、１階のマルコフ性と線形性の仮定により$y_t$と$y_{t-1}$にしか素性関数が依存しないという点である。</p><h1 id=条件付き確率場の学習>条件付き確率場の学習</h1><p>前章では、すでにパラメータwが既知のものとしていた</p><p>しかし、実際はこのwを学習しなければならない</p><p>ここでは、どのようにwを学習していくかを見ていく</p><p>考え方としては、各サンプrの対数尤度を最大化する。言い換えるなら、マイナスをつけたものを最小化するという問題にする。</p><p>i番目のサンプルの対数尤度にマイナスをつけたものは数式で表すと以下の通りになる</p><p>$$
+\begin{aligned}
+\mathcal L(\mathbf w|\mathbf x^{(i)},\mathbf y^{(i)})
+&= -logP(\mathbf y^{(i)}|\mathbf x^{(i)}) \
+&= -w \cdot \phi(\mathbf x^{(i)}, \mathbf y^{(i)}) + log(Z)
+\end{aligned}
+$$</p><p>Nを学習サンプル数とすると、全体の目的関数は下記の通りになる</p><p>$$
+\mathcal L(\mathbf w| \mathbf w, \mathbf y)=\Sigma_{i=1}^N \mathcal L(\mathbf w| \mathbf x^{(i)}, \mathbf y^{(i)})
+$$</p><p>目的関数に対する勾配は下記の通りになる</p><p>$$
+\frac{\partial \mathcal L_i}{\partial \mathbf w}=-\phi(\mathbf x^{(i)}, \mathbf y^{(i)})+ \Sigma_{y \in \mathcal Y(\mathbf x_i)}\phi(\mathbf x, \mathbf y)P(\mathbf y | \mathbf x)
+$$</p><h1 id=参考文献>参考文献</h1><p><a href=https://data-analytics.fun/2020/12/02/conditional-random-fields/>https://data-analytics.fun/2020/12/02/conditional-random-fields/</a></p></div><script type=text/x-mathjax-config>MathJax.Hub.Config({tex2jax:{inlineMath:[["$","$"],["\\(","\\)"]],processEscapes:true}});</script><script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><div class=article-end><a href=/blog/>← 記事一覧へ</a></div></article></main><footer><span>© 2026 Macho000</span><a href=/index.xml>RSS ↗</a></footer></div></body></html>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Python on Macho000</title><link>https://macho000.github.io/tags/python/</link><description>Recent content in Python on Macho000</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Thu, 22 Sep 2022 14:13:26 +0900</lastBuildDate><atom:link href="https://macho000.github.io/tags/python/index.xml" rel="self" type="application/rss+xml"/><item><title>pipenvのインストールと利用方法</title><link>https://macho000.github.io/blogs/20220921_pipenv%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%A8%E5%88%A9%E7%94%A8%E6%96%B9%E6%B3%95/</link><pubDate>Thu, 22 Sep 2022 14:13:26 +0900</pubDate><guid>https://macho000.github.io/blogs/20220921_pipenv%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%A8%E5%88%A9%E7%94%A8%E6%96%B9%E6%B3%95/</guid><description>&lt;h1 id="インストール方法">インストール方法&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">brew install pipenv
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="仮想環境の構築有効化">仮想環境の構築・有効化&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">pipenv shell
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="仮想環境から抜ける">仮想環境から抜ける&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">&lt;span class="k">exit&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Anacondaアンインストール方法</title><link>https://macho000.github.io/blogs/202200905_conda3uninstall/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/blogs/202200905_conda3uninstall/</guid><description>&lt;h1 id="1-現在の環境を確認">1. 現在の環境を確認&lt;/h1>
+&lt;h2 id="11-anaconda3のホームディレクトリの確認">1.1. Anaconda3のホームディレクトリの確認&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">$ env &lt;span class="p">|&lt;/span> grep CONDA
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">CONDA_SHLVL=2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">CONDA_PROMPT_MODIFIER=(GBTI) 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">CONDA_EXE=/opt/anaconda3/bin/conda
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">_CE_CONDA=
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">CONDA_PREFIX_1=/opt/anaconda3
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">CONDA_PREFIX=/opt/anaconda3/envs/GBTI
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">CONDA_PYTHON_EXE=/opt/anaconda3/bin/python
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">CONDA_DEFAULT_ENV=GBTI
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="12-anacondaへのpathの確認">1.2. AnacondaへのPathの確認&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">$ cat ~/.bash_profile
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># &lt;span class="p">&amp;gt;&amp;gt;&lt;/span>&amp;gt; conda initialize &lt;span class="p">&amp;gt;&amp;gt;&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># !! Contents within this block are managed by &amp;#39;conda init&amp;#39; !!
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">__conda_setup=&lt;span class="s2">&amp;#34;$(&amp;#39;/opt/anaconda3/bin/conda&amp;#39; &amp;#39;shell.bash&amp;#39; &amp;#39;hook&amp;#39; 2&amp;gt; /dev/null)&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> [&lt;span class="err"> $? -eq 0 ]; then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> eval &lt;span class="s2">&amp;#34;$__conda_setup&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">else
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> [&lt;span class="err"> -f &amp;#34;/opt/anaconda3/etc/profile.d/conda.sh&amp;#34; ]; then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> . &lt;span class="s2">&amp;#34;/opt/anaconda3/etc/profile.d/conda.sh&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> else
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> export PATH=&lt;span class="s2">&amp;#34;/opt/anaconda3/bin:$PATH&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> fi
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">fi
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">unset __conda_setup
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># &lt;span class="p">&amp;lt;&lt;/span>&amp;lt;&amp;lt; conda initialize &lt;span class="p">&amp;lt;&lt;/span>&amp;lt;&amp;lt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="2-anaconda-cleanを実行する">2. anaconda-cleanを実行する&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">conda install anaconda-clean
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">anaconda-clean
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ anaconda-clean
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Delete .anaconda? (y/n): y
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Backup directory: /Users/kosukeaigo/.anaconda_backup/2022-09-05T224138
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Delete .conda? (y/n): y
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Delete .condarc? (y/n): y
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Delete .ipynb_checkpoints? (y/n): y
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Delete .ipython? (y/n): y
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Delete .jupyter? (y/n): y
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Delete .matplotlib? (y/n): y
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>削除した際にバックアップディレクトリが&lt;code>~/.anaconda_backup&lt;/code>に作成される&lt;/p></description></item><item><title>Anacondaを利用したrequirements.txtの作成方法</title><link>https://macho000.github.io/blogs/202200905_condatorequirements/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/blogs/202200905_condatorequirements/</guid><description>&lt;h1 id="condaを使ってconda_requirementstxtに移行">Condaを使ってconda_requirements.txtに移行&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">conda list -e &lt;span class="p">&amp;gt;&lt;/span> conda_requirements.txt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="pipを使ってrequirementstxtに移行">Pipを使ってrequirements.txtに移行&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">pip freeze &lt;span class="p">&amp;gt;&lt;/span> requirements.txt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Pyenvのインストール</title><link>https://macho000.github.io/blogs/20220831_pyenv%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/blogs/20220831_pyenv%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/</guid><description>&lt;h1 id="pyenvのインストール">pyenvのインストール&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">brew install pyenv
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="pathを通す">pathを通す&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">&lt;span class="k">echo&lt;/span> $SHELL
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/bin/bash # &lt;span class="p">&amp;lt;&lt;/span>- bashを使っている
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>zshを使っている場合は&lt;code>~/.zshrc&lt;/code>
+bashの場合は&lt;code>~/.bash_profile&lt;/code>を下記コードに追加&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:/.bash_profile" data-lang="bash:/.bash_profile">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">export&lt;/span> &lt;span class="nv">PYENV_ROOT&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$HOME&lt;/span>&lt;span class="s2">/.pyenv&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">export&lt;/span> &lt;span class="nv">PATH&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$PYENV_ROOT&lt;/span>&lt;span class="s2">/bin:&lt;/span>&lt;span class="nv">$PATH&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">eval&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="k">$(&lt;/span>pyenv init --path&lt;span class="k">)&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">eval&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="k">$(&lt;/span>pyenv init -&lt;span class="k">)&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>shellの設定を適用&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl"># bashの場合
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">source ~/.bash_profile
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># zshの場合
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">source ~/.zshrc
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="pythonのインストール">pythonのインストール&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">pyenv install --list
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Available versions:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 2.1.3
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 2.2.3
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 2.3.7
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ...
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 3.12-dev
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>python 3.9.13をインストール&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">pyenv install 3.9.13
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="使用するpythonのバージョンを設定">使用するpythonのバージョンを設定&lt;/h1>
+&lt;p>先程インストールしたバージョンを確認する&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">pyenv versions
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">* system (set by /Users/kosukeaigo/.pyenv/version)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 3.9.13
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>python3.9.13を設定する&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl"># globalで設定
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># フォルダを超えてもそのバージョンが使われる
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">pyenv global 3.9.13
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># localで設定
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># 実行したディレクトリ内だけで、Pythonのバージョンが固定される
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">pyenv local 3.9.13
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>pythonバージョン確認&lt;/p></description></item><item><title>Visual Studio CodeにFlake8を導入する方法</title><link>https://macho000.github.io/blogs/202200905_visualstudiocodeflake8/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/blogs/202200905_visualstudiocodeflake8/</guid><description>&lt;h1 id="flake8のインストール">flake8のインストール&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">pip install flake8
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="vs-codeの既存のlintであるpylintを無効化する">VS Codeの既存のLintであるpylintを無効化する&lt;/h1>
+&lt;h2 id="settingsをクリック">Settingsをクリック&lt;/h2>
+&lt;p>&lt;img src="033ed52d3f4da1bce23df517e6a69cd9947a3430ad4ecdb1bb219af5242a08fa.png" alt="picture 2">&lt;/p>
+&lt;h2 id="linterを無効化する">linterを無効化する&lt;/h2>
+&lt;p>検索窓で&lt;code>python.linting.pylintEnabled&lt;/code>と入力し検索
+&lt;code>&amp;gt; Linting: PyLint Enabled&lt;/code>を無効化
+&lt;img src="91e293459ee0211a382089b8528a71e3dc6cb12469f374f34491b5431bc746f1.png" alt="picture 3">&lt;/p>
+&lt;h1 id="flake8に設定する">flake8に設定する&lt;/h1>
+&lt;p>検索窓で&lt;code>python.linting.flake8Enabled&lt;/code>と入力し検索
+&lt;code>&amp;gt; Linting: Flake8 Enabled&lt;/code>を無効化
+&lt;img src="87196564c0489996b77e251ec0fcd5b395d4a4908a4cf546e3c866a6cb58e268.png" alt="picture 4">&lt;/p>
+&lt;h1 id="完了">完了&lt;/h1>
+&lt;p>これでソースファイル保存時にコードがPEP8に準拠しているか検証される&lt;/p>
+&lt;h1 id="参考文献">参考文献&lt;/h1>
+&lt;p>&lt;a href="https://qiita.com/fehde/items/723b619013dc86008acc">https://qiita.com/fehde/items/723b619013dc86008acc&lt;/a>&lt;/p></description></item></channel></rss>

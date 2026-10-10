@@ -1,0 +1,25 @@
+<!doctype html><html lang=ja><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>BERTSCore解説 · Macho000</title><meta name=description content=" BERTScoreとは テキスト生成に対する自動評価指標のこと
+BERTScore計算方法 準備 入力として正解文字列を$$x=<x_1, x_2, &mldr;, x_k > $$ 出力文字列を$$ \hat{x}=<\hat{x_1}, …"><link rel=canonical href=https://macho000.github.io/research_blog/20220808_bertscore%E8%A7%A3%E8%AA%AC/><link rel=stylesheet href=/css/site.css><link rel=alternate type=application/rss+xml title="Macho000 RSS" href=/index.xml></head><body><a class=skip href=#main>本文へ</a><div class=shell><header><a class=brand href=/>Macho000<span class=dot>.</span></a><nav aria-label=メインナビゲーション><a href=/>Home</a><a href=/blog/ aria-current=page>Blog</a><a href=https://github.com/Macho000>GitHub ↗</a></nav></header><main id=main><article><div class=article-heading><a class=muted href=/blog/>← Blog</a><p class=eyebrow>2022.09.09</p><h1>BERTSCore解説</h1><div class=tags><a href=/tags/%E8%A9%95%E4%BE%A1%E6%8C%87%E6%A8%99/>評価指標</a></div></div><details class=toc><summary>目次</summary><nav id=TableOfContents><ul><li><a href=#準備>準備</a></li><li><a href=#bertscore>BERTSCORE</a></li><li><a href=#計算例>計算例</a><ul><li><a href=#recallの計算例>Recallの計算例</a></li><li><a href=#precisionの計算例>Precisionの計算例</a></li></ul></li></ul><ul><li><a href=#例>例</a></li></ul></nav></details><div class=prose><script type=text/x-mathjax-config>MathJax.Hub.Config({tex2jax:{inlineMath:[['\$','\$'],['\\(','\\)']],processEscapes:true},CommonHTML: {matchFontHeight:false}});</script><script type=text/javascript async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><h1 id=bertscoreとは>BERTScoreとは</h1><p>テキスト生成に対する自動評価指標のこと</p><h1 id=bertscore計算方法>BERTScore計算方法</h1><h2 id=準備>準備</h2><p>入力として正解文字列を$$x=&lt;x_1, x_2, &mldr;, x_k > $$
+出力文字列を$$ \hat{x}=&lt;\hat{x_1}, \hat{x_2},&mldr;,\hat{x_m}> $$
+と置く。</p><h2 id=bertscore>BERTSCORE</h2><p>$$
+R_{BERT}=\frac{1}{|x|} \Sigma_{x_i \in x}max_{\hat{x}_j \in \hat{x}} \mathbf x_i^T \mathbf{\hat{x}}_j
+$$</p><p>$$
+P_{BERT}=\frac{1}{|\hat{x}|}\Sigma_{\hat x_j \in \hat x} max_{x_i \in x} \mathbf x_i^T \mathbf{\hat{x}}_j
+$$</p><p>$$
+F_{BERT}=2\frac{P_{BERT}\cdot R_{BERT}}{P_{BERT}+R_{BERT}}
+$$</p><h2 id=計算例>計算例</h2><p>例えば正解文字列(TARGET)が"alphabet"で、生成文字列(OUTPUT)が”writing system”である場合を考える。</p><p>数式で表すと
+正解文字列を$x=&lt;x_1>=&lt;alphabet> $
+出力文字列を$ \hat{x}=&lt;\hat{x_1}, \hat{x_2}>=&lt;writing, system> $と表せる</p><h3 id=recallの計算例>Recallの計算例</h3><p>このときまず</p><p>$$
+R_{BERT}=
+\frac{1}{|x|} \Sigma_{x_i \in x}max_{\hat{x}_j \in \hat x} \mathbf x_i^T \mathbf{\hat{x}}_j
+$$</p><p>$$
+=\frac{1}{1} \Sigma_{x_i \in {alphabet}}max_{\hat{x}_j \in {writing, system}} \mathbf x_i^T \mathbf{\hat{x}}_j
+$$</p><p>の計算結果がRecallの結果となる</p><p>文字での説明では、alphabetとwritingの内積、alphabetとsystemの内積を取って値が高い方がRecallの計算結果となる</p><p>図で説明すると、
+<img src=08d5941e10c0a45a5476699b0e12a047221f718f244c711f31cfae4dc6380b86.png alt="picture 6"></p><p>TARGETの「alphabet」とOUTPUTの「writing」の内積を計算し、TARGETの「alphabet」とOUTPUTの「system」の内積を計算し、最大となる内積の結果をRecallの値となる</p><h3 id=precisionの計算例>Precisionの計算例</h3><p>$$
+P_{BERT}=\frac{1}{| \hat x |} \Sigma_{\hat x_j \in \hat x} max_{x_i \in x} \mathbf x_i^T \mathbf{\hat{x}}_j
+$$</p><p>$$
+=\frac{1}{| 2 |}\Sigma_{\hat x_j \in \lbrace writing, system \rbrace} \mathbf x_i^T \mathbf{\hat{x}}_j
+$$</p><p>の計算結果がPrecisionの結果となる</p><p>図で説明すると
+<img src=a567063d3bcc20472741f041c37fd80d2e827795c9acc30ade7eb2e1cb9be671.png alt="picture 8"></p><p>TARGETの「alphabet」とOUTPUTの「writing」の内積を計算した結果と、TARGETの「alphabet」とOUTPUTの「system」の内積を計算した結果を加算し、最終的にOUTPUTの長さ2を割った結果がPrecisionの結果となる。</p><h1 id=既存評価指標の問題点>既存評価指標の問題点</h1><p>テキスト生成の評価には、これまでBLEUスコアやMETEORスコアを用いられてきた。
+しかし、文字列の表面的な適合度のみを評価していた。</p><h2 id=例>例</h2><p>例えば、正解分として<code>people like foreign cars</code>
+という分が与えられるとする。</p><p>このとき、BLEUとMETEORスコアでは<code>people like visiting places abroad</code>に高評価を与える一方で、<code>consumers prefer imported cars</code>の文にはスコアは低い</p><p>このように、文の意味を考慮せずに表面的な適合度のみで評価を行う点がBLEUやMETEORスコアの良くない点である。</p><p>そこで、文の意味を考慮した評価を行うために導入されたのがBERTScoreである。</p><h1 id=参考文献>参考文献</h1><p>Zhang, Tianyi, Varsha Kishore, Felix Wu, Kilian Q. Weinberger, and Yoav Artzi. &ldquo;Bertscore: Evaluating text generation with bert.&rdquo; arXiv preprint arXiv:1904.09675 (2019).</p></div><div class=article-end><a href=/blog/>← 記事一覧へ</a></div></article></main><footer><span>© 2026 Macho000</span><a href=/index.xml>RSS ↗</a></footer></div></body></html>

@@ -1,0 +1,29 @@
+<!doctype html><html lang=ja><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>損失関数まとめ · Macho000</title><meta name=description content="損失関数とは 損失関数は一言で言うと「目標」と「実際」の結果の差を表したもの。
+損失関数は一般的には$\mathcal L$で表される。
+損失関数の種類にはいろいろあり平均二乗誤差（MSE：Mean Squared Error）、平均絶対誤差（MAE）、交差クロスエントロピー誤差 （Cross-entropy …"><link rel=canonical href=https://macho000.github.io/research_blog/20221022_%E6%90%8D%E5%A4%B1%E9%96%A2%E6%95%B0/><link rel=stylesheet href=/css/site.css><link rel=alternate type=application/rss+xml title="Macho000 RSS" href=/index.xml></head><body><a class=skip href=#main>本文へ</a><div class=shell><header><a class=brand href=/>Macho000<span class=dot>.</span></a><nav aria-label=メインナビゲーション><a href=/>Home</a><a href=/blog/ aria-current=page>Blog</a><a href=https://github.com/Macho000>GitHub ↗</a></nav></header><main id=main><article><div class=article-heading><a class=muted href=/blog/>← Blog</a><p class=eyebrow>2022.10.22</p><h1>損失関数まとめ</h1><div class=tags></div></div><details class=toc><summary>目次</summary><nav id=TableOfContents><ul><li><a href=#例１>例１</a></li><li><a href=#例２>例２</a></li></ul></nav></details><div class=prose><h1 id=損失関数とは>損失関数とは</h1><p>損失関数は一言で言うと「目標」と「実際」の結果の差を表したもの。</p><p>損失関数は一般的には$\mathcal L$で表される。</p><p>損失関数の種類にはいろいろあり平均二乗誤差（MSE：Mean Squared Error）、平均絶対誤差（MAE）、交差クロスエントロピー誤差 （Cross-entropy Loss）などがある。</p><p>では損失関数を用いてどのように学習するのかを見ていく</p><h1 id=損失関数を用いたモデルの学習>損失関数を用いたモデルの学習</h1><p>モデルの学習は以下のように表される</p><p>$$
+\mathcal w_{t+1} = \mathcal w_t - \alpha \frac{\partial L}{\partial \mathcal w}
+$$</p><p>この式の意味するところは、損失関数を小さくする方向に重み$w$を学習するということである。</p><h1 id=交差クロスエントロピー>交差クロスエントロピー</h1><p>ここで交差クロスエントロピーの定義と学習する方法について具体的に見ていく</p><p>交差クロスエントロピーは以下の式で定義される</p><p>$$
+\mathcal L(p, q) = - \Sigma_i p(i) logq(i)
+$$</p><ul><li>pは真の確率分布、qは推定した確率分布</li><li>pは正解データの確率分布、qはモデルが出力した確率分布</li></ul><h2 id=例１>例１</h2><p>仮に真の確率分布p=(1,0,0)、推定した確率分布q=(1,0,0)の場合を考える。</p><p>この時交差クロスエントロピーは
+$$
+\begin{aligned}
+\mathcal L(p, q)
+&= - \Sigma_i p(i) logq(i) \
+&= - 1 \cdot log 1 - 0 \cdot log 0 - 0 \cdot log 0 \
+&= 0
+\end{aligned}
+$$</p><p>このように真の確率分布と推定した確率分布が同じ場合は損失関数は０に収束する</p><p>この値を下記の式を用いて考える。</p><p>$$
+\mathcal w_{t+1} = \mathcal w_t - \alpha \frac{\partial L}{\partial \mathcal w}
+$$</p><p>上記の損失関数が０に収束する場合は上記の$\alpha \frac{\partial L}{\partial \mathcal w}$は０になるため、パラーメーターを更新する必要はない</p><h2 id=例２>例２</h2><p>仮に真の確率分布p=(1,0,0)、推定した確率分布q=(0.5,0,5)の場合を考える。</p><p>この時交差クロスエントロピーは
+$$
+\begin{aligned}
+\mathcal L(p, q)
+&= - \Sigma_i p(i) logq(i) \
+&= - 1 \cdot log 0.5 - 0 \cdot log 0.5 - 0 \cdot log 0 \
+&= 0.693147&mldr;
+\end{aligned}
+$$</p><p>このように真の確率分布と推定した確率分布が異なる場合は0.69..となる。</p><p>この値を下記の式を用いて考える。</p><p>$$
+\mathcal w_{t+1} = \mathcal w_t - \alpha \frac{\partial \mathcal L}{\partial \mathcal w}
+$$</p><p>q(x)は、より詳しく見ると入力xと重みw,誤差bに依存する。</p><p>具体的には、$q(x)=w\cdot x+b$となる</p><p>$$
+\frac{\partial \mathcal L}{\partial w} = \frac{\partial (- \Sigma_i p(i) logq(i) )}{\partial w}= \frac{\partial (- \Sigma_i p(i) logq(i) )}{\partial w}
+$$</p></div><script type=text/x-mathjax-config>MathJax.Hub.Config({tex2jax:{inlineMath:[["$","$"],["\\(","\\)"]],processEscapes:true}});</script><script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><div class=article-end><a href=/blog/>← 記事一覧へ</a></div></article></main><footer><span>© 2026 Macho000</span><a href=/index.xml>RSS ↗</a></footer></div></body></html>

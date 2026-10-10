@@ -1,0 +1,1417 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Home on Macho000</title><link>https://macho000.github.io/</link><description>Recent content in Home on Macho000</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Mon, 13 Feb 2023 20:42:15 +0900</lastBuildDate><atom:link href="https://macho000.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Install OpenFOAM for Mac</title><link>https://macho000.github.io/blogs/20230113_install_openfoam/install_openfoam_for_mac/</link><pubDate>Mon, 13 Feb 2023 20:42:15 +0900</pubDate><guid>https://macho000.github.io/blogs/20230113_install_openfoam/install_openfoam_for_mac/</guid><description>&lt;h1 id="準備">準備&lt;/h1>
+&lt;p>Install Docker for Mac&lt;/p>
+&lt;h1 id="dockerイメージの取得する方法">Dockerイメージの取得する方法&lt;/h1>
+&lt;p>&lt;code>docker pull opencfd/openfoam-run&lt;/code>&lt;/p>
+&lt;h2 id="補足">補足&lt;/h2>
+&lt;p>&lt;a href="https://hub.docker.com/u/opencfd">link&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>run : a small-footprint runtime-only image&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>dev : runtime with OpenFOAM development environment&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>default : just-give-me-everything image&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h1 id="コンテナの作成">コンテナの作成&lt;/h1>
+&lt;p>&lt;code>docker create -it opencfd/openfoam-run&lt;/code>&lt;/p>
+&lt;h1 id="コンテナのスタート">コンテナのスタート&lt;/h1>
+&lt;p>&lt;code>docker start コンテナID&lt;/code>&lt;/p>
+&lt;h1 id="コンテナ内のopenfoam実行方法">コンテナ内のOpenFOAM実行方法&lt;/h1>
+&lt;h2 id="スクリプトの実行">スクリプトの実行&lt;/h2>
+&lt;p>&lt;a href="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88">https://develop.openfoam.com/packaging/containers/-/raw/main/openfoam-docker&lt;/a>をダウンロードしてきて、パスの通った場所に保管。&lt;/p>
+&lt;p>下記のコマンドを実行&lt;/p>
+&lt;p>&lt;code>chmod +x openfoam-docker&lt;/code>
+&lt;code>ln -sf openfoam-docker openfoam2212-run&lt;/code>&lt;/p>
+&lt;p>ヘルプの確認
+&lt;code>openfoam-docker -help&lt;/code>&lt;/p>
+&lt;h1 id="参考文献">参考文献&lt;/h1>
+&lt;p>&lt;a href="https://openfoam.org/download/10-macos/">https://openfoam.org/download/10-macos/&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://develop.openfoam.com/Development/openfoam/-/wikis/precompiled/docker">https://develop.openfoam.com/Development/openfoam/-/wikis/precompiled/docker&lt;/a>&lt;/p></description></item><item><title>hugoの使い方</title><link>https://macho000.github.io/blogs/20230113_hugo%E8%A8%98%E4%BA%8B/how_to_hugo/</link><pubDate>Mon, 13 Feb 2023 20:39:10 +0900</pubDate><guid>https://macho000.github.io/blogs/20230113_hugo%E8%A8%98%E4%BA%8B/how_to_hugo/</guid><description>&lt;h1 id="新しい記事の作成する方法">新しい記事の作成する方法&lt;/h1>
+&lt;p>&lt;code>hugo new dir_name/folder_name/article_name.md&lt;/code>&lt;/p>
+&lt;h1 id="マークダウンファイルをhtmlに変換">マークダウンファイルをHTMLに変換&lt;/h1>
+&lt;p>&lt;code>hugo&lt;/code>&lt;/p></description></item><item><title>git reset コマンド</title><link>https://macho000.github.io/blogs/20230112_git%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89/</link><pubDate>Thu, 12 Jan 2023 22:32:39 +0900</pubDate><guid>https://macho000.github.io/blogs/20230112_git%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89/</guid><description>&lt;h1 id="git-resetとは">git resetとは&lt;/h1>
+&lt;p>Gitでコミットした内容を取り消すためのコマンド&lt;/p>
+&lt;p>一般的に&lt;code>git reset [打ち消したいコミットID]&lt;/code>で使用する。&lt;/p>
+&lt;h1 id="reset-オプション">reset オプション&lt;/h1>
+&lt;p>&lt;code>git reset --soft&lt;/code>&lt;/p>
+&lt;p>commitのみ取り消し　（HEADのいちのみ修正される）
+このコマンドを実行すると、コミットをする直前に戻る。１つしかコミットしていなかった時や、間違えてコミットしてしまった場合はこのコマンドを使用する&lt;/p>
+&lt;p>&lt;code>git reset --mixed&lt;/code>&lt;/p>
+&lt;p>commitとaddの取り消し （HEADの位置,インデックスが修正される）&lt;/p>
+&lt;p>git addしてコミットしたけど、やっぱり戻したい時に便利。作業ディレクトリのファイルは消えない&lt;/p>
+&lt;p>&lt;code>git reset --hard&lt;/code>&lt;/p>
+&lt;p>全部を取り消し （HEAD、インデックス、ワーキングツリーが修正される）。
+最も強力なもので、作業ディレクトリにも変更を残したなくない場合に使用する&lt;/p>
+&lt;h1 id="例">例&lt;/h1>
+&lt;p>ひとつ前のコミットを削除したい場合は下記のコマンドを使用する
+&lt;code>git reset --soft HEAD^&lt;/code>&lt;/p>
+&lt;h1 id="参考文献">参考文献&lt;/h1>
+&lt;p>&lt;a href="https://tech-blog.rakus.co.jp/entry/20210528/git">https://tech-blog.rakus.co.jp/entry/20210528/git&lt;/a>&lt;/p></description></item><item><title>テーラー展開マクローリン展開</title><link>https://macho000.github.io/blogs/20221118_%E3%83%86%E3%83%BC%E3%83%A9%E3%83%BC%E5%B1%95%E9%96%8B%E3%83%9E%E3%82%AF%E3%83%AD%E3%83%BC%E3%83%AA%E3%83%B3%E5%B1%95%E9%96%8B/</link><pubDate>Fri, 18 Nov 2022 20:54:24 +0900</pubDate><guid>https://macho000.github.io/blogs/20221118_%E3%83%86%E3%83%BC%E3%83%A9%E3%83%BC%E5%B1%95%E9%96%8B%E3%83%9E%E3%82%AF%E3%83%AD%E3%83%BC%E3%83%AA%E3%83%B3%E5%B1%95%E9%96%8B/</guid><description>&lt;ul>
+&lt;li>&lt;a href="#%E3%83%86%E3%82%A4%E3%83%A9%E3%83%BC%E5%B1%95%E9%96%8B%E3%81%A8%E3%81%AF">テイラー展開とは&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E3%83%9E%E3%82%AF%E3%83%AD%E3%83%BC%E3%83%AA%E3%83%B3%E5%B1%95%E9%96%8B%E3%81%A8%E3%81%AF">マクローリン展開とは&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E3%83%9E%E3%82%AF%E3%83%AD%E3%83%BC%E3%83%AA%E3%83%B3%E5%B1%95%E9%96%8B%E3%81%AE%E5%85%B7%E4%BD%93%E4%BE%8B">マクローリン展開の具体例&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h1 id="テイラー展開とは">テイラー展開とは&lt;/h1>
+&lt;p>テイラー級数を得ることをテイラー展開という。&lt;/p>
+&lt;p>テイラー級数とは関数のある一点での導関数の値から計算される項の無限和として関数を表したもの&lt;/p>
+&lt;p>数式に表すと以下の通り&lt;/p>
+&lt;p>$$
+\begin{aligned}
+f(x)&amp;amp;=\Sigma_{n=0}^{\infty}\frac{f^{(n)}(a)}{n!}(x-a)^n \
+&amp;amp;= f(a) + f&amp;rsquo;(a)(x-a) + \frac{f&amp;rsquo;&amp;rsquo;(a)}{2!}(x-a)^2 \ &amp;amp; + \frac{f&amp;rsquo;&amp;rsquo;&amp;rsquo;(a)}{3!} (x-a)^3 + \frac{f&amp;rsquo;&amp;rsquo;&amp;rsquo;&amp;rsquo;(a)}{4!} (x-a)^4 + \cdot \cdot \cdot
+\end{aligned}
+$$&lt;/p>
+&lt;h1 id="マクローリン展開とは">マクローリン展開とは&lt;/h1>
+&lt;p>０の周りでのテイラー展開のことを舞うローリン展開という。&lt;/p>
+&lt;p>数式に表すと以下の通り&lt;/p>
+&lt;p>$$
+\begin{aligned}
+f(x)&amp;amp;=\Sigma_{n=0}^{\infty}\frac{f^{(n)}(0)}{n!}x^n \
+&amp;amp;= f(0) + f&amp;rsquo;(0)(x) + \frac{f&amp;rsquo;&amp;rsquo;(0)}{2!}x^2 \ &amp;amp; + \frac{f&amp;rsquo;&amp;rsquo;&amp;rsquo;(0)}{3!} x^3 + \frac{f&amp;rsquo;&amp;rsquo;&amp;rsquo;&amp;rsquo;(0)}{4!} x^4 + \cdot \cdot \cdot
+\end{aligned}
+$$&lt;/p>
+&lt;h1 id="マクローリン展開の具体例">マクローリン展開の具体例&lt;/h1>
+&lt;p>$$
+e^x = 1 + x + \frac{x^2}{2!} + \cdot \cdot \cdot + \frac{x^n}{n!} + \cdot \cdot \cdot , (|x| &amp;lt; \infty )
+$$&lt;/p></description></item><item><title>交流RL回路の過渡現象</title><link>https://macho000.github.io/blogs/20221113_rl%E5%9B%9E%E8%B7%AF%E3%81%AE%E9%81%8E%E6%B8%A1%E7%8F%BE%E8%B1%A1/</link><pubDate>Sun, 13 Nov 2022 20:00:16 +0900</pubDate><guid>https://macho000.github.io/blogs/20221113_rl%E5%9B%9E%E8%B7%AF%E3%81%AE%E9%81%8E%E6%B8%A1%E7%8F%BE%E8%B1%A1/</guid><description>&lt;h1 id="回路方程式">回路方程式&lt;/h1>
+&lt;p>下図に交流RL回路の回路図を示す。抵抗R,インダクタンスLのコイルで構成され、波高値$E_m$、周波数$\omega$である交流電源$e=E_msin\omega t$が接続されたRL回路を考える。&lt;/p>
+&lt;p>&lt;img src="cb21f29bb0982774a6da5a6e0da1e6181abd5a3e479ad23b6bcb320ac6266512.png" alt="picture 1">&lt;/p>
+&lt;p>この回路にキルヒホッフの第２法則を適用すると、回路方程式は下記のようになる。&lt;/p>
+&lt;p>$$
+L\frac{di}{dt}+Ri=E_msin\omega t \label{eq1}\tag{1}
+$$&lt;/p>
+&lt;h1 id="回路方程式の解法">回路方程式の解法&lt;/h1>
+&lt;h2 id="過渡解と定常解">過渡解と定常解&lt;/h2>
+&lt;p>($\ref{eq1}$)式を電流iについて解く場合、過渡解を$it$,定常解を$i_s$とすると（１）式の解は&lt;/p>
+&lt;p>$$
+i=i_t+i_s \label{eq2}\tag{2}
+$$&lt;/p>
+&lt;p>($\ref{eq2}$)式を($\ref{eq1}$)式に代入すると&lt;/p>
+&lt;p>$$
+L(\frac{di_t}{dt}+\frac{di_s}{dt})+R(i_t+i_s)=E_msin\omega t
+$$
+$$
+(L\frac{di_t}{dt}+Ri_t)+(L\frac{di_s}{dt}+Ri_s)=E_msin\omega t \label{eq3}\tag{3}
+$$&lt;/p>
+&lt;p>($\ref{eq3}$)式をそれぞれ$i_t$と$i_s$について２つの式に分離する。過渡状態では電源の電圧が０、定常状態では時間微分の値が０になる。&lt;/p>
+&lt;p>$$
+\begin{equation}
+\begin{cases}
+L\frac{di_t}{dt}+Ri_t=0 &amp;amp;\\ &lt;br>
+L\frac{di_s}{dt}+Ri_s=E_msin\omega t &amp;amp;　\label{eq4}\tag{4}
+\end{cases}
+\end{equation}
+$$&lt;/p>
+&lt;h1 id="過渡解の導出">過渡解の導出&lt;/h1>
+&lt;p>($\ref{eq1}$)式を解くために、
+$$
+L\frac{di_t}{dt}+Ri_t=0
+$$
+を解き過渡解を求める。&lt;/p>
+&lt;p>この式を変形すると
+$$
+\begin{aligned}
+L\frac{di_t}{dt} &amp;amp;= -Ri_t \\
+\frac{di_t}{i_t} &amp;amp;= -\frac{R}{L}dt \\
+\int{\frac{di_t}{i_t}} &amp;amp;= -\frac{R}{L}\int{dt} \\
+\ln |i_t| &amp;amp;= -\frac{R}{L}t+C \\
+i_t &amp;amp;= Ae^{-\frac{R}{L}t}(A=\pm e^C)
+\end{aligned}
+$$&lt;/p></description></item><item><title>損失関数まとめ</title><link>https://macho000.github.io/research_blog/20221022_%E6%90%8D%E5%A4%B1%E9%96%A2%E6%95%B0/</link><pubDate>Sat, 22 Oct 2022 22:01:52 +0900</pubDate><guid>https://macho000.github.io/research_blog/20221022_%E6%90%8D%E5%A4%B1%E9%96%A2%E6%95%B0/</guid><description>&lt;h1 id="損失関数とは">損失関数とは&lt;/h1>
+&lt;p>損失関数は一言で言うと「目標」と「実際」の結果の差を表したもの。&lt;/p>
+&lt;p>損失関数は一般的には$\mathcal L$で表される。&lt;/p>
+&lt;p>損失関数の種類にはいろいろあり平均二乗誤差（MSE：Mean Squared Error）、平均絶対誤差（MAE）、交差クロスエントロピー誤差 （Cross-entropy Loss）などがある。&lt;/p>
+&lt;p>では損失関数を用いてどのように学習するのかを見ていく&lt;/p>
+&lt;h1 id="損失関数を用いたモデルの学習">損失関数を用いたモデルの学習&lt;/h1>
+&lt;p>モデルの学習は以下のように表される&lt;/p>
+&lt;p>$$
+\mathcal w_{t+1} = \mathcal w_t - \alpha \frac{\partial L}{\partial \mathcal w}
+$$&lt;/p>
+&lt;p>この式の意味するところは、損失関数を小さくする方向に重み$w$を学習するということである。&lt;/p>
+&lt;h1 id="交差クロスエントロピー">交差クロスエントロピー&lt;/h1>
+&lt;p>ここで交差クロスエントロピーの定義と学習する方法について具体的に見ていく&lt;/p>
+&lt;p>交差クロスエントロピーは以下の式で定義される&lt;/p>
+&lt;p>$$
+\mathcal L(p, q) = - \Sigma_i p(i) logq(i)
+$$&lt;/p>
+&lt;ul>
+&lt;li>pは真の確率分布、qは推定した確率分布&lt;/li>
+&lt;li>pは正解データの確率分布、qはモデルが出力した確率分布&lt;/li>
+&lt;/ul>
+&lt;h2 id="例１">例１&lt;/h2>
+&lt;p>仮に真の確率分布p=(1,0,0)、推定した確率分布q=(1,0,0)の場合を考える。&lt;/p>
+&lt;p>この時交差クロスエントロピーは
+$$
+\begin{aligned}
+\mathcal L(p, q)
+&amp;amp;= - \Sigma_i p(i) logq(i) \
+&amp;amp;= - 1 \cdot log 1 - 0 \cdot log 0 - 0 \cdot log 0 \
+&amp;amp;= 0
+\end{aligned}
+$$&lt;/p></description></item><item><title>ProtocolBufferのインストール</title><link>https://macho000.github.io/blogs/20221018_protocolbuffer%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/</link><pubDate>Tue, 18 Oct 2022 16:34:47 +0900</pubDate><guid>https://macho000.github.io/blogs/20221018_protocolbuffer%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/</guid><description>&lt;h1 id="パッケージマネージャを利用したインストール">パッケージマネージャを利用したインストール&lt;/h1>
+&lt;p>Linuxの場合&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">apt install -y protobuf-compiler
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">protoc --version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Macの場合&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">brew install protobuf
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">protoc --version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Windows(Linux, Mac以外のOSの場合)&lt;/p>
+&lt;ol>
+&lt;li>手動でインストール&lt;/li>
+&lt;li>解凍&lt;/li>
+&lt;li>パスに追加&lt;/li>
+&lt;/ol>
+&lt;p>あるいは&lt;/p>
+&lt;ol>
+&lt;li>コマンドからファイル取得
+&lt;ol>
+&lt;li>&lt;code>PB_REL=&amp;quot;https://github.com/protocolbuffers/protobuf/releases&amp;quot;&lt;/code>&lt;/li>
+&lt;li>&lt;code>curl -LO $PB_REL/download/v3.15.8/protoc-3.15.8-linux-x86_64.zip&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>解凍
+&lt;ol>
+&lt;li>&lt;code>unzip protoc-3.15.8-linux-x86_64.zip -d $HOME/.local&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>パスのアップデート
+&lt;ol>
+&lt;li>&lt;code>export PATH=&amp;quot;$PATH:$HOME/.local/bin&amp;quot;&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ol>
+&lt;h1 id="参考文献">参考文献&lt;/h1>
+&lt;p>&lt;a href="https://grpc.io/docs/protoc-installation/">https://grpc.io/docs/protoc-installation/&lt;/a>&lt;/p></description></item><item><title>Go言語でgRPC体験</title><link>https://macho000.github.io/blogs/20221018_go%E8%A8%80%E8%AA%9E%E3%81%A7grpc%E4%BD%93%E9%A8%93/</link><pubDate>Tue, 18 Oct 2022 16:31:13 +0900</pubDate><guid>https://macho000.github.io/blogs/20221018_go%E8%A8%80%E8%AA%9E%E3%81%A7grpc%E4%BD%93%E9%A8%93/</guid><description>&lt;h1 id="前提条件">前提条件&lt;/h1>
+&lt;ol>
+&lt;li>Goのインストール&lt;/li>
+&lt;li>プロトコルバッファーのインストール&lt;/li>
+&lt;li>Goのプラグインの導入
+&lt;ol>
+&lt;li>プロトコルコンパイラーのインストール
+&lt;ol>
+&lt;li>&lt;code>go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.28&lt;/code>&lt;/li>
+&lt;li>&lt;code>go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.2&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>protocコンパイラーへのパスを通しておく
+&lt;ol>
+&lt;li>&lt;code>export PATH=&amp;quot;$PATH:$(go env GOPATH)/bin&amp;quot;&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ol>
+&lt;h1 id="サンプルコードの取得">サンプルコードの取得&lt;/h1>
+&lt;ol>
+&lt;li>zipファイルのダウンロード
+&lt;ol>
+&lt;li>&lt;code>git clone -b v1.49.0 --depth 1 https://github.com/grpc/grpc-go&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>ディレクトリーの変更
+&lt;ol>
+&lt;li>&lt;code>cd grpc-go/examples/helloworld&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ol>
+&lt;h1 id="サンプルの実行">サンプルの実行&lt;/h1>
+&lt;ol>
+&lt;li>コンパイルして実行
+&lt;ol>
+&lt;li>&lt;code>go run greeter_server/main.go&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>異なるターミナルからコンパイルし実行をする。
+&lt;ol>
+&lt;li>&lt;code>go run greeter_client/main.go&lt;/code>すると&lt;code>Greeting: Hello world&lt;/code>が出力される&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ol>
+&lt;h1 id="参考文献">参考文献&lt;/h1>
+&lt;p>&lt;a href="https://grpc.io/docs/languages/go/quickstart/">https://grpc.io/docs/languages/go/quickstart/&lt;/a>&lt;/p></description></item><item><title>gRPCとは</title><link>https://macho000.github.io/blogs/20221018_grpc%E3%81%A8%E3%81%AF/</link><pubDate>Tue, 18 Oct 2022 12:00:58 +0900</pubDate><guid>https://macho000.github.io/blogs/20221018_grpc%E3%81%A8%E3%81%AF/</guid><description>&lt;ul>
+&lt;li>&lt;a href="#grpc%E3%81%AE%E7%B4%B9%E4%BB%8B">gRPCの紹介&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E6%A6%82%E8%A6%81">概要&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E3%83%97%E3%83%AD%E3%83%88%E3%82%B3%E3%83%AB%E3%83%90%E3%83%83%E3%83%95%E3%82%A1%E3%83%BC%E3%81%AE%E6%93%8D%E4%BD%9C">プロトコルバッファーの操作&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#grpc%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E4%B8%80%E8%A6%A7">gRPCのサービス一覧&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#api%E3%81%AE%E4%BD%BF%E7%94%A8">APIの使用&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE">参考文献&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h1 id="grpcの紹介">gRPCの紹介&lt;/h1>
+&lt;p>ここでは、gRPCとプロトコルバッファについてまとめる。gRPCはそのインターフェース定義言語（IDL）とメッセージ交換フォーマットの基礎としてプロトコルバッファを使用することができる。&lt;/p>
+&lt;h1 id="概要">概要&lt;/h1>
+&lt;p>gRPCでは、クライアントアプリケーションが別のマシンにあるサーバーアプリケーションのメソッドをローカルオブジェクトのように直接呼び出せるので、分散アプリケーションサービスを容易に作成することができる。&lt;/p>
+&lt;p>&lt;img src="98f3b13c8d0ab557e5298e6eb1c8ce7fbcdc46489661a48d42e10800e2ad2058.png" alt="picture 1">&lt;/p>
+&lt;p>例えば上記の図を考える。Rubyでクライアントサイドのアプリケーションを実装しており、C++サーバーで認証機能などを実装しているとする。gRPCを使わない場合は、C++サーバーにユーザーのID、パスワードといったデータが格納されているJSONデータを渡し、C++の方で認証を行う方式が取られる。&lt;/p>
+&lt;p>しかし、gRPCで行えば、わざわざJSON形式にフォーマットを変えてC++サーバーにリクエストするコードを書く必要はなく、あたかも同じサーバーにあるかのようにメソッドを呼び出すだけで背後でC++サーバーとやり取りができる仕組みである。&lt;/p>
+&lt;h1 id="プロトコルバッファーの操作">プロトコルバッファーの操作&lt;/h1>
+&lt;p>デフォルトでは、gRPCは構造化データをシリアライズするためのGoogleの成熟したオープンソースであるProtocol Buffersを使用する（JSONなどの他のデータ形式でも使用可能）。&lt;/p>
+&lt;p>プロトコルバッファはJSONやCSVなどのようなデータ形式の一種である。&lt;/p>
+&lt;p>プロトコルバッファを扱う最初のステップとして、シリアライズしたいデータの構造をprotoファイルに定義すること。これは.protoという拡張子を持つ通常のテキストファイルである。プロトコルバッファのでーたは&lt;code>メッセージ&lt;/code>として構造化されており、各メッセージは&lt;code>フィールド&lt;/code>と呼ばれる一連の名前と値のペアを含む情報の小さな論理的な記録である&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-proto" data-lang="proto">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">message&lt;/span> &lt;span class="nc">Person&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span> &lt;span class="kt">string&lt;/span> &lt;span class="n">name&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span> &lt;span class="kt">int32&lt;/span> &lt;span class="n">id&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span> &lt;span class="kt">bool&lt;/span> &lt;span class="n">has_ponycopter&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>一旦データ構造を指定したら、プロトコルバッファコンパイラのprotocを使って、protoの定義から好きな言語でデータアクセスクラスを生成する。これらはname()やset_name()のような各フィールドの簡単なアクセサと構造体全体を生のバイトからシリアライズ・パースするメソッドを提供する。&lt;/p>
+&lt;p>例えば、C++の場合を考える。上記のprotoファイルに対してprotocを使ってコンパイルをするとPersonというクラスが生成される。このクラスをアプリケーションで使用すると、Personプロトコル・バッファ・メッセージの入力、シリアライズ、取得を行うことができる。&lt;/p>
+&lt;p>上記のprotoファイルをコンパイルした結果が以下の通り&lt;/p>
+&lt;p>&lt;a href="https://gist.github.com/Macho000/dee8a31da0ef6e9335768a113ce19507">https://gist.github.com/Macho000/dee8a31da0ef6e9335768a113ce19507&lt;/a>&lt;/p>
+&lt;h1 id="grpcのサービス一覧">gRPCのサービス一覧&lt;/h1>
+&lt;p>４種類のサービスメソッドを定義することができる。&lt;/p>
+&lt;ul>
+&lt;li>単一RPC
+&lt;ul>
+&lt;li>クライアントがサーバーに１つのりクエウトを送り、通常の関数呼び出しと同じように１つのレスポンスを返す&lt;/li>
+&lt;li>&lt;code>rpc SayHello(HelloRequest) returns (HelloResponse); &lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>サーバーストリーミングRPC
+&lt;ul>
+&lt;li> クライアントがサーバにリクエストを送信し、一連のメッセージを読み取るためのストリームを取得する&lt;/li>
+&lt;li>&lt;code>rpc LotsOfReplies(HelloRequest) returns (stream HelloResponse); &lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>クライアントストリーミングRPC
+&lt;ul>
+&lt;li>クライアントが一連のメッセージを書き、提供されたストリームを使用してサーバーに送信する。クライアントがメッセージの書き込みを終えると、サーバーがメッセージを読み込んで応答を返すのを待つ。&lt;/li>
+&lt;li>&lt;code>rpc LotsOfGreetings(stream HelloRequest) returns (HelloResponse); &lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>双方向ストリーミングRPC
+&lt;ul>
+&lt;li>双方とも読み書き可能なストリームを使用して一連おメッセージを送信する。２つのストリームは独立して動作するため、クライアントとサーバは好きな順序で読み書きができる。&lt;/li>
+&lt;li>&lt;code>rpc BidiHello(stream HelloRequest) returns (stream HelloResponse); &lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h1 id="apiの使用">APIの使用&lt;/h1>
+&lt;p>&lt;code>.proto&lt;/code>ファイルのサービス定義から始まり、gRPCはクライアント側とサーバ側のコードを生成するプロトコルバッファコンパイラプラグインを提供する。gRPCユーザは通常、クライアント側でこれらのAPIを呼び出して、サーバーがわで対応するAPIを実装する&lt;/p>
+&lt;ul>
+&lt;li>サーバー側では、サービスが宣言したメソッドを実装し、クラインアントからの呼び出しを処理するためにgRPCサーバーを実行する。gRPCインフラストラクチャは受信したリクエストをデコードし、サービスメソッドを実行し、サービス応答をエンコードする。&lt;/li>
+&lt;li>クライアント側ではサービスと同じメソッドを実装したスタブと呼ばれるローカルオブジェクトを用意する。そしてクライアントはローカルオブジェクトのメソッドを呼び出すだけで、呼び出しのパラメータを適切なプロトコルバッファのメッセージタイプにラップする。つまり、ローカルオブジェクトのメソッドを呼び出すことによって、サーバー側のメソッドを呼び出すことができる。&lt;/li>
+&lt;/ul>
+&lt;h1 id="参考文献">参考文献&lt;/h1>
+&lt;p>&lt;a href="https://grpc.io/docs/what-is-grpc/introduction/">https://grpc.io/docs/what-is-grpc/introduction/&lt;/a>&lt;/p></description></item><item><title>AppleStore画素数まとめ</title><link>https://macho000.github.io/blogs/20221012_applestore%E7%94%BB%E7%B4%A0%E6%95%B0%E3%81%BE%E3%81%A8%E3%82%81/</link><pubDate>Wed, 12 Oct 2022 16:24:57 +0900</pubDate><guid>https://macho000.github.io/blogs/20221012_applestore%E7%94%BB%E7%B4%A0%E6%95%B0%E3%81%BE%E3%81%A8%E3%82%81/</guid><description>&lt;p>iPad 12.9インチ
+2732 x 2048ピクセル&lt;/p>
+&lt;p>iPhone6.5インチ
+1242×2688&lt;/p>
+&lt;p>iPhone5.5インチ
+1242×2208&lt;/p></description></item><item><title>flutterでデータを渡して画面遷移する方法</title><link>https://macho000.github.io/blogs/20220923_flutter%E3%81%A7%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E6%B8%A1%E3%81%97%E3%81%A6%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95/</link><pubDate>Fri, 23 Sep 2022 20:00:50 +0900</pubDate><guid>https://macho000.github.io/blogs/20220923_flutter%E3%81%A7%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E6%B8%A1%E3%81%97%E3%81%A6%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95/</guid><description>&lt;h1 id="statelesswidget-でデータを受け取る場合">StatelessWidget でデータを受け取る場合&lt;/h1>
+&lt;ul>
+&lt;li>画面遷移元から受け取るデータの引数を宣言&lt;/li>
+&lt;li>引数付きコンストラクタを作成し、引数として受け取るデータの変数を宣言&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-dart" data-lang="dart">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">class&lt;/span> &lt;span class="nc">NextPage&lt;/span> &lt;span class="kd">extends&lt;/span> &lt;span class="n">StatelessWidget&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 画面遷移元からのデータを受け取る変数
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kd">final&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">value&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// コンストラクタ
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kd">const&lt;/span> &lt;span class="n">NextPage&lt;/span>&lt;span class="p">({&lt;/span>&lt;span class="n">Key&lt;/span>&lt;span class="o">?&lt;/span> &lt;span class="n">key&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kd">required&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">value&lt;/span>&lt;span class="p">})&lt;/span> &lt;span class="o">:&lt;/span> &lt;span class="k">super&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">key:&lt;/span> &lt;span class="n">key&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">@&lt;/span>&lt;span class="n">override&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Widget&lt;/span> &lt;span class="n">build&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">BuildContext&lt;/span> &lt;span class="n">context&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">Scaffold&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">…&lt;/span> &lt;span class="p">,&lt;/span> &lt;span class="c1">// 省略
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="statefulwidget-でデータを受け取る場合">StatefulWidget でデータを受け取る場合&lt;/h1>
+&lt;p>StatelessWidgetの手順に加えて、Statefulではデータ（変数）にアクセスするにはwidget.変数を用いる&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-dart" data-lang="dart">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">class&lt;/span> &lt;span class="nc">NextPage&lt;/span> &lt;span class="kd">extends&lt;/span> &lt;span class="n">StatefulWidget&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 画面遷移元からのデータを受け取る変数
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kd">final&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">value&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// コンストラクタ
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kd">const&lt;/span> &lt;span class="n">NextPage&lt;/span>&lt;span class="p">({&lt;/span>&lt;span class="n">Key&lt;/span>&lt;span class="o">?&lt;/span> &lt;span class="n">key&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kd">required&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">value&lt;/span>&lt;span class="p">})&lt;/span> &lt;span class="o">:&lt;/span> &lt;span class="k">super&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">key:&lt;/span> &lt;span class="n">key&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">@&lt;/span>&lt;span class="n">override&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">State&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">NextPage&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">createState&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">_NextPageState&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">class&lt;/span> &lt;span class="err">&lt;/span>&lt;span class="nc">_NextPageState&lt;/span> &lt;span class="kd">extends&lt;/span> &lt;span class="n">State&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">NextPage&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 状態を管理する変数
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">late&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">state&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">@&lt;/span>&lt;span class="n">override&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">void&lt;/span> &lt;span class="n">initState&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">super&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">initState&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 受け取ったデータを状態を管理する変数に格納
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">state&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">widget&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">value&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">@&lt;/span>&lt;span class="n">override&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Widget&lt;/span> &lt;span class="n">build&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">BuildContext&lt;/span> &lt;span class="n">context&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">Scaffold&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">…&lt;/span> &lt;span class="p">,&lt;/span> &lt;span class="c1">// 省略
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="データの受け渡し方">データの受け渡し方&lt;/h1>
+&lt;p>わたす変数のデータを引数として渡す。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-dart" data-lang="dart">&lt;span class="line">&lt;span class="cl">&lt;span class="n">Navigator&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">push&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">context&lt;/span>&lt;span class="p">,&lt;/span> 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">MaterialPageRoute&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">builder:&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">context&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">NextPage&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">value:&lt;/span> &lt;span class="m">100&lt;/span>&lt;span class="p">)),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="参考文献">参考文献&lt;/h1>
+&lt;p>&lt;a href="https://hiyoko-programming.com/1347/">https://hiyoko-programming.com/1347/&lt;/a>&lt;/p></description></item><item><title>pipenvのインストールと利用方法</title><link>https://macho000.github.io/blogs/20220921_pipenv%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%A8%E5%88%A9%E7%94%A8%E6%96%B9%E6%B3%95/</link><pubDate>Thu, 22 Sep 2022 14:13:26 +0900</pubDate><guid>https://macho000.github.io/blogs/20220921_pipenv%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%A8%E5%88%A9%E7%94%A8%E6%96%B9%E6%B3%95/</guid><description>&lt;h1 id="インストール方法">インストール方法&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">brew install pipenv
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="仮想環境の構築有効化">仮想環境の構築・有効化&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">pipenv shell
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="仮想環境から抜ける">仮想環境から抜ける&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">&lt;span class="k">exit&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>日本語固有表現抽出データセット一覧</title><link>https://macho000.github.io/research_blog/20220920_%E6%97%A5%E6%9C%AC%E8%AA%9E%E5%9B%BA%E6%9C%89%E8%A1%A8%E7%8F%BE%E6%8A%BD%E5%87%BA%E3%83%87%E3%83%BC%E3%82%BF%E3%82%BB%E3%83%83%E3%83%88%E4%B8%80%E8%A6%A7/</link><pubDate>Tue, 20 Sep 2022 10:50:04 +0900</pubDate><guid>https://macho000.github.io/research_blog/20220920_%E6%97%A5%E6%9C%AC%E8%AA%9E%E5%9B%BA%E6%9C%89%E8%A1%A8%E7%8F%BE%E6%8A%BD%E5%87%BA%E3%83%87%E3%83%BC%E3%82%BF%E3%82%BB%E3%83%83%E3%83%88%E4%B8%80%E8%A6%A7/</guid><description>&lt;ul>
+&lt;li>&lt;a href="#bidding-dataset">BIDDING DATASET&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#wikipedia%E3%82%92%E7%94%A8%E3%81%84%E3%81%9F%E6%97%A5%E6%9C%AC%E8%AA%9E%E3%81%AE%E5%9B%BA%E6%9C%89%E8%A1%A8%E7%8F%BE%E6%8A%BD%E5%87%BA%E3%83%87%E3%83%BC%E3%82%BF%E3%82%BB%E3%83%83%E3%83%88">Wikipediaを用いた日本語の固有表現抽出データセット&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#irex%E3%82%B3%E3%83%BC%E3%83%91%E3%82%B9">IREXコーパス&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E4%BA%AC%E9%83%BD%E5%A4%A7%E5%AD%A6%E3%82%A6%E3%82%A7%E3%83%96%E6%96%87%E6%9B%B8%E3%83%AA%E3%83%BC%E3%83%89%E3%82%B3%E3%83%BC%E3%83%91%E3%82%B9">京都大学ウェブ文書リードコーパス&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#bccwj-ne%E3%82%B3%E3%83%BC%E3%83%91%E3%82%B9">BCCWJ NEコーパス&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E6%8B%A1%E5%BC%B5%E5%9B%BA%E6%9C%89%E8%A1%A8%E7%8F%BE%E3%82%BF%E3%82%B0%E4%BB%98%E3%81%8D%E3%82%B3%E3%83%BC%E3%83%91%E3%82%B9">拡張固有表現タグ付きコーパス&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>日本語固有表現抽出を以下にまとめる&lt;/p>
+&lt;h1 id="bidding-dataset">BIDDING DATASET&lt;/h1>
+&lt;p>入札に関するPDFと「調達年度、都道府県、入札件名、施設名、需要場所（住所）、調達開始日、調達終了日、公告日、仕様書交付期限、質問締切日時、資格申請締切日時、入札書締切日時、改札日時、質問箇所 所属/担当者、質問箇所 TEL/FAX、資格申請送付先、資格申請送付先 部署/担当者名、入札書送付先、入札書送付先 部署/担当者名、改札場所」の固有表現を抽出するデータセット&lt;/p>
+&lt;p>&lt;a href="https://github.com/DungLe13/bidding-dataset">リンク&lt;/a>&lt;/p>
+&lt;p>PDFは以下のようになっている&lt;/p>
+&lt;p>&lt;img src="8ecab731e32a419d71693ebdae45b93f4d4feaee1e133a3702709711d8d79ca4.png" alt="picture 1">&lt;/p>
+&lt;p>&lt;img src="d99903ce8c2cd953dfd8f0eb31e819dc560d1a0beae1841283e48db242e58762.png" alt="picture 2">&lt;/p>
+&lt;p>&lt;img src="97b4463df09c11b513305dd4af26fd66615d432737616f1ac0899b42f61c3609.png" alt="picture 3">&lt;/p>
+&lt;p>&lt;img src="d2bd0828672d129d37de5e15feae48756fdb41d18a2ba6598298a96229ac0bc6.png" alt="picture 4">&lt;/p>
+&lt;p>正解ラベルはExcel形式&lt;/p>
+&lt;p>&lt;img src="cb4bb4724359281718d252690c9edcce95e9b557a222bfd32361daeb679edcde.png" alt="picture 5">&lt;/p>
+&lt;p>データスタッツ&lt;/p>
+&lt;p>&lt;img src="db5a315135e728dff55f3c83ebb4bdccca91626ecad5b7bf14a3cbf74a9644ca.png" alt="picture 6">&lt;/p>
+&lt;h1 id="wikipediaを用いた日本語の固有表現抽出データセット">Wikipediaを用いた日本語の固有表現抽出データセット&lt;/h1>
+&lt;p>Wikipediaのテキストに対して、タグ（タイプ）を「人名、法人名、政治的組織名、その他の組織名、地名、施設名、製品名、イベント名」を割り当てたデータセット&lt;a href="https://github.com/stockmarkteam/ner-wikipedia-dataset">リンク&lt;/a>&lt;/p>
+&lt;p>固有表現をハイライトしたサンプルは以下の通り&lt;a href="https://stockmarkteam.github.io/ner-wikipedia-dataset/index.html">リンク&lt;/a>
+&lt;img src="c08810330d4ac88783d42324ca47a1ed489cdf23469cff597e6e1091fda04f33.png" alt="picture 7">&lt;/p>
+&lt;p>データ形式
+データファイルはjson形式になっており、全体としてはデータサンプルのリストとして構成されている&lt;/p>
+&lt;p>&lt;img src="ee08d4ffcb8500a95ad7cb521c16371f1f48cc175d052f871ca76765cb72b0d4.png" alt="picture 8">&lt;/p>
+&lt;ul>
+&lt;li>curidは、データ元のWikipediaのページID&lt;/li>
+&lt;li>textはタグ付けを行う対象のテキスト&lt;/li>
+&lt;li>entitiesは固有表現のリスト
+&lt;ul>
+&lt;li>nameは固有表現名&lt;/li>
+&lt;li>spanはtextでの位置&lt;/li>
+&lt;li>typeは固有表現のタイプ&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h1 id="irexコーパス">IREXコーパス&lt;/h1>
+&lt;p>毎日新聞の94,95年の記事を対象にした固有表現抽出データセット&lt;/p>
+&lt;p>新聞記事データは含まれていない点に注意が必要&lt;/p>
+&lt;p>データセットのダウンロードは&lt;a href="https://nlp.cs.nyu.edu/irex/Package/">こちら&lt;/a>&lt;/p>
+&lt;p>日本語HPは&lt;a href="https://nlp.cs.nyu.edu/irex/index-j.html">こちら&lt;/a>&lt;/p>
+&lt;p>このHPに詳しく各フォルダの中身について解説がされている&lt;/p>
+&lt;h1 id="京都大学ウェブ文書リードコーパス">京都大学ウェブ文書リードコーパス&lt;/h1>
+&lt;p>さまざまな種類のテキストに対する固有表現抽出を行なったデータセット&lt;/p>
+&lt;p>具体的にはWebやニュース、百科事典、ブログ、広告といった幅広いジャンルのテキストから固有表現を抽出したデータセット&lt;/p>
+&lt;p>データの形式は以下の通り&lt;/p>
+&lt;p>&lt;img src="5311df33ea6c50b11acc76db8f3507d4544c4fdcef59162ae737bb1f77a40cd7.png" alt="picture 9">&lt;/p>
+&lt;ul>
+&lt;li>最初の行は文章のIDを表す&lt;/li>
+&lt;li>*は文節を表す
+&lt;ul>
+&lt;li>文節は１つもしくは複数の単語で構成されている&lt;/li>
+&lt;li>はじめの数字は先頭のIDをあらわし、アルファベットは依存関係の種類を表す&lt;/li>
+&lt;li>D 普通の依存関係&lt;/li>
+&lt;li>P 調整依存&lt;/li>
+&lt;li>I　不完全調整依存関係&lt;/li>
+&lt;li>A 同格依存関係&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>+はフレーズを表す
+&lt;ul>
+&lt;li>基本的なフレーズを表す&lt;/li>
+&lt;li>文節と一致するかあるいは文節の一部になる&lt;/li>
+&lt;li>はじめの数字は先頭のIDを表し、アルファベットは文節と同様に定義される&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>その他の行は形態素を表す
+&lt;ul>
+&lt;li>形態素の行は、JUMANで形態素解析を行った結果と一致する&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>固有表現のアノテーションは $&lt;NE>$ タグで与えられる。$&lt;NE>$ タグは４つの属性を持つ。&lt;/p></description></item><item><title>Viterbiアルゴリズム解説</title><link>https://macho000.github.io/research_blog/20220920_viterbi%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0%E8%A7%A3%E8%AA%AC/</link><pubDate>Tue, 20 Sep 2022 09:27:38 +0900</pubDate><guid>https://macho000.github.io/research_blog/20220920_viterbi%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0%E8%A7%A3%E8%AA%AC/</guid><description>&lt;h1 id="viterbiアルゴリズムとは">Viterbiアルゴリズムとは&lt;/h1>
+&lt;p>動的計画法の一種である。&lt;/p>
+&lt;p>数式で表すと下記のような数式を再帰的に計算し、&lt;/p>
+&lt;p>$$
+\delta_{t+1}(j)=max_{i}[\delta_i(i)a_{ij}]b_j(o_{t+1})
+$$
+$$
+\psi_{i+1}(j)=argmax_{i}[\delta_i(i)a_{ij}]
+$$&lt;/p>
+&lt;p>時刻 $t=1,2,&amp;hellip;,T-1$ として、状態 $q_j(j=1,&amp;hellip;,N)$の最大の確率値 $\delta_{t+1}(j)$を再帰的に計算する。&lt;/p>
+&lt;p>そして、最大の確率値 $\delta_{t+1}(j)$ の直前の状態iを記録している $\psi$ も更新する&lt;/p>
+&lt;p>$ a_{ij} $ は、状態iから状態jに遷移する際の確率を表し
+$ b_j(o_{t+1}) $ は、時刻t+1における値 $ o_{t+1} $ を状態jで取りうる確率を表す&lt;/p>
+&lt;p>この再帰計算により、尤もらしい（最も確率の高い）状態のみを保存していくことで、全ての状態に対する組み合わせを考えなくて済む。&lt;/p>
+&lt;h1 id="参考文献">参考文献&lt;/h1>
+&lt;p>&lt;a href="https://mieruca-ai.com/ai/viterbi_algorithm/">https://mieruca-ai.com/ai/viterbi_algorithm/&lt;/a>&lt;/p></description></item><item><title>pandocでPDF生成する方法</title><link>https://macho000.github.io/blogs/20220920_pandoc%E3%81%A7pdf%E7%94%9F%E6%88%90%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95/</link><pubDate>Tue, 20 Sep 2022 09:08:08 +0900</pubDate><guid>https://macho000.github.io/blogs/20220920_pandoc%E3%81%A7pdf%E7%94%9F%E6%88%90%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95/</guid><description>&lt;ul>
+&lt;li>&lt;a href="#1-pandoc%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB">1. pandocのインストール&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#2-%E5%BC%95%E7%94%A8%E6%96%87%E7%8C%AE%E3%82%92%E8%BF%BD%E5%8A%A0%E3%81%97%E3%81%9F%E3%81%84%E5%A0%B4%E5%90%88%E3%81%AFbibtex%E3%81%A8sist02%E3%82%92%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB">2. 引用文献を追加したい場合はbibTexとsist02をインストール&lt;/a>
+&lt;ul>
+&lt;li>&lt;a href="#21-bibtex%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%A8%E3%81%AF">2.1. bibTexファイルとは&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#22-sist02%E3%82%92%E3%83%80%E3%82%A6%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89">2.2. sist02をダウンロード&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;a href="#3-pdf%E7%94%9F%E6%88%90">3. PDF生成&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#too-deeply-nested%E3%81%A8%E3%81%84%E3%81%86%E3%82%A8%E3%83%A9%E3%83%BC%E3%81%8C%E5%87%BA%E3%81%9F%E5%A0%B4%E5%90%88">Too deeply nestedというエラーが出た場合&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#4-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE">4. 参考文献&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h1 id="1-pandocのインストール">1. pandocのインストール&lt;/h1>
+&lt;p>&lt;a href="https://pandoc.org/installing.html">https://pandoc.org/installing.html&lt;/a>
+上記のサイトを参考にpandocをインストール&lt;/p>
+&lt;p>具体的にはMacであれば&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">brew install pandoc
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>その後、Python環境が整っている場合は、&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">brew install librsvg homebrew/cask/basictex
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>日本語用パッケージを追加&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">tlmgr update --self --all
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">tlmgr paper a4
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">tlmgr install collection-langjapanese collection-luatex lm-math
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>もしfonts not foundと表示される場合は&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">tlmgr install collection-fontsrecommended
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="2-引用文献を追加したい場合はbibtexとsist02をインストール">2. 引用文献を追加したい場合はbibTexとsist02をインストール&lt;/h1>
+&lt;h2 id="21-bibtexファイルとは">2.1. bibTexファイルとは&lt;/h2>
+&lt;p>引用文献として追加したいbibTexファイルを取得&lt;/p>
+&lt;p>bibTexファイルは以下のような形式になっている&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bib" data-lang="bib">&lt;span class="line">&lt;span class="cl">&lt;span class="nc">@BOOK&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="nl">noauthor_undated-qu&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">title&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s">&amp;#34;Graph Database&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nc">@ARTICLE&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="nl">noauthor_undated-tj&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">title&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s">&amp;#34;Recent trends in knowledge graphs: theory and practice&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="22-sist02をダウンロード">2.2. sist02をダウンロード&lt;/h2>
+&lt;p>参考文献用のスタイルファイル（CSLファイル）をダウンロードする&lt;/p></description></item><item><title>FlutterでAppleConnectにビルドするしたアプリを共有する方法</title><link>https://macho000.github.io/blogs/20220917_flutter%E3%81%A7appleconnect%E3%81%AB%E3%83%93%E3%83%AB%E3%83%89%E3%81%99%E3%82%8B%E3%81%97%E3%81%9F%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E5%85%B1%E6%9C%89%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95/</link><pubDate>Sat, 17 Sep 2022 22:28:06 +0900</pubDate><guid>https://macho000.github.io/blogs/20220917_flutter%E3%81%A7appleconnect%E3%81%AB%E3%83%93%E3%83%AB%E3%83%89%E3%81%99%E3%82%8B%E3%81%97%E3%81%9F%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E5%85%B1%E6%9C%89%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95/</guid><description>&lt;h1 id="flutterをビルドする">Flutterをビルドする&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">flutter build ipa
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="xcodeでビルドしたアプリをarchiveを開く">XCodeでビルドしたアプリをArchiveを開く&lt;/h1>
+&lt;p>XCodeを開いて
+Product-&amp;gt;Archiveをクリックしてアーカイブを開く
+&lt;img src="d796e8ae12a3413c419b9d42b2d765f60774efdda3185e8cb07a027eaee5d933.png" alt="picture 3">&lt;/p>
+&lt;p>#　先ほどビルドしたアプリをクリックしてApp Connectに共有する&lt;/p>
+&lt;p>Distributeをクリックしてあとは全てYesをクリック&lt;/p>
+&lt;p>&lt;img src="b54845161c2a7242aed7e6378666570a5c82246ab8d3d3a859283c49de564534.png" alt="picture 4">&lt;/p></description></item><item><title>iOS Simulator起動方法</title><link>https://macho000.github.io/blogs/20220917_ios_simulator%E8%B5%B7%E5%8B%95%E6%96%B9%E6%B3%95/</link><pubDate>Sat, 17 Sep 2022 14:55:41 +0900</pubDate><guid>https://macho000.github.io/blogs/20220917_ios_simulator%E8%B5%B7%E5%8B%95%E6%96%B9%E6%B3%95/</guid><description>&lt;h1 id="xcodeの起動">XCodeの起動&lt;/h1>
+&lt;p>XCode→Open Developer Tool-&amp;gt;Simulatorをクリック
+&lt;img src="76736ac33e694baa45dd1e7bc05ab971b66c5ec630661baabe64948879d25306.png" alt="picture 1">&lt;/p>
+&lt;h1 id="もしsimulatorが起動できない場合に確認すること">もしSimulatorが起動できない場合に確認すること&lt;/h1>
+&lt;p>Preferenceを開き、Simulatorタブを開く&lt;/p>
+&lt;p>&lt;img src="991ebdf3d45c8cb0aeced0600e678df8855c8913a551c0bca8cc08e097cf10b4.png" alt="picture 2">&lt;/p>
+&lt;p>iOSのシミュレーターがモジュールがインストールされているかを確認する。&lt;/p></description></item><item><title>TEXで数式が正しく表示されない問題</title><link>https://macho000.github.io/blogs/20220911_tex%E3%81%A7%E6%95%B0%E5%BC%8F%E3%81%8C%E6%AD%A3%E3%81%97%E3%81%8F%E8%A1%A8%E7%A4%BA%E3%81%95%E3%82%8C%E3%81%AA%E3%81%84%E5%95%8F%E9%A1%8C/</link><pubDate>Sun, 11 Sep 2022 17:02:23 +0900</pubDate><guid>https://macho000.github.io/blogs/20220911_tex%E3%81%A7%E6%95%B0%E5%BC%8F%E3%81%8C%E6%AD%A3%E3%81%97%E3%81%8F%E8%A1%A8%E7%A4%BA%E3%81%95%E3%82%8C%E3%81%AA%E3%81%84%E5%95%8F%E9%A1%8C/</guid><description>&lt;h1 id="mathbfにカギカッコを使わずにできるだけ空白区切りにする">mathbfにカギカッコを使わずにできるだけ空白区切りにする&lt;/h1>
+&lt;p>現在の問題点&lt;/p>
+&lt;p>$$
+(\mathbf W_{x i} \times \mathbf W_{h i} )
+$$&lt;/p>
+&lt;p>と表示したいところが&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">&lt;span class="p">(&lt;/span>\mathbf{W}_{x i} \times \mathbf{W}_{h i} &lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>と入力すると下記の画像のように正しくレンダリングされない&lt;/p>
+&lt;p>&lt;img src="1631b80c392d423ef826f1fe8b734844f0c59ba316e92baf9379ee00491b8f75.png" alt="picture 3">&lt;/p>
+&lt;p>そのため下記のように\mathcalの後に空白スペースを使って記述&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">&lt;span class="p">(&lt;/span>\mathbf W_{x i} \times \mathbf W_{h i} &lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="6684581c3471681c522ceca9bfdb800ad61be3cc8b203c51660de9a56adf2276.png" alt="picture 4">&lt;/p>
+&lt;h1 id="boldsymbolではなくmathbfをできるだけ使う">boldsymbolではなくmathbfをできるだけ使う&lt;/h1>
+&lt;p>$$
+\tilde{\mathbf z}=\sum_{j=1}^{\lvert \mathcal V \rvert}
+$$
+という数式を表示させたい&lt;/p>
+&lt;p>この時&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">\tilde{\boldsymbol z}_i&lt;span class="se">^l&lt;/span>=\sum_{j=1}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>というようなコードを入力すると下記の画像のように数式のコードがそのまま表示されてしまう&lt;/p>
+&lt;p>&lt;img src="e96491c619ebb74c4f72ae269d67dbba0e811707101edd3c20b36a0936b2f4b2.png" alt="picture 5">&lt;/p>
+&lt;p>そこで、&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">\tilde{\mathbf z}=\sum_{j=1}&lt;span class="se">^{&lt;/span>\lvert \mathcal V \rvert}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>boldsymbolではなく\mathbfを使うと正しく表示される&lt;/p>
+&lt;p>&lt;img src="af5501dff43ae894fc5953e7658ea05db7473281477ba22b92e64bdd147864e3.png" alt="picture 6">&lt;/p>
+&lt;h1 id="添字は関数の中にできるだけ書く">添字は関数の中にできるだけ書く&lt;/h1>
+&lt;p>$$
+\tilde{\mathbf z_i^{l}}=\sum_{j=1}^{\lvert \mathcal V \rvert}
+$$&lt;/p>
+&lt;p>このような数式を表示することを考える。&lt;/p>
+&lt;p>しかし、添字を下記のように外側に書くとコードがそのまま表示されてしまう&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">\tilde{\mathbf z}_i&lt;span class="se">^{&lt;/span>l}=\sum_{j=1}&lt;span class="se">^{&lt;/span>\lvert \mathcal V \rvert}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="80cd76c313407c52021b29369bf84701d0d8daddc75dc411c836e57b64e97baa.png" alt="picture 7">&lt;/p></description></item><item><title>STM+CRF解説</title><link>https://macho000.github.io/research_blog/20220911_lstmcrf/</link><pubDate>Sun, 11 Sep 2022 10:45:36 +0900</pubDate><guid>https://macho000.github.io/research_blog/20220911_lstmcrf/</guid><description>&lt;h1 id="要約">要約&lt;/h1>
+&lt;p>下の図のように埋め込み表現と両方向LSTMを使用してCRF層に出力するモデルを提案&lt;/p>
+&lt;p>&lt;img src="0f9035421654bf88fb39ebfbdce6449921964626d0f44de2de9d5bcd8cc6a59b.png" alt="picture 1">&lt;/p>
+&lt;h1 id="lstm-crfモデルとは">LSTM-CRFモデルとは&lt;/h1>
+&lt;h2 id="lstm">LSTM&lt;/h2>
+&lt;p>RNNはニューラルネットワークの一部で有、連続データを扱う。しかし、 RNNの問題点として、長い文章を扱う際に最も直近の入力に注目してしまうという問題点があった。&lt;/p>
+&lt;p>この問題に対処するためにLSTMモデルが提案された。LSTMは（Long Short-term Memory Networks）の略である。&lt;/p>
+&lt;p>LSTMでは、入力の情報を貯めるメモリー機構とそのメモリーをどの用いた機構である。&lt;/p>
+&lt;p>数式で表すと下記のようになる。&lt;/p>
+&lt;p>$$
+\begin{aligned}
+\mathbf i_t=&amp;amp; \sigma\left(\mathbf W_{x i} \mathbf x_t+\mathbf W_{h i} \mathbf h_{t-1}+\mathbf W_{c i} \mathbf c_{t-1}+\mathbf b_i\right) \
+\mathbf c_t=&amp;amp;\left(1-\mathbf i_t\right) \odot \mathbf c_{t-1}+\
+&amp;amp; \mathbf i_t \odot \tanh \left(\mathbf W_{x c} \mathbf x_t+\mathbf W_{h c} \mathbf h_{t-1}+\mathbf b_c\right) \
+\mathbf o_t=&amp;amp; \sigma\left(\mathbf W_{x o} \mathbf x_t+\mathbf W_{h o} \mathbf h_{t-1}+\mathbf W_{c o} \mathbf c_t+\mathbf b_o\right) \
+\mathbf h_t=&amp;amp; \mathbf o_t \odot \tanh \left(\mathbf c_t\right)
+\end{aligned}
+$$&lt;/p></description></item><item><title>My New Post</title><link>https://macho000.github.io/my-new-post/</link><pubDate>Fri, 09 Sep 2022 11:48:18 +0900</pubDate><guid>https://macho000.github.io/my-new-post/</guid><description>&lt;p>TEst&lt;/p></description></item><item><title> Beam Search解説</title><link>https://macho000.github.io/research_blog/20220818_beamsearch%E8%A7%A3%E8%AA%AC/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/research_blog/20220818_beamsearch%E8%A7%A3%E8%AA%AC/</guid><description>&lt;script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax:{inlineMath:[['\$','\$'],['\\(','\\)']],processEscapes:true},CommonHTML: {matchFontHeight:false}});&lt;/script>
+&lt;script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">&lt;/script>
+&lt;h1 id="はじめに">はじめに&lt;/h1>
+&lt;p>ここでは、&lt;/p>
+&lt;ul>
+&lt;li>Greedy Search(貪欲法)&lt;/li>
+&lt;li>Exhaustive Search（しらみつぶし探索）&lt;/li>
+&lt;li>Beam Search(ビームサーチ)&lt;/li>
+&lt;/ul>
+&lt;p>これらのアルゴリズムを解説する&lt;/p>
+&lt;h1 id="用語解説">用語解説&lt;/h1>
+&lt;p>$ \mathcal{V} $ : ボキャブラリー&lt;/p>
+&lt;p>$ |\mathcal{V}| $ : ボキャブラリー数&lt;/p>
+&lt;p>$\mathcal{T}$ : 文章の単語数&lt;/p>
+&lt;p>これらの $\mathcal{V}$ と $\mathcal{T}$ から得られる単語列は $ |\mathcal{V}|^\mathcal{T}$ の組み合わせがある。&lt;/p>
+&lt;p>仮に、ボキャブラリー $\mathcal{V}$ が[I, am, japanese]でボキャブラリー数 $|\mathcal{V}|$ が3個で、文章の単語数が3の場合を考えると、このとき文字列の候補は $3^3=27$ 個存在する。&lt;/p>
+&lt;p>具体的には&lt;/p>
+&lt;ul>
+&lt;li>I I I&lt;/li>
+&lt;li>I I am&lt;/li>
+&lt;li>I I japanese&lt;/li>
+&lt;li>I am I&lt;/li>
+&lt;li>I am am&lt;/li>
+&lt;li>I am japanese&lt;/li>
+&lt;li>I japanse I&lt;/li>
+&lt;li>I japanese am&lt;/li>
+&lt;li>I japanese japanese&lt;/li>
+&lt;li>am I I
+&amp;hellip;.
+&amp;hellip;.
+&amp;hellip;.&lt;/li>
+&lt;li>japanese japanese japanese
+の計27個である&lt;/li>
+&lt;/ul>
+&lt;p>ここで、今回はボキャブラリー数が3個で、文章の単語数が3個と小さい値であったが、実際はボキャブラリー数が10,000個、単語数は500個ほどで合計で $10,000^500=1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000&amp;hellip;$ の組み合わせを考える必要がある。&lt;/p></description></item><item><title> BLEU解説</title><link>https://macho000.github.io/research_blog/20220813_bleu%E8%A7%A3%E8%AA%AC/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/research_blog/20220813_bleu%E8%A7%A3%E8%AA%AC/</guid><description>&lt;script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax:{inlineMath:[['\$','\$'],['\\(','\\)']],processEscapes:true},CommonHTML: {matchFontHeight:false}});&lt;/script>
+&lt;script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">&lt;/script>
+&lt;p>BLEUスコアのスコアの算出方法はズバリ以下のとおりです
+$BLEU=BP \cdot exp(\Sigma_{n=1}^{N}w_nlogp_n)$
+でスコアを算出します。&lt;/p>
+&lt;p>簡単に説明するとモデルの出力の1-gram, 2-gram, 3-gram, 4-gramが正解質問(Reference)がどの程度含まれているかを表す指標です&lt;/p>
+&lt;p>用語の説明をしていきます&lt;/p>
+&lt;h2 id="p_nの定義">$p_n$の定義&lt;/h2>
+&lt;p>$p_n$ はprecisionスコアと呼ばれるもので以下の式で計算される
+$p_n= \frac{\Sigma_{C\in {Candidates}} \Sigma_{n-gram \in C} Count_{clip}(n-gram)}{\Sigma_{C&amp;rsquo;\in {Candidates}} \Sigma_{n-gram&amp;rsquo; \in C&amp;rsquo;} Count(n-gram&amp;rsquo;)}$
+で定義される&lt;/p>
+&lt;p>ここで、$Count_{clip}(n-gram)=min(Count(n-gram), MaxRefCount(n-gram))$
+と定義される&lt;/p>
+&lt;p>$Count(n-gram)$は、Candidateに含まれるn-gramの数を表す .例えば、$Count(1-gram)$は、Candidateに含まれる1-gramの数を表す .&lt;/p>
+&lt;p>$MaxRefCount(n-gram)$は、candidateに含まれるn-gramがReference文中に観測される回数を表す&lt;/p>
+&lt;p>例えばCandidateに「the cat sat at chair」、Referenceに「the cat sat on the table」だったら1-gramのときは $Count(1-gram)=5, MaxRefCount(1-gram)=3$となるので $Count_{clip}(n-gram)=3$となる。したがって、このような状況の場合precisionは　$p_n=\frac{3}{5}=0.6$となる。&lt;/p>
+&lt;p>簡単に言えば、precisionは、candidateに含まれるn-gramがreferenceに含まれる割合を表す
+precisionが高い場合は、n-gram単位でreferenceと単語の一致度が高いということを意味する
+一方precisionが低い場合は、n-gram単位でreferenceと単語の一致度が低いということを意味し、関係のない単語が出力されている可能性が高い。&lt;/p>
+&lt;h2 id="bpとは">BPとは&lt;/h2>
+&lt;p>BPとは下記の式で定義されます&lt;/p>
+&lt;p>$
+\text{BP}
+\begin{cases}
+1 &amp;amp; c &amp;gt; r \
+e^{1-r/c} &amp;amp; c \leqq r
+\end{cases}
+$&lt;/p>
+&lt;p>$c:candidate$の長さ
+$r:reference$の長さ&lt;/p></description></item><item><title> DockerでGo言語開発環境構築</title><link>https://macho000.github.io/blogs/20220816_docker%E3%81%A7go%E8%A8%80%E8%AA%9E%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/blogs/20220816_docker%E3%81%A7go%E8%A8%80%E8%AA%9E%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/</guid><description>&lt;h1 id="docker環境作成">docker環境作成&lt;/h1>
+&lt;h2 id="ディレクトリ構成">ディレクトリ構成&lt;/h2>
+&lt;p>ディレクトリ構成は下記の通り。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── Docker
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ └── Dockerfile
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── docker-compose.yaml
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">└── src
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> └── main.go
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="dockerfile">Dockerfile&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-DOckerfile" data-lang="DOckerfile">&lt;span class="line">&lt;span class="cl">&lt;span class="c"># goバージョン&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">FROM&lt;/span>&lt;span class="s"> golang:1.16.3-alpine&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="c"># アップデートとgitのインストール！！&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">RUN&lt;/span> apk add --update &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> apk add git&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="c"># appディレクトリの作成&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">RUN&lt;/span> mkdir /go/src/app&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="c"># ワーキングディレクトリの設定&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">WORKDIR&lt;/span>&lt;span class="s"> /go/src/app&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="c"># ホストのファイルをコンテナの作業ディレクトリに移行&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">ADD&lt;/span> . /go/src/app&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="docker-composeyaml">docker-compose.yaml&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">version&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;3.9&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">services&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">goapp&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">build&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">context&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">.&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">dockerfile&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">./Docker/Dockerfile&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">tty&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">volumes&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="l">./src/:/go/src/app&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">ports&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="m">8080&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="m">8080&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="コンテナの作成立ち上げ実行">コンテナの作成・立ち上げ・実行&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">docker-compose build
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker-compose up -d
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker-compose exec golang go run main.go
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="goの初期化やビルド">goの初期化やビルド&lt;/h2>
+&lt;p>###　初期化
+go.modファイルの作成&lt;/p></description></item><item><title>Anacondaアンインストール方法</title><link>https://macho000.github.io/blogs/202200905_conda3uninstall/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/blogs/202200905_conda3uninstall/</guid><description>&lt;h1 id="1-現在の環境を確認">1. 現在の環境を確認&lt;/h1>
+&lt;h2 id="11-anaconda3のホームディレクトリの確認">1.1. Anaconda3のホームディレクトリの確認&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">$ env &lt;span class="p">|&lt;/span> grep CONDA
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">CONDA_SHLVL=2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">CONDA_PROMPT_MODIFIER=(GBTI) 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">CONDA_EXE=/opt/anaconda3/bin/conda
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">_CE_CONDA=
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">CONDA_PREFIX_1=/opt/anaconda3
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">CONDA_PREFIX=/opt/anaconda3/envs/GBTI
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">CONDA_PYTHON_EXE=/opt/anaconda3/bin/python
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">CONDA_DEFAULT_ENV=GBTI
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="12-anacondaへのpathの確認">1.2. AnacondaへのPathの確認&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">$ cat ~/.bash_profile
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># &lt;span class="p">&amp;gt;&amp;gt;&lt;/span>&amp;gt; conda initialize &lt;span class="p">&amp;gt;&amp;gt;&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># !! Contents within this block are managed by &amp;#39;conda init&amp;#39; !!
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">__conda_setup=&lt;span class="s2">&amp;#34;$(&amp;#39;/opt/anaconda3/bin/conda&amp;#39; &amp;#39;shell.bash&amp;#39; &amp;#39;hook&amp;#39; 2&amp;gt; /dev/null)&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> [&lt;span class="err"> $? -eq 0 ]; then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> eval &lt;span class="s2">&amp;#34;$__conda_setup&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">else
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> [&lt;span class="err"> -f &amp;#34;/opt/anaconda3/etc/profile.d/conda.sh&amp;#34; ]; then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> . &lt;span class="s2">&amp;#34;/opt/anaconda3/etc/profile.d/conda.sh&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> else
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> export PATH=&lt;span class="s2">&amp;#34;/opt/anaconda3/bin:$PATH&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> fi
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">fi
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">unset __conda_setup
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># &lt;span class="p">&amp;lt;&lt;/span>&amp;lt;&amp;lt; conda initialize &lt;span class="p">&amp;lt;&lt;/span>&amp;lt;&amp;lt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="2-anaconda-cleanを実行する">2. anaconda-cleanを実行する&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">conda install anaconda-clean
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">anaconda-clean
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ anaconda-clean
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Delete .anaconda? (y/n): y
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Backup directory: /Users/kosukeaigo/.anaconda_backup/2022-09-05T224138
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Delete .conda? (y/n): y
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Delete .condarc? (y/n): y
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Delete .ipynb_checkpoints? (y/n): y
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Delete .ipython? (y/n): y
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Delete .jupyter? (y/n): y
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Delete .matplotlib? (y/n): y
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>削除した際にバックアップディレクトリが&lt;code>~/.anaconda_backup&lt;/code>に作成される&lt;/p></description></item><item><title>Anacondaを利用したrequirements.txtの作成方法</title><link>https://macho000.github.io/blogs/202200905_condatorequirements/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/blogs/202200905_condatorequirements/</guid><description>&lt;h1 id="condaを使ってconda_requirementstxtに移行">Condaを使ってconda_requirements.txtに移行&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">conda list -e &lt;span class="p">&amp;gt;&lt;/span> conda_requirements.txt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="pipを使ってrequirementstxtに移行">Pipを使ってrequirements.txtに移行&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">pip freeze &lt;span class="p">&amp;gt;&lt;/span> requirements.txt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>BART解説</title><link>https://macho000.github.io/research_blog/20220822_bart%E8%A7%A3%E8%AA%AC/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/research_blog/20220822_bart%E8%A7%A3%E8%AA%AC/</guid><description>&lt;h1 id="要約">要約&lt;/h1>
+&lt;p>BARTでのBERTとの違いは以下の３つの特徴&lt;/p>
+&lt;ul>
+&lt;li>エンコーダーとデコーダーの両方を用いて事前学習&lt;/li>
+&lt;li>デコーダーのそれぞれのレイヤーでエンコーダーの最後の層との隠れ状態とのクロスアテンションレイヤーを追加&lt;/li>
+&lt;li>BERTでは単語予測のためにFEED-FORWARDネットワークを取り入れていたが、BEATでは行わなかった。&lt;/li>
+&lt;/ul>
+&lt;h3 id="事前学習">事前学習&lt;/h3>
+&lt;p>　
+&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/554239/86f0a71f-d691-47f1-a166-62c604ff7aa8.png" alt="image.png">&lt;/p>
+&lt;p>図のようにエンコーダーとデコーダーの両方を使って事前学習を行った。
+事前学習の手法は以下の７つを行った&lt;/p>
+&lt;ol>
+&lt;li>単語マスキング&lt;/li>
+&lt;li>単語削除&lt;/li>
+&lt;li>単語列のマスキング&lt;/li>
+&lt;li>単語の並び替え&lt;/li>
+&lt;li>文章回転&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://macho000.github.io/d8c6be80cbf6981910e502008ee3a6255b1c773f6251d2207e249301fc3ae54b.png" alt="picture 2">&lt;/p>
+&lt;p>図にあらあわすと上図の通り。&lt;/p>
+&lt;p>単語マスキングでは予測する単語に＿というマスキングを施す
+単語削除では任意の単語を削除して.で置き換える
+単語列のマスキングでは複数単語（BC）に＿というマスキングを施す
+単語の並び替えでは単語の順番を入れ替える。
+文章回転では、単語の並びを保持したまま最初の単語を入れ替える&lt;/p></description></item><item><title>BERTSCore解説</title><link>https://macho000.github.io/research_blog/20220808_bertscore%E8%A7%A3%E8%AA%AC/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/research_blog/20220808_bertscore%E8%A7%A3%E8%AA%AC/</guid><description>&lt;script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax:{inlineMath:[['\$','\$'],['\\(','\\)']],processEscapes:true},CommonHTML: {matchFontHeight:false}});&lt;/script>
+&lt;script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">&lt;/script>
+&lt;h1 id="bertscoreとは">BERTScoreとは&lt;/h1>
+&lt;p>テキスト生成に対する自動評価指標のこと&lt;/p>
+&lt;h1 id="bertscore計算方法">BERTScore計算方法&lt;/h1>
+&lt;h2 id="準備">準備&lt;/h2>
+&lt;p>入力として正解文字列を$$x=&amp;lt;x_1, x_2, &amp;hellip;, x_k &amp;gt; $$
+出力文字列を$$ \hat{x}=&amp;lt;\hat{x_1}, \hat{x_2},&amp;hellip;,\hat{x_m}&amp;gt; $$
+と置く。&lt;/p>
+&lt;h2 id="bertscore">BERTSCORE&lt;/h2>
+&lt;p>$$
+R_{BERT}=\frac{1}{|x|} \Sigma_{x_i \in x}max_{\hat{x}_j \in \hat{x}} \mathbf x_i^T \mathbf{\hat{x}}_j
+$$&lt;/p>
+&lt;p>$$
+P_{BERT}=\frac{1}{|\hat{x}|}\Sigma_{\hat x_j \in \hat x} max_{x_i \in x} \mathbf x_i^T \mathbf{\hat{x}}_j
+$$&lt;/p>
+&lt;p>$$
+F_{BERT}=2\frac{P_{BERT}\cdot R_{BERT}}{P_{BERT}+R_{BERT}}
+$$&lt;/p>
+&lt;h2 id="計算例">計算例&lt;/h2>
+&lt;p>例えば正解文字列(TARGET)が&amp;quot;alphabet&amp;quot;で、生成文字列(OUTPUT)が”writing system”である場合を考える。&lt;/p>
+&lt;p>数式で表すと
+正解文字列を$x=&amp;lt;x_1&amp;gt;=&amp;lt;alphabet&amp;gt; $
+出力文字列を$ \hat{x}=&amp;lt;\hat{x_1}, \hat{x_2}&amp;gt;=&amp;lt;writing, system&amp;gt; $と表せる&lt;/p>
+&lt;h3 id="recallの計算例">Recallの計算例&lt;/h3>
+&lt;p>このときまず&lt;/p>
+&lt;p>$$
+R_{BERT}=
+\frac{1}{|x|} \Sigma_{x_i \in x}max_{\hat{x}_j \in \hat x} \mathbf x_i^T \mathbf{\hat{x}}_j
+$$&lt;/p></description></item><item><title>Clean Architectureについて</title><link>https://macho000.github.io/blogs/20220815_cleanarchitecture%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/blogs/20220815_cleanarchitecture%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/</guid><description>&lt;h1 id="clean-architectureとは">Clean Architectureとは&lt;/h1>
+&lt;p>ソフトウェアを開発する際の信条のことである。具体的には、ソフトウェアデザイン要素（ソフトウェア設計工程）をリングレベルに分解することである。&lt;/p>
+&lt;p>クリーンアーキテクチャでのコードの依存関係は外側から内側へと動く。つまり、内側の層に位置するコードは外側の層に位置するコードの情報を取得できないことを意味する。逆に外側の層に位置するコードは内側の層のコードにアクセスすることができない。&lt;/p>
+&lt;p>&lt;img src="https://macho000.github.io/5dff465730ab2ff68d3448e8e1a50917ce51222dacca20af11d2cb4dd0de51b7.png" alt="picture 1">&lt;/p>
+&lt;h1 id="参考文献">参考文献&lt;/h1>
+&lt;p>&lt;a href="https://www.techtarget.com/whatis/definition/clean-architecture">clean architecture&lt;/a>&lt;/p></description></item><item><title>Flutterタブで画面を切り替える方法</title><link>https://macho000.github.io/blogs/20220731_flutter%E3%82%BF%E3%83%96%E3%81%A7%E7%94%BB%E9%9D%A2%E3%82%92%E5%88%87%E3%82%8A%E6%9B%BF%E3%81%88%E3%82%8B%E6%96%B9%E6%B3%95/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/blogs/20220731_flutter%E3%82%BF%E3%83%96%E3%81%A7%E7%94%BB%E9%9D%A2%E3%82%92%E5%88%87%E3%82%8A%E6%9B%BF%E3%81%88%E3%82%8B%E6%96%B9%E6%B3%95/</guid><description>&lt;h1 id="flutterでタブを使って画面を切り替える方法の紹介">Flutterでタブを使って画面を切り替える方法の紹介&lt;/h1>
+&lt;h2 id="version">Version&lt;/h2>
+&lt;p>flutter 3.0.5
+Dart 2.17.6&lt;/p>
+&lt;h2 id="全体像">全体像&lt;/h2>
+&lt;p>&lt;img src="5be321f028ddb3ba2cf0688b6eeff5ddeb85472a6645ea046b19a92b16f4c613.gif" alt="picture 1">&lt;/p>
+&lt;p>ソースコードは以下の通り&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-Dart" data-lang="Dart">&lt;span class="line">&lt;span class="cl">&lt;span class="k">import&lt;/span> &lt;span class="s1">&amp;#39;package:flutter/material.dart&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="n">main&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">runApp&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kd">const&lt;/span> &lt;span class="n">MyApp&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">class&lt;/span> &lt;span class="nc">MyApp&lt;/span> &lt;span class="kd">extends&lt;/span> &lt;span class="n">StatelessWidget&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">const&lt;/span> &lt;span class="n">MyApp&lt;/span>&lt;span class="p">({&lt;/span>&lt;span class="n">Key&lt;/span>&lt;span class="o">?&lt;/span> &lt;span class="n">key&lt;/span>&lt;span class="p">})&lt;/span> &lt;span class="o">:&lt;/span> &lt;span class="k">super&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">key:&lt;/span> &lt;span class="n">key&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">@&lt;/span>&lt;span class="n">override&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Widget&lt;/span> &lt;span class="n">build&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">BuildContext&lt;/span> &lt;span class="n">context&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">MaterialApp&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nl">home:&lt;/span> &lt;span class="n">DefaultTabController&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nl">length:&lt;/span> &lt;span class="m">3&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nl">child:&lt;/span> &lt;span class="n">Scaffold&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nl">appBar:&lt;/span> &lt;span class="n">AppBar&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nl">title:&lt;/span> &lt;span class="kd">const&lt;/span> &lt;span class="n">Text&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;タブ画面移動サンプル&amp;#39;&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nl">bottom:&lt;/span> &lt;span class="kd">const&lt;/span> &lt;span class="n">TabBar&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">tabs:&lt;/span> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">Widget&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Tab&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">icon:&lt;/span> &lt;span class="n">Icon&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Icons&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">cloud_outlined&lt;/span>&lt;span class="p">)),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Tab&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">icon:&lt;/span> &lt;span class="n">Icon&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Icons&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">beach_access_sharp&lt;/span>&lt;span class="p">)),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Tab&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">icon:&lt;/span> &lt;span class="n">Icon&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Icons&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">brightness_5_sharp&lt;/span>&lt;span class="p">)),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">]),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nl">body:&lt;/span> &lt;span class="kd">const&lt;/span> &lt;span class="n">TabBarView&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nl">children:&lt;/span> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">Widget&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Center&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">child:&lt;/span> &lt;span class="n">Text&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;くもり&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nl">style:&lt;/span> &lt;span class="n">TextStyle&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">fontSize:&lt;/span> &lt;span class="m">50&lt;/span>&lt;span class="p">))),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Center&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">child:&lt;/span> &lt;span class="n">Text&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;雨&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nl">style:&lt;/span> &lt;span class="n">TextStyle&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">fontSize:&lt;/span> &lt;span class="m">50&lt;/span>&lt;span class="p">))),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Center&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">child:&lt;/span> &lt;span class="n">Text&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;晴れ&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nl">style:&lt;/span> &lt;span class="n">TextStyle&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">fontSize:&lt;/span> &lt;span class="m">50&lt;/span>&lt;span class="p">))),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="タブを下に持ってくる">タブを下に持ってくる&lt;/h2>
+&lt;p>&lt;img src="8635dd4678d6754cbbb87bc39cd58eb7b80a5c0a27c4ae9cf3927cec0b7acad0.gif" alt="picture 2">&lt;/p>
+&lt;p>先程はAppBarにWidgetを配置していたが、bottomNavigationBarにWidgetを配置し直す&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-Dart" data-lang="Dart">&lt;span class="line">&lt;span class="cl">&lt;span class="k">import&lt;/span> &lt;span class="s1">&amp;#39;package:flutter/material.dart&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="n">main&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">runApp&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kd">const&lt;/span> &lt;span class="n">MyApp&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">class&lt;/span> &lt;span class="nc">MyApp&lt;/span> &lt;span class="kd">extends&lt;/span> &lt;span class="n">StatelessWidget&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">const&lt;/span> &lt;span class="n">MyApp&lt;/span>&lt;span class="p">({&lt;/span>&lt;span class="n">Key&lt;/span>&lt;span class="o">?&lt;/span> &lt;span class="n">key&lt;/span>&lt;span class="p">})&lt;/span> &lt;span class="o">:&lt;/span> &lt;span class="k">super&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">key:&lt;/span> &lt;span class="n">key&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">@&lt;/span>&lt;span class="n">override&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Widget&lt;/span> &lt;span class="n">build&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">BuildContext&lt;/span> &lt;span class="n">context&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">MaterialApp&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nl">home:&lt;/span> &lt;span class="n">DefaultTabController&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nl">length:&lt;/span> &lt;span class="m">3&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nl">child:&lt;/span> &lt;span class="n">Scaffold&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nl">appBar:&lt;/span> &lt;span class="n">AppBar&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nl">title:&lt;/span> &lt;span class="kd">const&lt;/span> &lt;span class="n">Text&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;タブ画面移動サンプル&amp;#39;&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nl">bottomNavigationBar:&lt;/span> &lt;span class="n">Container&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nl">color:&lt;/span> &lt;span class="n">Theme&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">of&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">context&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="n">primaryColor&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nl">child:&lt;/span> &lt;span class="kd">const&lt;/span> &lt;span class="n">TabBar&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">tabs:&lt;/span> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">Widget&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Tab&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">icon:&lt;/span> &lt;span class="n">Icon&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Icons&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">cloud_outlined&lt;/span>&lt;span class="p">)),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Tab&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">icon:&lt;/span> &lt;span class="n">Icon&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Icons&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">beach_access_sharp&lt;/span>&lt;span class="p">)),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Tab&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">icon:&lt;/span> &lt;span class="n">Icon&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Icons&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">brightness_5_sharp&lt;/span>&lt;span class="p">)),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">]),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nl">body:&lt;/span> &lt;span class="kd">const&lt;/span> &lt;span class="n">TabBarView&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nl">children:&lt;/span> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">Widget&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Center&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">child:&lt;/span> &lt;span class="n">Text&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;くもり&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nl">style:&lt;/span> &lt;span class="n">TextStyle&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">fontSize:&lt;/span> &lt;span class="m">50&lt;/span>&lt;span class="p">))),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Center&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">child:&lt;/span> &lt;span class="n">Text&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;雨&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nl">style:&lt;/span> &lt;span class="n">TextStyle&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">fontSize:&lt;/span> &lt;span class="m">50&lt;/span>&lt;span class="p">))),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Center&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">child:&lt;/span> &lt;span class="n">Text&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;晴れ&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nl">style:&lt;/span> &lt;span class="n">TextStyle&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nl">fontSize:&lt;/span> &lt;span class="m">50&lt;/span>&lt;span class="p">))),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="タブをボタンをみなす方法">タブをボタンをみなす方法&lt;/h2>
+&lt;p>ソースコードは以下の通り&lt;/p></description></item><item><title>FlutterでGoogleMapの表示</title><link>https://macho000.github.io/blogs/20220731_flutter%E3%81%A7googlemap%E3%81%AE%E8%A1%A8%E7%A4%BA/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/blogs/20220731_flutter%E3%81%A7googlemap%E3%81%AE%E8%A1%A8%E7%A4%BA/</guid><description>&lt;h1 id="flutterでgoogle-mapの表示を行う">FlutterでGoogle Mapの表示を行う&lt;/h1>
+&lt;h2 id="google-cloud-platformでプロジェクトを作成する">Google Cloud Platformでプロジェクトを作成する&lt;/h2>
+&lt;p>1
+&lt;img src="d56e446aecc7b28b2d3db68d9f76356bee4918cb491ad8982caffb627afc02cd.png" alt="picture 3">&lt;/p>
+&lt;p>2
+&lt;img src="d25cf4e10af84416aa9747bc343ae4c73fc28c138e7bd79eae7739363c56f2e3.png" alt="picture 4">&lt;/p>
+&lt;p>3
+&lt;img src="ce9f7f4a3d2fbfaac1e953c19c38b36c5ede3f4117d740b916f7b9bce1af5b96.png" alt="picture 5">&lt;/p>
+&lt;p>4
+&lt;img src="a841a729833b5938229d71fe91a88a3da0c78173e96b6dbdd6c20864fbd05782.png" alt="picture 9">&lt;/p>
+&lt;p>5
+&lt;img src="a9a906c63c599f7dc26242b40e7b0ae05304741744a70c1ea484e99b22b8541d.png" alt="picture 10">&lt;/p>
+&lt;h2 id="maps-sdk-for-iosandroid-apiを有効にする">Maps SDK for iOS/Android APIを有効にする&lt;/h2>
+&lt;p>6
+&lt;img src="0a71bc228c2566522a185f99cc2aebad9be20535ffaaccd7ec88334517ca30bd.png" alt="picture 11">&lt;/p>
+&lt;p>7
+&lt;img src="5238e8b249b404f3275171aadd87d8d1ccba939399d9729ef500e92c4c7325da.png" alt="picture 12">&lt;/p>
+&lt;p>8
+&lt;img src="4c714f575fd5c81c9cb4b8ad6bb0161bbdaa116ad4fde23739f56777b13516f7.png" alt="picture 13">&lt;/p>
+&lt;p>9
+&lt;img src="09e20a9c3e323cede5eef685b7621f72101e1e0c00bab877e374d3940fd91d8b.png" alt="picture 14">&lt;/p>
+&lt;p>10
+&lt;img src="ad579f6b26da97b736614326ff1c5e49566d30e9ef33a748a2de32c995e8f60e.png" alt="picture 15">&lt;/p>
+&lt;p>11
+&lt;img src="e4d7e3554e2e5e915d5cad515d9d62b743c8cf7608d47f2709dc02c32f9cdc15.png" alt="picture 16">&lt;/p>
+&lt;p>12
+&lt;img src="dc606c95426acff15b4032601db2c6cd8e0520b194f128b359d04ff9e7657534.png" alt="picture 17">&lt;/p>
+&lt;p>13
+&lt;img src="500483beec451aecdfb21921770fa2b4768378d41de1b4818090c375d11bb3ed.png" alt="picture 18">&lt;/p>
+&lt;p>14
+APIキーが登録されたら完了！！
+&lt;img src="2444664ddcbb68f1485284f0f3de6b6f9c40067d676e0a6057dd874ecc41a2d5.png" alt="picture 19">&lt;/p>
+&lt;h2 id="パッケージをインストールする">パッケージをインストールする&lt;/h2>
+&lt;p>&lt;a href="https://pub.dev/packages/google_maps_flutter">flutter google maps&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">flutter pub add google_maps_flutter
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>を実施&lt;/p>
+&lt;p>pubspec.yamlに下記のようにgoogle_maps_flutterが格納されていることを確認&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">dependencies&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">google_maps_flutter&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">^2.1.10&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="androidの設定">Androidの設定&lt;/h3>
+&lt;ol>
+&lt;li>Android/app/build.gradle内のminSdkVersionを20以上に設定する&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gradle" data-lang="gradle">&lt;span class="line">&lt;span class="cl">&lt;span class="n">android&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">defaultConfig&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">minSdkVersion&lt;/span> &lt;span class="mi">20&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
+&lt;li>android/app/src/main/AndroidManifest.xmlで先程取得したAPIキーを設定する&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-xml" data-lang="xml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;manifest&lt;/span> &lt;span class="err">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">&amp;lt;application&lt;/span> &lt;span class="err">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">&amp;lt;meta-data&lt;/span> &lt;span class="na">android:name=&lt;/span>&lt;span class="s">&amp;#34;com.google.android.geo.API_KEY&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">android:value=&lt;/span>&lt;span class="s">&amp;#34;YOUR KEY HERE&amp;#34;&lt;/span>&lt;span class="nt">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="iosの設定">iOSの設定&lt;/h3>
+&lt;ol>
+&lt;li>ios/Runner/AppDelegate.swiftに先程設定したAPIキーを設定する&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="p">#&lt;/span>&lt;span class="n">include&lt;/span> &lt;span class="s">&amp;#34;AppDelegate.h&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">#&lt;/span>&lt;span class="n">include&lt;/span> &lt;span class="s">&amp;#34;GeneratedPluginRegistrant.h&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">#&lt;/span>&lt;span class="kd">import&lt;/span> &lt;span class="s">&amp;#34;GoogleMaps/GoogleMaps.h&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">@&lt;/span>&lt;span class="n">implementation&lt;/span> &lt;span class="n">AppDelegate&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">-&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">BOOL&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="n">application&lt;/span>&lt;span class="p">:(&lt;/span>&lt;span class="n">UIApplication&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="n">application&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">didFinishLaunchingWithOptions&lt;/span>&lt;span class="p">:(&lt;/span>&lt;span class="n">NSDictionary&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="n">launchOptions&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">GMSServices&lt;/span> &lt;span class="n">provideAPIKey&lt;/span>&lt;span class="p">:@&lt;/span>&lt;span class="s">&amp;#34;YOUR KEY HERE&amp;#34;&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">GeneratedPluginRegistrant&lt;/span> &lt;span class="n">registerWithRegistry&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="kc">self&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="kc">super&lt;/span> &lt;span class="n">application&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="n">application&lt;/span> &lt;span class="n">didFinishLaunchingWithOptions&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="n">launchOptions&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">@&lt;/span>&lt;span class="n">end&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Flutterでの環境変数のアクセス</title><link>https://macho000.github.io/blogs/20220731_flutter%E3%81%A7%E3%81%AE%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0%E3%81%AE%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/blogs/20220731_flutter%E3%81%A7%E3%81%AE%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0%E3%81%AE%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9/</guid><description>&lt;h2 id="前準備">前準備&lt;/h2>
+&lt;p>&lt;a href="https://pub.dev/packages/flutter_config">flutter_config&lt;/a>を下記のコマンドを使ってインスール&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">flutter pub add flutter_config
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="flutterアプリケーションのルート位置に新しくenvを作成">Flutterアプリケーションのルート位置に新しく.envを作成&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-env" data-lang="env">&lt;span class="line">&lt;span class="cl">&lt;span class="nv">API_KEY&lt;/span>&lt;span class="o">=&lt;/span>test_value // example
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="maindartですべての環境変数を読み込む">main.dartですべての環境変数を読み込む&lt;/h2>
+&lt;p>下記のコードを書くことによりアプリのどの場所でも環境変数を呼び出せる&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-dart" data-lang="dart">&lt;span class="line">&lt;span class="cl">&lt;span class="k">import&lt;/span> &lt;span class="s1">&amp;#39;package:flutter_config/flutter_config.dart&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="n">main&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="kd">async&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">WidgetsFlutterBinding&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">ensureInitialized&lt;/span>&lt;span class="p">();&lt;/span> &lt;span class="c1">// Required by FlutterConfig
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kd">await&lt;/span> &lt;span class="n">FlutterConfig&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">loadEnvVariables&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">runApp&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">MyApp&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="アプリ内での呼び出し">アプリ内での呼び出し&lt;/h2>
+&lt;h3 id="flutterアプリ内">Flutterアプリ内&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-dart" data-lang="dart">&lt;span class="line">&lt;span class="cl">&lt;span class="k">import&lt;/span> &lt;span class="s1">&amp;#39;package:flutter_config/flutter_config.dart&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">FlutterConfig&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="kd">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;API_KEY&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1">// returns &amp;#39;test_value&amp;#39;
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="ios側での呼び出し">iOS側での呼び出し&lt;/h3>
+&lt;p>swiftファイルでの呼び出し&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">import&lt;/span> &lt;span class="nc">UIKit&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">import&lt;/span> &lt;span class="nc">Flutter&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">import&lt;/span> &lt;span class="nc">flutter_config&lt;/span> &lt;span class="c1">//import忘れずに&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nc">import&lt;/span> &lt;span class="nc">GoogleMaps&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">@UIApplicationMain&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">@objc&lt;/span> &lt;span class="kd">class&lt;/span> &lt;span class="nc">AppDelegate&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">FlutterAppDelegate&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">override&lt;/span> &lt;span class="kd">func&lt;/span> &lt;span class="nf">application&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kc">_&lt;/span> &lt;span class="n">application&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">UIApplication&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">didFinishLaunchingWithOptions&lt;/span> &lt;span class="n">launchOptions&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">UIApplication&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">LaunchOptionsKey&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">Any&lt;/span>&lt;span class="p">]?&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">)&lt;/span> &lt;span class="p">-&amp;gt;&lt;/span> &lt;span class="nb">Bool&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">GMSServices&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">provideAPIKey&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">FlutterConfigPlugin&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">env&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">for&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s">&amp;#34;API_KEY&amp;#34;&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="c1">//API_KEY 呼び出し&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">GeneratedPluginRegistrant&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">register&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">with&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">self&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="kc">super&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">application&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">application&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">didFinishLaunchingWithOptions&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">launchOptions&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="android側での呼び出し">Android側での呼び出し&lt;/h3>
+&lt;h4 id="pluginの適用">pluginの適用&lt;/h4>
+&lt;p>android/app/build.gradle で一番最後の行を追加する&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gradle" data-lang="gradle">&lt;span class="line">&lt;span class="cl">&lt;span class="o">~~&lt;/span>&lt;span class="err">省略&lt;/span>&lt;span class="o">~~&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">apply&lt;/span> &lt;span class="nl">plugin:&lt;/span> &lt;span class="s1">&amp;#39;kotlin-android&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">apply&lt;/span> &lt;span class="nl">from:&lt;/span> &lt;span class="s2">&amp;#34;$flutterRoot/packages/flutter_tools/gradle/flutter.gradle&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">apply&lt;/span> &lt;span class="nl">from:&lt;/span> &lt;span class="n">project&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="s1">&amp;#39;:flutter_config&amp;#39;&lt;/span>&lt;span class="o">).&lt;/span>&lt;span class="na">projectDir&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="na">getPath&lt;/span>&lt;span class="o">()&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="s2">&amp;#34;/dotenv.gradle&amp;#34;&lt;/span> &lt;span class="c1">// 追加ライン
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">~~&lt;/span>&lt;span class="err">省略&lt;/span>&lt;span class="o">~~&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="呼び出し">呼び出し&lt;/h4>
+&lt;p>xmlファイルでの呼び出し&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-xml" data-lang="xml">&lt;span class="line">&lt;span class="cl">~~省略~~
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">android:hardwareAccelerated=&amp;#34;true&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">android:windowSoftInputMode=&amp;#34;adjustResize&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;meta-data&lt;/span> &lt;span class="na">android:name=&lt;/span>&lt;span class="s">&amp;#34;com.google.android.geo.API_KEY&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">android:value=&lt;/span>&lt;span class="s">&amp;#34;@string/API_KEY&amp;#34;&lt;/span>&lt;span class="nt">/&amp;gt;&lt;/span> // 追加ライン
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;meta-data&lt;/span> &lt;span class="na">android:name=&lt;/span>&lt;span class="s">&amp;#34;io.flutter.embedding.android.NormalTheme&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">android:resource=&lt;/span>&lt;span class="s">&amp;#34;@style/NormalTheme&amp;#34;&lt;/span>&lt;span class="nt">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">~~省略~~
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="参考サイト">参考サイト&lt;/h2>
+&lt;p>&lt;a href="https://zenn.dev/taitai9847/articles/0be7298408b7c8">AndroidManifest.xml、AppDelegate.swiftからenvにアクセス&lt;/a>&lt;/p></description></item><item><title>gcloudのアカウント設定</title><link>https://macho000.github.io/blogs/202200908_gcloud%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E8%A8%AD%E5%AE%9A/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/blogs/202200908_gcloud%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E8%A8%AD%E5%AE%9A/</guid><description>&lt;h1 id="gcloudのアカウント設定">gcloudのアカウント設定&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">gcloud config configurations create test
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">gcloud config set project &lt;span class="p">&amp;lt;&lt;/span>自分のプロジェクトID&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">gcloud config set account &lt;span class="p">&amp;lt;&lt;/span>自分のメールアドレス&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">gcloud auth login
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Github Pagesとカスタムドメイン（Google Domain）の紐付け</title><link>https://macho000.github.io/blogs/202207150940/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/blogs/202207150940/</guid><description>&lt;h1 id="github-pagesとカスタムドメインgoogle-domainの紐付け">Github Pagesとカスタムドメイン（Google Domain）の紐付け&lt;/h1>
+&lt;h2 id="用語解説">用語解説&lt;/h2>
+&lt;p>&lt;strong>Apexドメイン&lt;/strong>
+Apexドメインとは、サブドメインではないドメインのこと。たとえば、Google Domainでmacho000.comというドメインを購入した場合macho000.comがApexドメインになる。www.macho000.comはサブドメインとなる。&lt;/p>
+&lt;h2 id="apexドメインの設定">Apexドメインの設定&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>Google DomainのDNSの設定&lt;/strong>
+&lt;img src="6e058426a3c4ba8d072a1a2fee34e710e31ca71957b1a7b219448bf7832bfef8.jpg" alt="picture 4">&lt;/li>
+&lt;/ul>
+&lt;p>Data(Ipv4アドレス)には[Github Doc](&lt;a href="https://docs.github.com/ja/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site">Github Doc&lt;/a>)にかかれているIPアドレスを指定。
+今回の場合は、以下の画像より&lt;/p>
+&lt;pre tabindex="0">&lt;code>185.199.108.153
+185.199.109.153
+185.199.110.153
+185.199.111.153
+&lt;/code>&lt;/pre>&lt;p>を指定する。
+&lt;img src="3dc6ace52e2dda9487e6470d9b0764a1e665531f687afb5d42da2e7dd4d976b4.jpg" alt="picture 5">&lt;/p>
+&lt;ul>
+&lt;li>DNSレコードが更新されたことを確認する
+以下のコマンドを打ち、DNSのレコードの更新を確認する。&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>dig &amp;lt;your domain&amp;gt; +noall +answer
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>GithubのSettingで、Custom Domainを登録する
+&lt;img src="a993b84c53e7b6dd42626fd1dcfbc76a6641b810e16f12323c8f3404fb69df66.jpg" alt="picture 6">&lt;br>
+まず、Setting画面を開き、次にPagesをクリック、最後にCustom Domainに先程登録したApexドメインを登録する&lt;/li>
+&lt;/ul>
+&lt;h2 id="サブドメインの設定">サブドメインの設定&lt;/h2>
+&lt;ul>
+&lt;li>Google DomainのCustom RecordにCNAME Typeを追加
+&lt;img src="f2072f250fd764efd3e7af350df6295123c4d2390ebba8ac2b1bd2161eee15f8.jpg" alt="picture 7">&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="6e18aaeec4116aca26985470d03121e199db577c5989932653b3ced99758fa25.jpg" alt="picture 8">&lt;/p>
+&lt;p>&lt;img src="2aa3e34f07709411cb5e12faa784fc36c7cf31e9526747daefc98a0db998f9a8.jpg" alt="picture 9">&lt;/p>
+&lt;h2 id="参考情報">参考情報&lt;/h2>
+&lt;p>&lt;a href="https://dev-moyashi.hatenablog.com/entry/2021/01/10/222249">GitHub Pages に Google Domains で購入した独自ドメインを設定する&lt;/a>&lt;/p></description></item><item><title>Githubを利用したMarkdownでの記事執筆</title><link>https://macho000.github.io/blogs/202207150918/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/blogs/202207150918/</guid><description>&lt;h1 id="githubを利用したmarkdownでの記事執筆">Githubを利用したMarkdownでの記事執筆&lt;/h1>
+&lt;h2 id="環境一覧">環境一覧&lt;/h2>
+&lt;ul>
+&lt;li>VSCode&lt;/li>
+&lt;li>Github&lt;/li>
+&lt;/ul>
+&lt;h2 id="vscode">VSCode&lt;/h2>
+&lt;p>VSCodeに必要な拡張機能をインストール&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="%5Bshd101wyy.markdown-preview-enhanced%5D(https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced)">Markdown Preview&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://marketplace.visualstudio.com/items?itemName=hancel.markdown-image">Markdown Image&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="github">Github&lt;/h2>
+&lt;p>下記のディレクトリ構成のフォルダを作成&lt;/p>
+&lt;pre tabindex="0">&lt;code>blogs/
+images/
+index.md
+&lt;/code>&lt;/pre>&lt;p>index.mdには以下のファイルの内容&lt;/p>
+&lt;pre tabindex="0">&lt;code>- [Blogs](blogs/home.md)
+
+
+
+# 自己紹介
+&lt;/code>&lt;/pre>&lt;p>下記のようにアップロードできたら、Settingsをクリック&lt;/p>
+&lt;p>&lt;img src="35588db314599393b397f22688cc673ef197cfde11e0eef32fceda20daed7d43.jpg" alt="picture 2">&lt;/p>
+&lt;p>1,2,3の順番で以下のとおりに設定
+３番目のURLをクリックするとindex.mdの内容が表示される。
+&lt;img src="8ed5daa0e8c9ec2ac2d3f00fcb396531639233b3264579dd42bd46c55611d337.jpg" alt="picture 3">&lt;/p></description></item><item><title>Goでのfor文並列処理</title><link>https://macho000.github.io/blogs/202200902_go%E3%81%A7%E3%81%AEfor%E6%96%87%E4%B8%A6%E5%88%97%E5%87%A6%E7%90%86/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/blogs/202200902_go%E3%81%A7%E3%81%AEfor%E6%96%87%E4%B8%A6%E5%88%97%E5%87%A6%E7%90%86/</guid><description>&lt;ul>
+&lt;li>&lt;a href="#%E3%83%AB%E3%83%BC%E3%83%97%E5%87%A6%E7%90%86%E5%86%85%E3%81%A7goroutine%E3%82%92%E4%BD%BF%E3%82%8F%E3%81%AA%E3%81%84%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3">ループ処理内でgoroutineを使わないバージョン&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#goroutine%E3%81%A8mutex%E3%82%92%E4%BD%BF%E3%81%86%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3">goroutineとmutexを使うバージョン&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h1 id="ループ処理内でgoroutineを使わないバージョン">ループ処理内でgoroutineを使わないバージョン&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">package&lt;/span> &lt;span class="nx">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;log&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;time&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">main&lt;/span>&lt;span class="p">(){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">start&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">time&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Now&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	&lt;span class="kd">var&lt;/span> &lt;span class="nx">count&lt;/span> &lt;span class="kt">int&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	&lt;span class="k">for&lt;/span> &lt;span class="nx">i&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nx">i&lt;/span> &lt;span class="p">&amp;lt;&lt;/span> &lt;span class="mi">100000&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nx">i&lt;/span>&lt;span class="o">++&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">		&lt;span class="kd">func&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">			&lt;span class="nx">time&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Sleep&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">10&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="nx">time&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Microsecond&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">			&lt;span class="nx">count&lt;/span>&lt;span class="o">++&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">		&lt;span class="p">}()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	&lt;span class="nx">end&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">time&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Now&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	&lt;span class="nx">log&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Done: %d times\n&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">count&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	&lt;span class="nx">log&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Println&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">fmt&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Sprintf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;The end time %v(s)&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">end&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Sub&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">start&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nf">Seconds&lt;/span>&lt;span class="p">()))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>このコードは、10万回のループ後に、実行結果と経過時間を標準出力に表示するプログラムである。&lt;/p>
+&lt;p>4秒ほどで完了することができる&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">go run main.go
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2022/09/02 23:18:37 Done: &lt;span class="m">100000&lt;/span> &lt;span class="nb">times&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2022/09/02 23:18:37 The end &lt;span class="nb">time&lt;/span> 4.204919083&lt;span class="o">(&lt;/span>s&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="goroutineとmutexを使うバージョン">goroutineとmutexを使うバージョン&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">main&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	&lt;span class="nx">start&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">time&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Now&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	&lt;span class="kd">var&lt;/span> &lt;span class="nx">count&lt;/span> &lt;span class="kt">int&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	&lt;span class="c1">// WaitGroupを定義&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	&lt;span class="kd">var&lt;/span> &lt;span class="nx">wg&lt;/span> &lt;span class="nx">sync&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">WaitGroup&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	&lt;span class="c1">// 排他制御&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	&lt;span class="kd">var&lt;/span> &lt;span class="nx">mu&lt;/span> &lt;span class="nx">sync&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Mutex&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	&lt;span class="k">for&lt;/span> &lt;span class="nx">i&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nx">i&lt;/span> &lt;span class="p">&amp;lt;&lt;/span> &lt;span class="mi">100000&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nx">i&lt;/span>&lt;span class="o">++&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">		&lt;span class="nx">wg&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Add&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">		&lt;span class="k">go&lt;/span> &lt;span class="kd">func&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">wg&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="nx">sync&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">WaitGroup&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">			&lt;span class="c1">// 処理完了を通知&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">			&lt;span class="k">defer&lt;/span> &lt;span class="nx">wg&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Done&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">			&lt;span class="c1">// 無名関数が完了したらUnlock&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">			&lt;span class="k">defer&lt;/span> &lt;span class="nx">mu&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Unlock&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">			&lt;span class="nx">time&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Sleep&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">10&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="nx">time&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Microsecond&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">			&lt;span class="nx">mu&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Lock&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">			&lt;span class="nx">count&lt;/span>&lt;span class="o">++&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">		&lt;span class="p">}(&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="nx">wg&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	&lt;span class="c1">// すべてDoneになるまで待機&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	&lt;span class="nx">wg&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Wait&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	&lt;span class="nx">end&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">time&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Now&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	&lt;span class="nx">log&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Done: %d times\n&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">count&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	&lt;span class="nx">log&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Println&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">fmt&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Sprintf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;The end time %v(s)&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">end&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Sub&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">start&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nf">Seconds&lt;/span>&lt;span class="p">()))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>このコードは、10万回のループ後に、実行結果と経過時間を標準出力に表示するプログラムである。&lt;/p></description></item><item><title>Goでのクエリパラメータの取得</title><link>https://macho000.github.io/blogs/20220822_go%E3%81%A7%E3%81%AE%E3%82%AF%E3%82%A8%E3%83%AA%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF-%E3%81%AE%E5%8F%96%E5%BE%97/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/blogs/20220822_go%E3%81%A7%E3%81%AE%E3%82%AF%E3%82%A8%E3%83%AA%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF-%E3%81%AE%E5%8F%96%E5%BE%97/</guid><description>&lt;h1 id="go言語でクエリパラメーターを取得する方法">Go言語でクエリパラメーターを取得する方法&lt;/h1>
+&lt;p>答えを先に書くと&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-golang" data-lang="golang">&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">package&lt;/span> &lt;span class="nx">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	&lt;span class="s">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	&lt;span class="s">&amp;#34;net/http&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">main&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	&lt;span class="nx">http&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">HandleFunc&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;/&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kd">func&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">w&lt;/span> &lt;span class="nx">http&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">ResponseWriter&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">r&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="nx">http&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Request&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">		&lt;span class="nx">id&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">r&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">URL&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Query&lt;/span>&lt;span class="p">().&lt;/span>&lt;span class="nf">Get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;id&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">		&lt;span class="nx">fmt&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Println&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;id =&amp;gt;&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">id&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	&lt;span class="nx">http&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">ListenAndServe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;:3000&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kc">nil&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>JointGT解説</title><link>https://macho000.github.io/research_blog/20220822_jointgt%E8%A7%A3%E8%AA%AC/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/research_blog/20220822_jointgt%E8%A7%A3%E8%AA%AC/</guid><description>&lt;script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax:{inlineMath:[['\$','\$'],['\\(','\\)']],processEscapes:true},CommonHTML: {matchFontHeight:false}});&lt;/script>
+&lt;script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">&lt;/script>
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+&lt;script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous">&lt;/script>
+&lt;!-- Automatically render math in text elements -->
+&lt;script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous">&lt;/script>
+&lt;script>
+document.addEventListener("DOMContentLoaded", function() {
+ renderMathInElement(document.body, {
+ delimiters: [
+ {left: "$$", right: "$$", display: true},
+ {left: "$", right: "$", display: false},
+ ]
+ });
+});
+&lt;/script>
+# JointGTとは
+2021年にKeが発表した論文
+&lt;p>Ke, Pei, Haozhe Ji, Yu Ran, Xin Cui, Liwei Wang, Linfeng Song, Xiaoyan Zhu, and Minlie Huang. &amp;ldquo;JointGT: Graph-Text Joint Representation Learning for Text Generation from Knowledge Graphs.&amp;rdquo; In Findings of the Association for Computational Linguistics: ACL-IJCNLP 2021, pp. 2526-2538. 2021.&lt;/p></description></item><item><title>k8sでできること</title><link>https://macho000.github.io/blogs/20220901_k8s%E3%81%A7%E3%81%A7%E3%81%8D%E3%82%8B%E3%81%93%E3%81%A8%E8%A7%A3%E8%AA%AC/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/blogs/20220901_k8s%E3%81%A7%E3%81%A7%E3%81%8D%E3%82%8B%E3%81%93%E3%81%A8%E8%A7%A3%E8%AA%AC/</guid><description>&lt;h1 id="1-k8skubernetesとは">1. k8s（kubernetes）とは&lt;/h1>
+&lt;p>&lt;code>Kubernetesとは、コンピュータ・クラスター内およびコンピュータ・クラスター間でのアプリケーションコンテナの配置および実行を調整する、プロダクショングレードのオープンソースプラットフォームのこと&lt;/code>
+&lt;code>機能としては、単一のユニットとして機能するように接続された、可用性の高いコンピュータのクラスターをまとめあげる機能である&lt;/code>と公式HPには書かれています。&lt;/p>
+&lt;p>これだけだと分かりづらいのK8sクラスターの図を以下に示す&lt;/p>
+&lt;p>&lt;img src="40efb62d8e5e3b643b4345ddb86cd5f7d6a5e77d722ef90d5e04fe4156fe5782.png" alt="picture 1">&lt;/p>
+&lt;p>この図のようにK8sクラスターはクラスターを管理する&lt;code>マスター&lt;/code>とアプリケーションを動かすワーカーとなる&lt;code>ノード&lt;/code>からなる。&lt;/p>
+&lt;h1 id="2-kubernetes-deployementsとは">2. Kubernetes Deployementsとは&lt;/h1>
+&lt;p>Kubernetesクラスターを実行すると、その上にコンテナ化アプリケーションをデプロイできる。&lt;/p>
+&lt;p>これを図にしたものを以下に示す&lt;/p>
+&lt;p>&lt;img src="e1055c1758c5e4e812e93dd5f13dbb51ddbc6c9f1813493e077a6dae177838e1.png" alt="picture 2">&lt;/p>
+&lt;p>デプロイを行うことによって先程作成したコンテナの上にアプリケーションを乗せることができる&lt;/p>
+&lt;h1 id="3-kubernetes-podとは">3. Kubernetes Podとは&lt;/h1>
+&lt;p>&lt;code>Podは１つ以上のアプリケーションコンテナのグループであり、共有ストレージ、IPアドレス、それらの実行方法に関する情報が含まれている&lt;/code>&lt;/p>
+&lt;p>これを図にすると以下の通り&lt;/p>
+&lt;p>&lt;img src="91c99d3e3939bee4df24c04bde8c7df4f7f2be51875bcce7237aaac3e086f148.png" alt="picture 3">&lt;/p>
+&lt;p>１つのPodに１つのアプリがある場合もあれば、１つのPodに複数のアプリと共有コンテナが共存する場合もある&lt;/p>
+&lt;h1 id="4-kubernetes-ノードとは">4. Kubernetes ノードとは&lt;/h1>
+&lt;p>Podは常にノード上で動作をする。ノードは複数のPodを持つことができ、Kubernetesマスターはクラスター内のノード間でPodのスケジュールを自動的に処理をする。&lt;/p>
+&lt;p>これを図にすると以下の通り&lt;/p>
+&lt;p>&lt;img src="819ee281130b89fa85f178ea6695f88832f7979eb48cc35b7c1db74a8dca4f03.png" alt="picture 4">&lt;/p>
+&lt;p>ノードの中には複数のPodが存在している&lt;/p>
+&lt;h1 id="5-kubernetesserviceとは">5. Kubernetes　Serviceとは&lt;/h1>
+&lt;p>&lt;code>Serviceは、Podの論理セットを定義し、それらのPodに対する外部トラフィックの公開、負荷分散、およびサービス検出を可能にする抽象化層のこと&lt;/code>&lt;/p>
+&lt;p>これを図にすると以下の通り&lt;/p>
+&lt;p>&lt;img src="cf97d9933fb951d48037a224b2a91ddfea676d1af624cd6ec83b3ec5b1dfa2e2.png" alt="picture 5">&lt;/p>
+&lt;p>Serviceは、一連のPodにトライフィックをルーティングする。さらにServiceは、アプリケーションに影響を与えることなく、Podが死んだり複製したりすることを可能にする抽象概念のことである。
+K8sの肝であるルーティングや、自動スケーリング、Podが死んでも立ち直るのはこのServiceがあるおかげである。&lt;/p>
+&lt;h2 id="51-serviceの種類">5.1. Serviceの種類&lt;/h2>
+&lt;ul>
+&lt;li>ClusterIP(既定値) - クラスター内の内部IPでServiceを公開する&lt;/li>
+&lt;li>NodePort - NATを使用して、クラスター内の選択された各ノードの同じポートにServiceを公開する。&lt;/li>
+&lt;li>LoadBalancer - 現在のクラウドに外部ロードバランサを作成し、Serviceni固定の外部IPを割り当てる&lt;/li>
+&lt;li>ExternalName - 使用の&lt;code>externalName&lt;/code>で指定した名前のCNAMEレコードを返す&lt;/li>
+&lt;/ul>
+&lt;h1 id="6-アプリケーションのスケーリング">6. アプリケーションのスケーリング&lt;/h1>
+&lt;p>ユーザーの需要に対応するためにアプリケーションをスケール必要がある&lt;/p>
+&lt;p>&lt;code>kubectl create deploymentコマンドの--replicasパラメーターを使用することで、最初から複数のインスタンスを含むDeploymentを作成できる&lt;/code>&lt;/p>
+&lt;h2 id="61-スケーリングの概要1">6.1. スケーリングの概要1&lt;/h2>
+&lt;p>&lt;img src="c058dab6b85ccc01ea15950d3813a8f0c48944a3ad9d4709c4ed741223c80a99.png" alt="picture 8">&lt;/p>
+&lt;h2 id="62-スケーリングの概要2">6.2. スケーリングの概要2&lt;/h2>
+&lt;p>&lt;img src="75edbdd7dd743e05af55c190c63d87e2c1ae4a52281a25b3b2009931dc7cb27e.png" alt="picture 9">&lt;/p>
+&lt;h1 id="7-ローリングアップデートの実行">7. ローリングアップデートの実行&lt;/h1>
+&lt;p>&lt;code>ローリングアップデートでは、Podを新しいインスタンスで段階的にアップデートすることで、ダウンタイムなしDeploymentをアップデートできる&lt;/code>&lt;/p></description></item><item><title>k8sで用いるコマンド一覧</title><link>https://macho000.github.io/blogs/20220901_k8s%E3%81%A7%E7%94%A8%E3%81%84%E3%82%8B%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E4%B8%80%E8%A6%A7/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/blogs/20220901_k8s%E3%81%A7%E7%94%A8%E3%81%84%E3%82%8B%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E4%B8%80%E8%A6%A7/</guid><description>&lt;h1 id="クラスターの作成">クラスターの作成&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">## start k8s
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">minikube start
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">## see running cluster-info
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">kubectl cluster-info 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">## shows all nodes that can be used to host application
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">kubectl get nodes 
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="アプリケーションのデプロイ">アプリケーションのデプロイ&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">## deploy app on kubernetes
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">kubectl create deployment 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">## deploy and set app image location
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">kubectl create deployment kubernetes-bootcamp --image=gcr.io/google-samples/kubernetes-bootcamp:v1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">## list your deployments
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">kubectl get deployments
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Open second window&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl"># to run proxy
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">echo&lt;/span> -e &lt;span class="s2">&amp;#34;\n\n\n\e[92mStarting Proxy. After starting it will not output a response. Please click the first Terminal Tab\n&amp;#34;&lt;/span>; 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">kubectl proxy
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>and then we have a connection between our host and k8s cluster.&lt;/p></description></item><item><title>Precision Recall F1スコア解説</title><link>https://macho000.github.io/research_blog/20220830_precisionrecallf1%E3%82%B9%E3%82%B3%E3%82%A2%E8%A7%A3%E8%AA%AC/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/research_blog/20220830_precisionrecallf1%E3%82%B9%E3%82%B3%E3%82%A2%E8%A7%A3%E8%AA%AC/</guid><description>&lt;script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax:{inlineMath:[['\$','\$'],['\\(','\\)']],processEscapes:true},CommonHTML: {matchFontHeight:false}});&lt;/script>
+&lt;script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">&lt;/script>
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+&lt;script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous">&lt;/script>
+&lt;!-- Automatically render math in text elements -->
+&lt;script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous">&lt;/script>
+&lt;script>
+document.addEventListener("DOMContentLoaded", function() {
+ renderMathInElement(document.body, {
+ delimiters: [
+ {left: "$$", right: "$$", display: true},
+ {left: "$", right: "$", display: false},
+ ]
+ });
+});
+&lt;/script>
+&lt;h1 id="1-前提知識">1. 前提知識&lt;/h1>
+&lt;h2 id="11-分類問題における正解不正解パターン">1.1. 分類問題における正解・不正解パターン&lt;/h2>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: center">&lt;/th>
+ &lt;th style="text-align: center">正解（実測）&lt;/th>
+ &lt;th style="text-align: center">不正解（実測）&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: center">正解（予測）&lt;/td>
+ &lt;td style="text-align: center">TP&lt;/td>
+ &lt;td style="text-align: center">FP&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: center">不正解（予測）&lt;/td>
+ &lt;td style="text-align: center">FN&lt;/td>
+ &lt;td style="text-align: center">TN&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;p>TP (True Positive): 実測値、予測値がともに正であるもの&lt;/p>
+&lt;p>FP (False Positive)： 実測値が負なのに、間違えて予測値が正であると予測したもの&lt;/p>
+&lt;p>FN (True Negative)： 実測値が正なのに、間違えて予測値が負であると予測したもの&lt;/p>
+&lt;p>TN (False Negative)： 実測値、予測値がともに負であるもの&lt;/p>
+&lt;h1 id="2-precisionとは">2. Precisionとは&lt;/h1>
+&lt;p>Precisionは日本語だと適合率のことを言います。
+Precisionでは、「&lt;em>&lt;strong>正と予測したものが、どれだけ正しかったか&lt;/strong>&lt;/em>」を測る指標&lt;/p>
+&lt;p>数式にすると
+$$
+\frac{TP}{TP+FP}
+$$&lt;/p></description></item><item><title>Pyenvのインストール</title><link>https://macho000.github.io/blogs/20220831_pyenv%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/blogs/20220831_pyenv%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/</guid><description>&lt;h1 id="pyenvのインストール">pyenvのインストール&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">brew install pyenv
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="pathを通す">pathを通す&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">&lt;span class="k">echo&lt;/span> $SHELL
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/bin/bash # &lt;span class="p">&amp;lt;&lt;/span>- bashを使っている
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>zshを使っている場合は&lt;code>~/.zshrc&lt;/code>
+bashの場合は&lt;code>~/.bash_profile&lt;/code>を下記コードに追加&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:/.bash_profile" data-lang="bash:/.bash_profile">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">export&lt;/span> &lt;span class="nv">PYENV_ROOT&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$HOME&lt;/span>&lt;span class="s2">/.pyenv&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">export&lt;/span> &lt;span class="nv">PATH&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$PYENV_ROOT&lt;/span>&lt;span class="s2">/bin:&lt;/span>&lt;span class="nv">$PATH&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">eval&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="k">$(&lt;/span>pyenv init --path&lt;span class="k">)&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">eval&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="k">$(&lt;/span>pyenv init -&lt;span class="k">)&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>shellの設定を適用&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl"># bashの場合
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">source ~/.bash_profile
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># zshの場合
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">source ~/.zshrc
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="pythonのインストール">pythonのインストール&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">pyenv install --list
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Available versions:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 2.1.3
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 2.2.3
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 2.3.7
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ...
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 3.12-dev
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>python 3.9.13をインストール&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">pyenv install 3.9.13
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="使用するpythonのバージョンを設定">使用するpythonのバージョンを設定&lt;/h1>
+&lt;p>先程インストールしたバージョンを確認する&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">pyenv versions
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">* system (set by /Users/kosukeaigo/.pyenv/version)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 3.9.13
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>python3.9.13を設定する&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl"># globalで設定
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># フォルダを超えてもそのバージョンが使われる
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">pyenv global 3.9.13
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># localで設定
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># 実行したディレクトリ内だけで、Pythonのバージョンが固定される
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">pyenv local 3.9.13
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>pythonバージョン確認&lt;/p></description></item><item><title>Pyenvのコマンド一覧</title><link>https://macho000.github.io/blogs/202200905_pyenv%E3%81%AE%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E4%B8%80%E8%A6%A7/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/blogs/202200905_pyenv%E3%81%AE%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E4%B8%80%E8%A6%A7/</guid><description>&lt;h1 id="インストール可能なバージョン一覧表示">インストール可能なバージョン一覧表示&lt;/h1>
+&lt;p>pyenv install &amp;ndash;list&lt;/p>
+&lt;h1 id="特定のバージョンをインストール">特定のバージョンをインストール&lt;/h1>
+&lt;p>pyenv install 3.6.1 # python 3.6.1をインストール&lt;/p>
+&lt;h1 id="インストールされているpythonバージョン一覧を表示">インストールされているPythonバージョン一覧を表示&lt;/h1>
+&lt;p>pyenv versions&lt;/p>
+&lt;h1 id="現在のバージョンを確認">現在のバージョンを確認&lt;/h1>
+&lt;p>python &amp;ndash;version&lt;/p>
+&lt;h1 id="globalコマンドを使ってデフォルトのpythonバージョンを変更">globalコマンドを使ってデフォルトのPythonバージョンを変更&lt;/h1>
+&lt;p>pyenv global 3.6.1 # デフォルトバージョンを3.6.1に変更&lt;/p></description></item><item><title>T5とBARTモデルの結果比較</title><link>https://macho000.github.io/research_blog/20220823_t5%E3%81%A8bart%E3%81%AE%E7%B5%90%E6%9E%9C%E6%AF%94%E8%BC%83/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/research_blog/20220823_t5%E3%81%A8bart%E3%81%AE%E7%B5%90%E6%9E%9C%E6%AF%94%E8%BC%83/</guid><description>&lt;h1 id="t5結果">T5結果&lt;/h1>
+&lt;p>&lt;img src="e89abc292cb8dd54b135ba3825ecd6bde260e9818b70678bad09ce4e41957eb0.png" alt="picture 1">&lt;/p>
+&lt;p>Raffel, Colin, Noam Shazeer, Adam Roberts, Katherine Lee, Sharan Narang, Michael Matena, Yanqi Zhou, Wei Li, and Peter J. Liu. &amp;ldquo;Exploring the limits of transfer learning with a unified text-to-text transformer.&amp;rdquo; J. Mach. Learn. Res. 21, no. 140 (2020): 1-67.&lt;/p>
+&lt;h1 id="bart結果">BART結果&lt;/h1>
+&lt;p>&lt;img src="51a8bb813457a7f442dbb611afc0652c9a5450da1dbae497b2439f7e2864471e.png" alt="picture 2">&lt;/p>
+&lt;p>Lewis, Mike, Yinhan Liu, Naman Goyal, Marjan Ghazvininejad, Abdelrahman Mohamed, Omer Levy, Ves Stoyanov, and Luke Zettlemoyer. &amp;ldquo;Bart: Denoising sequence-to-sequence pre-training for natural language generation, translation, and comprehension.&amp;rdquo; arXiv preprint arXiv:1910.13461 (2019).&lt;/p></description></item><item><title>Visual Studio CodeにFlake8を導入する方法</title><link>https://macho000.github.io/blogs/202200905_visualstudiocodeflake8/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/blogs/202200905_visualstudiocodeflake8/</guid><description>&lt;h1 id="flake8のインストール">flake8のインストール&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">pip install flake8
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="vs-codeの既存のlintであるpylintを無効化する">VS Codeの既存のLintであるpylintを無効化する&lt;/h1>
+&lt;h2 id="settingsをクリック">Settingsをクリック&lt;/h2>
+&lt;p>&lt;img src="033ed52d3f4da1bce23df517e6a69cd9947a3430ad4ecdb1bb219af5242a08fa.png" alt="picture 2">&lt;/p>
+&lt;h2 id="linterを無効化する">linterを無効化する&lt;/h2>
+&lt;p>検索窓で&lt;code>python.linting.pylintEnabled&lt;/code>と入力し検索
+&lt;code>&amp;gt; Linting: PyLint Enabled&lt;/code>を無効化
+&lt;img src="91e293459ee0211a382089b8528a71e3dc6cb12469f374f34491b5431bc746f1.png" alt="picture 3">&lt;/p>
+&lt;h1 id="flake8に設定する">flake8に設定する&lt;/h1>
+&lt;p>検索窓で&lt;code>python.linting.flake8Enabled&lt;/code>と入力し検索
+&lt;code>&amp;gt; Linting: Flake8 Enabled&lt;/code>を無効化
+&lt;img src="87196564c0489996b77e251ec0fcd5b395d4a4908a4cf546e3c866a6cb58e268.png" alt="picture 4">&lt;/p>
+&lt;h1 id="完了">完了&lt;/h1>
+&lt;p>これでソースファイル保存時にコードがPEP8に準拠しているか検証される&lt;/p>
+&lt;h1 id="参考文献">参考文献&lt;/h1>
+&lt;p>&lt;a href="https://qiita.com/fehde/items/723b619013dc86008acc">https://qiita.com/fehde/items/723b619013dc86008acc&lt;/a>&lt;/p></description></item><item><title>XCodeの再インストール</title><link>https://macho000.github.io/blogs/202207151335/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/blogs/202207151335/</guid><description>&lt;h1 id="xcodeの再インストール">XCodeの再インストール&lt;/h1>
+&lt;pre tabindex="0">&lt;code>sudo rm -rf /Applications/Xcode.app
+sudo rm -rf /Library/Preferences/com.apple.dt.Xcode.plist
+sudo rm -rf ~/Library/Preferences/com.apple.dt.Xcode.plist
+sudo rm -rf ~/Library/Caches/com.apple.dt.Xcode
+sudo rm -rf ~/Library/Application Support/Xcode
+sudo rm -rf ~/Library/Developer/Xcode
+sudo rm -rf ~/Library/Developer/CoreSimulator
+&lt;/code>&lt;/pre></description></item><item><title>数式で理解するソートアルゴリズム</title><link>https://macho000.github.io/blogs/202207151245/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/blogs/202207151245/</guid><description>&lt;h1 id="数式で理解するソートアルゴリズム">数式で理解するソートアルゴリズム&lt;/h1>
+&lt;p>ここでは、ソートアルゴリズムを数式を使って解説する。ソートアルゴリズムの解説では、手順を追って説明することが多い。ここでは、数式を使ってソートアルゴリズムを解説していく。&lt;/p>
+&lt;p>では、さっそく以下に解説していく&lt;/p>
+&lt;h2 id="入力">入力&lt;/h2>
+&lt;p>入力として以下の順不同な長さnの入力が与えられる。
+$$ a_8, a_2, a_1, &amp;hellip;, a_k = b_1, b_2, &amp;hellip; , b_k, .. , b_n=B $$
+$$ (1 \leq k \leq n, \quad len(B)=n) $$
+これを昇順に並び替えることがゴールである。数式で表すと以下の通り。&lt;/p>
+&lt;h2 id="ゴール">ゴール&lt;/h2>
+&lt;p>$$ a_1, a_2, &amp;hellip;, a_k, .. a_n $$
+$$ (a_k \leq a_{k+1}, \quad 1\leq k\leq n )$$&lt;/p>
+&lt;h2 id="選択ソート">選択ソート&lt;/h2>
+&lt;h3 id="数式による解説">数式による解説&lt;/h3>
+&lt;p>$$ REP_{i=1}^n swap(b_i, \argmin_{b_k}[b_i, b_{i+1}, &amp;hellip;, b_k,&amp;hellip;,b_n]) $$
+ここで、$REP_{i=1}^n$は、iを1からnまで繰り返すことを意味する。&lt;/p>
+&lt;h3 id="文字による解説">文字による解説&lt;/h3>
+&lt;p>選択ソートは配列の中から最小値を探し、ソート済み配列に格納することを繰り返すことによりソートを行う手法のことである。&lt;/p>
+&lt;h2 id="バブルソート">バブルソート&lt;/h2>
+&lt;h3 id="数式による解説-1">数式による解説&lt;/h3>
+&lt;p>$$ REP+&lt;em>{i=0}^{n-1}REP-&lt;/em>{j=n-1}^{i+1} \begin{cases}
+swap(b_j,b_{j-1}) &amp;amp; (if \quad b_j &amp;lt; b_{j-1}) \
+nothing &amp;amp; (else)
+\end{cases}
+$$
+ここで、$REP+&lt;em>{i=0}^n$は、iを１ずつ加算していきiが0からnをなるまで繰り返すことを意味する。$REP-&lt;/em>{j=n-1}^{i+1}$は、jを1ずつ減算していきjがn-1からi+1になるまでまで繰り返すことを意味する。&lt;/p></description></item><item><title>日本語形態素解析比較</title><link>https://macho000.github.io/research_blog/20220824_%E6%97%A5%E6%9C%AC%E8%AA%9E%E5%BD%A2%E6%85%8B%E7%B4%A0%E8%A7%A3%E6%9E%90%E6%AF%94%E8%BC%83/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/research_blog/20220824_%E6%97%A5%E6%9C%AC%E8%AA%9E%E5%BD%A2%E6%85%8B%E7%B4%A0%E8%A7%A3%E6%9E%90%E6%AF%94%E8%BC%83/</guid><description>&lt;script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax:{inlineMath:[['\$','\$'],['\\(','\\)']],processEscapes:true},CommonHTML: {matchFontHeight:false}});&lt;/script>
+&lt;script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">&lt;/script>
+&lt;h1 id="日本語形態素解析の紹介">日本語形態素解析の紹介&lt;/h1>
+&lt;p>このページでは、日本語形態素解析であるJUMAN、ChaSen、MeCab、KyTea、Sudachiについて紹介、比較をしていく&lt;/p>
+&lt;h1 id="juman">JUMAN&lt;/h1>
+&lt;p>最も歴史が古い日本語形態素解析で1992年にリリースされた。JUMANは構文解析システムKNPと組み合わせて利用されることを想定している。&lt;/p>
+&lt;p>JUMANの特徴として、単語間の接続コストといった解析用のパラメーターは人でによる処理で行われている。最新の日本語形態素解析と比較すると精度は落ちるが、長い歴史をかけてチューニングされていることもあり、分野依存性が低い形態素解析が特徴である。&lt;/p>
+&lt;h1 id="chasen">ChaSen&lt;/h1>
+&lt;p>2006年に初めて登場した日本語形態素解析である。&lt;/p>
+&lt;p>C言語で実装されており、コードはJUMANのバージョン2.0.0を参考に作られている。&lt;/p>
+&lt;p>ChaSenの特徴として、統計的手法を用いることにより解析速度と使い勝手の向上を目指したことである。具体的には、JUMANでは解析用のパラメーターを人手でチューニングをしていたのに対してChaSenでは、正しく解析されたデータつまり注釈済みコーパスを用いて推定している。&lt;/p>
+&lt;h1 id="mecab">MeCab&lt;/h1>
+&lt;p>MeCabは2006年3月に初めてリリースされた日本語形態素解析である。&lt;/p>
+&lt;p>MeCabはC++言語で実装されており、ChaSenをもともとは再実装したものであった。&lt;/p>
+&lt;p>MeCabの特徴として、ダブル配列の活用と条件付き確率場の利用が挙げられる。&lt;/p>
+&lt;h1 id="kytea">KyTea&lt;/h1>
+&lt;p>2009年に初リリースされた日本語形態素解析である。&lt;/p>
+&lt;p>KyTeaは、単語分割、品詞推定、読み推定を行うだけで、活用処理は行わないため形態素解析ではない。&lt;/p>
+&lt;p>KyTeaの特徴として、点推測を用いた単語分割である。&lt;/p>
+&lt;h1 id="sudachi">Sudachi&lt;/h1>
+&lt;p>2017年にリリースされた日本で最も新しい日本語形態素解析である。&lt;/p>
+&lt;p>Sudachiは企業のサポートにより商業利用を目的とした利用促進のため今後10年開発し続けることを目標としている。&lt;/p>
+&lt;p>Sudachiの特徴として、分割単位の異なる３つのモードで動作することである。３つのモード（A,B,C単位）は、Aは、短い単位（UniDic短単位相当）、Cは固有表現相当（NEologd相当）、BはAとCの中間相当（IPAdic相当）である。&lt;/p>
+&lt;h1 id="参考文献">参考文献&lt;/h1>
+&lt;p>工藤拓. 形態素解析の理論と実装. 近代科学社, 2018.
+&lt;a href="https://ja.wikipedia.org/wiki/JUMAN">https://ja.wikipedia.org/wiki/JUMAN&lt;/a>
+&lt;a href="https://ja.wikipedia.org/wiki/ChaSen">https://ja.wikipedia.org/wiki/ChaSen&lt;/a>
+&lt;a href="https://ja.osdn.net/projects/chasen-legacy/">https://ja.osdn.net/projects/chasen-legacy/&lt;/a>
+&lt;a href="https://ja.wikipedia.org/wiki/MeCab">https://ja.wikipedia.org/wiki/MeCab&lt;/a>
+&lt;a href="http://www.phontron.com/kytea/index-ja.html">http://www.phontron.com/kytea/index-ja.html&lt;/a>
+&lt;a href="https://qiita.com/hi-asano/items/aaf406db875f1c81530e#sudachi">https://qiita.com/hi-asano/items/aaf406db875f1c81530e#sudachi&lt;/a>&lt;/p></description></item><item><title>条件付き確率場を使った品詞タグづけ解説</title><link>https://macho000.github.io/research_blog/20220907_%E6%9D%A1%E4%BB%B6%E4%BB%98%E3%81%8D%E7%A2%BA%E7%8E%87%E5%A0%B4%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%9F%E5%93%81%E8%A9%9E%E3%82%BF%E3%82%B0%E4%BB%98%E3%81%91%E8%A7%A3%E8%AA%AC/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/research_blog/20220907_%E6%9D%A1%E4%BB%B6%E4%BB%98%E3%81%8D%E7%A2%BA%E7%8E%87%E5%A0%B4%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%9F%E5%93%81%E8%A9%9E%E3%82%BF%E3%82%B0%E4%BB%98%E3%81%91%E8%A7%A3%E8%AA%AC/</guid><description>&lt;h1 id="条件付き確率場とは">条件付き確率場とは&lt;/h1>
+&lt;p>条件付き確率場は、入力xに対して品詞ラベルの系列yを出力する条件付き確率 $P(y|x)$　を計算するモデルのこと&lt;/p>
+&lt;p>例えば、{私,は,日本人,です}という形態素に分割された文字列集合を入力として、出力に{名詞、助詞、名詞、助詞}という出力をするモデルを表す&lt;/p>
+&lt;p>条件付き確率は以下のように与えられる&lt;/p>
+&lt;p>$$
+P(y|x)=\frac{exp(h(x,y))}{Z}=\frac{exp(w \cdot \phi(x,y))}{Z}
+$$&lt;/p>
+&lt;p>$\textbf{w}$は$K$次元のパラメータ・ベクトルのこと&lt;/p>
+&lt;p>また、$\phi(\cdot)$は素性関数と呼ばれるもので、例えば以下のような特性を持つ関数のことである。&lt;/p>
+&lt;p>$$
+\phi_k(x,y)=
+\begin{cases}
+1 &amp;amp; t-1番目の品詞が名詞かつt番目の品詞が動詞 \
+0 &amp;amp; それ以外
+\end{cases}
+$$&lt;/p>
+&lt;p>というように特定の条件に合致する場合は１をそれ以外の場合は０を出力する関数のことをすじょう関数という。&lt;/p>
+&lt;p>この素性関数はモデルごとに適切な条件を指定する&lt;/p>
+&lt;p>そして、こういった素性を$K$個並べた$K$次元のベクトルが $\phi(x,y) \in \mathbb{R}^k$と表し、これを&lt;code>素性ベクトル&lt;/code>という。&lt;/p>
+&lt;p>$Z$ は、$\Sigma_{\textbf y \in \mathcal{Y(\textbf x)}}P(\textbf y | \textbf x) = 1$ となる正規化項である&lt;/p>
+&lt;p>そして、具体的には&lt;/p>
+&lt;p>$$
+Z := \Sigma_{\mathbf y \in \mathcal Y_{(\mathbf x)}} exp(\mathbf w \cdot \phi (\mathbf x, \mathbf y))
+$$&lt;/p>
+&lt;p>と表すことができる&lt;/p>
+&lt;p>#　条件付き確率場の過程&lt;/p>
+&lt;p>条件付き確率馬ではこれらを単純化して&lt;code>１階のマルコフ性と素性関数の線形性を仮定する&lt;/code>&lt;/p>
+&lt;p>つまり
+$$
+\phi (\mathbf x , \mathbf y)= \Sigma_{x} \phi_t (\mathbf x , y_{t-1}, y_t)
+$$&lt;/p></description></item></channel></rss>

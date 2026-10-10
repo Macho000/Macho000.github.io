@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>言語モデル on Macho000</title><link>https://macho000.github.io/tags/%E8%A8%80%E8%AA%9E%E3%83%A2%E3%83%87%E3%83%AB/</link><description>Recent content in 言語モデル on Macho000</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Fri, 09 Sep 2022 11:28:39 +0900</lastBuildDate><atom:link href="https://macho000.github.io/tags/%E8%A8%80%E8%AA%9E%E3%83%A2%E3%83%87%E3%83%AB/index.xml" rel="self" type="application/rss+xml"/><item><title>BART解説</title><link>https://macho000.github.io/research_blog/20220822_bart%E8%A7%A3%E8%AA%AC/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/research_blog/20220822_bart%E8%A7%A3%E8%AA%AC/</guid><description>&lt;h1 id="要約">要約&lt;/h1>
+&lt;p>BARTでのBERTとの違いは以下の３つの特徴&lt;/p>
+&lt;ul>
+&lt;li>エンコーダーとデコーダーの両方を用いて事前学習&lt;/li>
+&lt;li>デコーダーのそれぞれのレイヤーでエンコーダーの最後の層との隠れ状態とのクロスアテンションレイヤーを追加&lt;/li>
+&lt;li>BERTでは単語予測のためにFEED-FORWARDネットワークを取り入れていたが、BEATでは行わなかった。&lt;/li>
+&lt;/ul>
+&lt;h3 id="事前学習">事前学習&lt;/h3>
+&lt;p>　
+&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/554239/86f0a71f-d691-47f1-a166-62c604ff7aa8.png" alt="image.png">&lt;/p>
+&lt;p>図のようにエンコーダーとデコーダーの両方を使って事前学習を行った。
+事前学習の手法は以下の７つを行った&lt;/p>
+&lt;ol>
+&lt;li>単語マスキング&lt;/li>
+&lt;li>単語削除&lt;/li>
+&lt;li>単語列のマスキング&lt;/li>
+&lt;li>単語の並び替え&lt;/li>
+&lt;li>文章回転&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://macho000.github.io/d8c6be80cbf6981910e502008ee3a6255b1c773f6251d2207e249301fc3ae54b.png" alt="picture 2">&lt;/p>
+&lt;p>図にあらあわすと上図の通り。&lt;/p>
+&lt;p>単語マスキングでは予測する単語に＿というマスキングを施す
+単語削除では任意の単語を削除して.で置き換える
+単語列のマスキングでは複数単語（BC）に＿というマスキングを施す
+単語の並び替えでは単語の順番を入れ替える。
+文章回転では、単語の並びを保持したまま最初の単語を入れ替える&lt;/p></description></item><item><title>JointGT解説</title><link>https://macho000.github.io/research_blog/20220822_jointgt%E8%A7%A3%E8%AA%AC/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/research_blog/20220822_jointgt%E8%A7%A3%E8%AA%AC/</guid><description>&lt;script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax:{inlineMath:[['\$','\$'],['\\(','\\)']],processEscapes:true},CommonHTML: {matchFontHeight:false}});&lt;/script>
+&lt;script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">&lt;/script>
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+&lt;script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous">&lt;/script>
+&lt;!-- Automatically render math in text elements -->
+&lt;script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous">&lt;/script>
+&lt;script>
+document.addEventListener("DOMContentLoaded", function() {
+ renderMathInElement(document.body, {
+ delimiters: [
+ {left: "$$", right: "$$", display: true},
+ {left: "$", right: "$", display: false},
+ ]
+ });
+});
+&lt;/script>
+# JointGTとは
+2021年にKeが発表した論文
+&lt;p>Ke, Pei, Haozhe Ji, Yu Ran, Xin Cui, Liwei Wang, Linfeng Song, Xiaoyan Zhu, and Minlie Huang. &amp;ldquo;JointGT: Graph-Text Joint Representation Learning for Text Generation from Knowledge Graphs.&amp;rdquo; In Findings of the Association for Computational Linguistics: ACL-IJCNLP 2021, pp. 2526-2538. 2021.&lt;/p></description></item><item><title>T5とBARTモデルの結果比較</title><link>https://macho000.github.io/research_blog/20220823_t5%E3%81%A8bart%E3%81%AE%E7%B5%90%E6%9E%9C%E6%AF%94%E8%BC%83/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/research_blog/20220823_t5%E3%81%A8bart%E3%81%AE%E7%B5%90%E6%9E%9C%E6%AF%94%E8%BC%83/</guid><description>&lt;h1 id="t5結果">T5結果&lt;/h1>
+&lt;p>&lt;img src="e89abc292cb8dd54b135ba3825ecd6bde260e9818b70678bad09ce4e41957eb0.png" alt="picture 1">&lt;/p>
+&lt;p>Raffel, Colin, Noam Shazeer, Adam Roberts, Katherine Lee, Sharan Narang, Michael Matena, Yanqi Zhou, Wei Li, and Peter J. Liu. &amp;ldquo;Exploring the limits of transfer learning with a unified text-to-text transformer.&amp;rdquo; J. Mach. Learn. Res. 21, no. 140 (2020): 1-67.&lt;/p>
+&lt;h1 id="bart結果">BART結果&lt;/h1>
+&lt;p>&lt;img src="51a8bb813457a7f442dbb611afc0652c9a5450da1dbae497b2439f7e2864471e.png" alt="picture 2">&lt;/p>
+&lt;p>Lewis, Mike, Yinhan Liu, Naman Goyal, Marjan Ghazvininejad, Abdelrahman Mohamed, Omer Levy, Ves Stoyanov, and Luke Zettlemoyer. &amp;ldquo;Bart: Denoising sequence-to-sequence pre-training for natural language generation, translation, and comprehension.&amp;rdquo; arXiv preprint arXiv:1910.13461 (2019).&lt;/p></description></item></channel></rss>

@@ -1,0 +1,36 @@
+<!doctype html><html lang=ja><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>DockerでGo言語開発環境構築 · Macho000</title><meta name=description content="docker環境作成 ディレクトリ構成 ディレクトリ構成は下記の通り。
+. ├── Docker │ └── Dockerfile ├── docker-compose.yaml └── src └── main.go Dockerfile # goバージョン FROM golang:1.16.3-alpine # ア …"><link rel=canonical href=https://macho000.github.io/blogs/20220816_docker%E3%81%A7go%E8%A8%80%E8%AA%9E%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/><link rel=stylesheet href=/css/site.css><link rel=alternate type=application/rss+xml title="Macho000 RSS" href=/index.xml></head><body><a class=skip href=#main>本文へ</a><div class=shell><header><a class=brand href=/>Macho000<span class=dot>.</span></a><nav aria-label=メインナビゲーション><a href=/>Home</a><a href=/blog/ aria-current=page>Blog</a><a href=https://github.com/Macho000>GitHub ↗</a></nav></header><main id=main><article><div class=article-heading><a class=muted href=/blog/>← Blog</a><p class=eyebrow>2022.09.09</p><h1>DockerでGo言語開発環境構築</h1><div class=tags><a href=/tags/go/>Go</a><a href=/tags/docker/>Docker</a></div></div><details class=toc><summary>目次</summary><nav id=TableOfContents><ul><li><a href=#ディレクトリ構成>ディレクトリ構成</a></li><li><a href=#dockerfile>Dockerfile</a></li><li><a href=#docker-composeyaml>docker-compose.yaml</a></li><li><a href=#コンテナの作成立ち上げ実行>コンテナの作成・立ち上げ・実行</a></li><li><a href=#goの初期化やビルド>goの初期化やビルド</a></li></ul></nav></details><div class=prose><h1 id=docker環境作成>docker環境作成</h1><h2 id=ディレクトリ構成>ディレクトリ構成</h2><p>ディレクトリ構成は下記の通り。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-cmd data-lang=cmd><span class=line><span class=cl>.
+</span></span><span class=line><span class=cl>├── Docker
+</span></span><span class=line><span class=cl>│   └── Dockerfile
+</span></span><span class=line><span class=cl>├── docker-compose.yaml
+</span></span><span class=line><span class=cl>└── src
+</span></span><span class=line><span class=cl>    └── main.go
+</span></span></code></pre></div><h2 id=dockerfile>Dockerfile</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-DOckerfile data-lang=DOckerfile><span class=line><span class=cl><span class=c># goバージョン</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=k>FROM</span><span class=s> golang:1.16.3-alpine</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=c># アップデートとgitのインストール！！</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=k>RUN</span> apk add --update <span class=o>&amp;&amp;</span>  apk add git<span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=c># appディレクトリの作成</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=k>RUN</span> mkdir /go/src/app<span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=c># ワーキングディレクトリの設定</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=k>WORKDIR</span><span class=s> /go/src/app</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=c># ホストのファイルをコンテナの作業ディレクトリに移行</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=k>ADD</span> . /go/src/app<span class=err>
+</span></span></span></code></pre></div><h2 id=docker-composeyaml>docker-compose.yaml</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>version</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;3.9&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>services</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>goapp</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>build</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>context</span><span class=p>:</span><span class=w> </span><span class=l>.</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>dockerfile</span><span class=p>:</span><span class=w> </span><span class=l>./Docker/Dockerfile</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>tty</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>volumes</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=l>./src/:/go/src/app</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>ports</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=m>8080</span><span class=p>:</span><span class=m>8080</span><span class=w>
+</span></span></span></code></pre></div><h2 id=コンテナの作成立ち上げ実行>コンテナの作成・立ち上げ・実行</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-cmd data-lang=cmd><span class=line><span class=cl>docker-compose build
+</span></span><span class=line><span class=cl>docker-compose up -d
+</span></span><span class=line><span class=cl>docker-compose exec golang go run main.go
+</span></span></code></pre></div><h2 id=goの初期化やビルド>goの初期化やビルド</h2><p>###　初期化
+go.modファイルの作成</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-cmd data-lang=cmd><span class=line><span class=cl>docker-compose exec goapp go mod init github.com/akakuro43/go-app
+</span></span><span class=line><span class=cl>docker-compose exec goapp go mod tidy
+</span></span></code></pre></div><h1 id=参考文献>参考文献</h1><p><a href=https://zenn.dev/akakuro/articles/2426098256785b>Docker環境構築</a></p></div><script type=text/x-mathjax-config>MathJax.Hub.Config({tex2jax:{inlineMath:[["$","$"],["\\(","\\)"]],processEscapes:true}});</script><script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><div class=article-end><a href=/blog/>← 記事一覧へ</a></div></article></main><footer><span>© 2026 Macho000</span><a href=/index.xml>RSS ↗</a></footer></div></body></html>

@@ -1,0 +1,21 @@
+<!doctype html><html lang=ja><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Beam Search解説 · Macho000</title><meta name=description content=" はじめに ここでは、
+Greedy Search(貪欲法) Exhaustive Search（しらみつぶし探索） Beam Search(ビームサーチ) これらのアルゴリズムを解説する
+用語解説 $ \mathcal{V} $ : ボキャブラリー
+$ |\mathcal{V}| $ : ボキャブラリー …"><link rel=canonical href=https://macho000.github.io/research_blog/20220818_beamsearch%E8%A7%A3%E8%AA%AC/><link rel=stylesheet href=/css/site.css><link rel=alternate type=application/rss+xml title="Macho000 RSS" href=/index.xml></head><body><a class=skip href=#main>本文へ</a><div class=shell><header><a class=brand href=/>Macho000<span class=dot>.</span></a><nav aria-label=メインナビゲーション><a href=/>Home</a><a href=/blog/ aria-current=page>Blog</a><a href=https://github.com/Macho000>GitHub ↗</a></nav></header><main id=main><article><div class=article-heading><a class=muted href=/blog/>← Blog</a><p class=eyebrow>2022.09.09</p><h1>Beam Search解説</h1><div class=tags><a href=/tags/%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0/>アルゴリズム</a></div></div><details class=toc><summary>目次</summary><nav id=TableOfContents><ul><li><a href=#数式解説>数式解説</a></li></ul><ul><li><a href=#数式解説-1>数式解説</a></li></ul><ul><li><a href=#数式解説-2>数式解説</a></li></ul></nav></details><div class=prose><script type=text/x-mathjax-config>MathJax.Hub.Config({tex2jax:{inlineMath:[['\$','\$'],['\\(','\\)']],processEscapes:true},CommonHTML: {matchFontHeight:false}});</script><script type=text/javascript async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><h1 id=はじめに>はじめに</h1><p>ここでは、</p><ul><li>Greedy Search(貪欲法)</li><li>Exhaustive Search（しらみつぶし探索）</li><li>Beam Search(ビームサーチ)</li></ul><p>これらのアルゴリズムを解説する</p><h1 id=用語解説>用語解説</h1><p>$ \mathcal{V} $ : ボキャブラリー</p><p>$ |\mathcal{V}| $ : ボキャブラリー数</p><p>$\mathcal{T}$ : 文章の単語数</p><p>これらの $\mathcal{V}$ と $\mathcal{T}$ から得られる単語列は $ |\mathcal{V}|^\mathcal{T}$ の組み合わせがある。</p><p>仮に、ボキャブラリー $\mathcal{V}$ が[I, am, japanese]でボキャブラリー数 $|\mathcal{V}|$ が3個で、文章の単語数が3の場合を考えると、このとき文字列の候補は $3^3=27$ 個存在する。</p><p>具体的には</p><ul><li>I I I</li><li>I I am</li><li>I I japanese</li><li>I am I</li><li>I am am</li><li>I am japanese</li><li>I japanse I</li><li>I japanese am</li><li>I japanese japanese</li><li>am I I
+&mldr;.
+&mldr;.
+&mldr;.</li><li>japanese japanese japanese
+の計27個である</li></ul><p>ここで、今回はボキャブラリー数が3個で、文章の単語数が3個と小さい値であったが、実際はボキャブラリー数が10,000個、単語数は500個ほどで合計で $10,000^500=1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000&mldr;$ の組み合わせを考える必要がある。</p><p>その際にすべての組み合わせの中から最も確率が高くなるような単語列を出力することを式で表すと下記のとおりになる。</p><p>$$
+p(y_1,&mldr;,y_T|c)=\prod_{t=1}^{T}P(y_t|y_1,&mldr;,y_{t-1},c)
+$$</p><p>この確率を最大化するような単語列 $\textbf{y}(=y_1,&mldr;,y_T)$ を求める必要がある。</p><p>しかし、現在のPCでは、これらの組み合わせをすべて考えることは不可能なので、Greedy Seachといったアルゴリズムが考案された</p><h1 id=greedy-searchとは>Greedy Searchとは</h1><h2 id=数式解説>数式解説</h2><p>$$
+y_t = \arg \max_{ y \in \mathcal{V}} P(y_t|y_1,&mldr;,y_{t-1},c)
+$$</p><p>となる単語$y_t$を順番に求めていき単語列$\textbf{y}(=y_1,&mldr;,y_T)$を求める。</p><h1 id=exhaustive-searchとは>Exhaustive Searchとは</h1><h2 id=数式解説-1>数式解説</h2><p>$$
+\textbf{y}=y_1,&mldr;,y_T=\arg \max_{y_1,&mldr;,y_T}p(y_1,&mldr;,y_T|c)
+$$</p><p>をなる単語列$\textbf{y}$を直接求めることである。
+しかし、これは愚直な方法で計算量が$O(|\mathcal{V}|^\mathcal{T})$かかってしまい現実的でない。</p><h1 id=beam-searchとは>Beam Searchとは</h1><h2 id=数式解説-2>数式解説</h2><p>$$
+\mathbf y_i^{&rsquo;} =
+y_{1,i},&mldr;,y_{t,i}= arg topk_{y_{1,j},&mldr;,y_{t,j}}p(y_{1,j},&mldr;,y_{t,j}|c)
+$$</p><p>$$
+\mathbf y_i^{&rsquo;} = y_{1,i},&mldr;,y_{t,i}
+$$</p><p>ここで
+$1 \le i \le k, 1\le j\le k$</p><p>$k$ ビームサイズ</p><p>iは時刻tにおける確率が高い文字列のインデックスを表し、jは時刻t-1における確率が高い文字列のインデックスを表す。</p><h1 id=参考文献>参考文献</h1><p><a href=https://data-analytics.fun/2020/12/16/understanding-beamsearch/>ビームサイズ（Beam Search）を理解する</a></p></div><div class=article-end><a href=/blog/>← 記事一覧へ</a></div></article></main><footer><span>© 2026 Macho000</span><a href=/index.xml>RSS ↗</a></footer></div></body></html>

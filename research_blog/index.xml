@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Research_blogs on Macho000</title><link>https://macho000.github.io/research_blog/</link><description>Recent content in Research_blogs on Macho000</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Sat, 22 Oct 2022 22:01:52 +0900</lastBuildDate><atom:link href="https://macho000.github.io/research_blog/index.xml" rel="self" type="application/rss+xml"/><item><title>損失関数まとめ</title><link>https://macho000.github.io/research_blog/20221022_%E6%90%8D%E5%A4%B1%E9%96%A2%E6%95%B0/</link><pubDate>Sat, 22 Oct 2022 22:01:52 +0900</pubDate><guid>https://macho000.github.io/research_blog/20221022_%E6%90%8D%E5%A4%B1%E9%96%A2%E6%95%B0/</guid><description>&lt;h1 id="損失関数とは">損失関数とは&lt;/h1>
+&lt;p>損失関数は一言で言うと「目標」と「実際」の結果の差を表したもの。&lt;/p>
+&lt;p>損失関数は一般的には$\mathcal L$で表される。&lt;/p>
+&lt;p>損失関数の種類にはいろいろあり平均二乗誤差（MSE：Mean Squared Error）、平均絶対誤差（MAE）、交差クロスエントロピー誤差 （Cross-entropy Loss）などがある。&lt;/p>
+&lt;p>では損失関数を用いてどのように学習するのかを見ていく&lt;/p>
+&lt;h1 id="損失関数を用いたモデルの学習">損失関数を用いたモデルの学習&lt;/h1>
+&lt;p>モデルの学習は以下のように表される&lt;/p>
+&lt;p>$$
+\mathcal w_{t+1} = \mathcal w_t - \alpha \frac{\partial L}{\partial \mathcal w}
+$$&lt;/p>
+&lt;p>この式の意味するところは、損失関数を小さくする方向に重み$w$を学習するということである。&lt;/p>
+&lt;h1 id="交差クロスエントロピー">交差クロスエントロピー&lt;/h1>
+&lt;p>ここで交差クロスエントロピーの定義と学習する方法について具体的に見ていく&lt;/p>
+&lt;p>交差クロスエントロピーは以下の式で定義される&lt;/p>
+&lt;p>$$
+\mathcal L(p, q) = - \Sigma_i p(i) logq(i)
+$$&lt;/p>
+&lt;ul>
+&lt;li>pは真の確率分布、qは推定した確率分布&lt;/li>
+&lt;li>pは正解データの確率分布、qはモデルが出力した確率分布&lt;/li>
+&lt;/ul>
+&lt;h2 id="例１">例１&lt;/h2>
+&lt;p>仮に真の確率分布p=(1,0,0)、推定した確率分布q=(1,0,0)の場合を考える。&lt;/p>
+&lt;p>この時交差クロスエントロピーは
+$$
+\begin{aligned}
+\mathcal L(p, q)
+&amp;amp;= - \Sigma_i p(i) logq(i) \
+&amp;amp;= - 1 \cdot log 1 - 0 \cdot log 0 - 0 \cdot log 0 \
+&amp;amp;= 0
+\end{aligned}
+$$&lt;/p></description></item><item><title>日本語固有表現抽出データセット一覧</title><link>https://macho000.github.io/research_blog/20220920_%E6%97%A5%E6%9C%AC%E8%AA%9E%E5%9B%BA%E6%9C%89%E8%A1%A8%E7%8F%BE%E6%8A%BD%E5%87%BA%E3%83%87%E3%83%BC%E3%82%BF%E3%82%BB%E3%83%83%E3%83%88%E4%B8%80%E8%A6%A7/</link><pubDate>Tue, 20 Sep 2022 10:50:04 +0900</pubDate><guid>https://macho000.github.io/research_blog/20220920_%E6%97%A5%E6%9C%AC%E8%AA%9E%E5%9B%BA%E6%9C%89%E8%A1%A8%E7%8F%BE%E6%8A%BD%E5%87%BA%E3%83%87%E3%83%BC%E3%82%BF%E3%82%BB%E3%83%83%E3%83%88%E4%B8%80%E8%A6%A7/</guid><description>&lt;ul>
+&lt;li>&lt;a href="#bidding-dataset">BIDDING DATASET&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#wikipedia%E3%82%92%E7%94%A8%E3%81%84%E3%81%9F%E6%97%A5%E6%9C%AC%E8%AA%9E%E3%81%AE%E5%9B%BA%E6%9C%89%E8%A1%A8%E7%8F%BE%E6%8A%BD%E5%87%BA%E3%83%87%E3%83%BC%E3%82%BF%E3%82%BB%E3%83%83%E3%83%88">Wikipediaを用いた日本語の固有表現抽出データセット&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#irex%E3%82%B3%E3%83%BC%E3%83%91%E3%82%B9">IREXコーパス&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E4%BA%AC%E9%83%BD%E5%A4%A7%E5%AD%A6%E3%82%A6%E3%82%A7%E3%83%96%E6%96%87%E6%9B%B8%E3%83%AA%E3%83%BC%E3%83%89%E3%82%B3%E3%83%BC%E3%83%91%E3%82%B9">京都大学ウェブ文書リードコーパス&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#bccwj-ne%E3%82%B3%E3%83%BC%E3%83%91%E3%82%B9">BCCWJ NEコーパス&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E6%8B%A1%E5%BC%B5%E5%9B%BA%E6%9C%89%E8%A1%A8%E7%8F%BE%E3%82%BF%E3%82%B0%E4%BB%98%E3%81%8D%E3%82%B3%E3%83%BC%E3%83%91%E3%82%B9">拡張固有表現タグ付きコーパス&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>日本語固有表現抽出を以下にまとめる&lt;/p>
+&lt;h1 id="bidding-dataset">BIDDING DATASET&lt;/h1>
+&lt;p>入札に関するPDFと「調達年度、都道府県、入札件名、施設名、需要場所（住所）、調達開始日、調達終了日、公告日、仕様書交付期限、質問締切日時、資格申請締切日時、入札書締切日時、改札日時、質問箇所 所属/担当者、質問箇所 TEL/FAX、資格申請送付先、資格申請送付先 部署/担当者名、入札書送付先、入札書送付先 部署/担当者名、改札場所」の固有表現を抽出するデータセット&lt;/p>
+&lt;p>&lt;a href="https://github.com/DungLe13/bidding-dataset">リンク&lt;/a>&lt;/p>
+&lt;p>PDFは以下のようになっている&lt;/p>
+&lt;p>&lt;img src="8ecab731e32a419d71693ebdae45b93f4d4feaee1e133a3702709711d8d79ca4.png" alt="picture 1">&lt;/p>
+&lt;p>&lt;img src="d99903ce8c2cd953dfd8f0eb31e819dc560d1a0beae1841283e48db242e58762.png" alt="picture 2">&lt;/p>
+&lt;p>&lt;img src="97b4463df09c11b513305dd4af26fd66615d432737616f1ac0899b42f61c3609.png" alt="picture 3">&lt;/p>
+&lt;p>&lt;img src="d2bd0828672d129d37de5e15feae48756fdb41d18a2ba6598298a96229ac0bc6.png" alt="picture 4">&lt;/p>
+&lt;p>正解ラベルはExcel形式&lt;/p>
+&lt;p>&lt;img src="cb4bb4724359281718d252690c9edcce95e9b557a222bfd32361daeb679edcde.png" alt="picture 5">&lt;/p>
+&lt;p>データスタッツ&lt;/p>
+&lt;p>&lt;img src="db5a315135e728dff55f3c83ebb4bdccca91626ecad5b7bf14a3cbf74a9644ca.png" alt="picture 6">&lt;/p>
+&lt;h1 id="wikipediaを用いた日本語の固有表現抽出データセット">Wikipediaを用いた日本語の固有表現抽出データセット&lt;/h1>
+&lt;p>Wikipediaのテキストに対して、タグ（タイプ）を「人名、法人名、政治的組織名、その他の組織名、地名、施設名、製品名、イベント名」を割り当てたデータセット&lt;a href="https://github.com/stockmarkteam/ner-wikipedia-dataset">リンク&lt;/a>&lt;/p>
+&lt;p>固有表現をハイライトしたサンプルは以下の通り&lt;a href="https://stockmarkteam.github.io/ner-wikipedia-dataset/index.html">リンク&lt;/a>
+&lt;img src="c08810330d4ac88783d42324ca47a1ed489cdf23469cff597e6e1091fda04f33.png" alt="picture 7">&lt;/p>
+&lt;p>データ形式
+データファイルはjson形式になっており、全体としてはデータサンプルのリストとして構成されている&lt;/p>
+&lt;p>&lt;img src="ee08d4ffcb8500a95ad7cb521c16371f1f48cc175d052f871ca76765cb72b0d4.png" alt="picture 8">&lt;/p>
+&lt;ul>
+&lt;li>curidは、データ元のWikipediaのページID&lt;/li>
+&lt;li>textはタグ付けを行う対象のテキスト&lt;/li>
+&lt;li>entitiesは固有表現のリスト
+&lt;ul>
+&lt;li>nameは固有表現名&lt;/li>
+&lt;li>spanはtextでの位置&lt;/li>
+&lt;li>typeは固有表現のタイプ&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h1 id="irexコーパス">IREXコーパス&lt;/h1>
+&lt;p>毎日新聞の94,95年の記事を対象にした固有表現抽出データセット&lt;/p>
+&lt;p>新聞記事データは含まれていない点に注意が必要&lt;/p>
+&lt;p>データセットのダウンロードは&lt;a href="https://nlp.cs.nyu.edu/irex/Package/">こちら&lt;/a>&lt;/p>
+&lt;p>日本語HPは&lt;a href="https://nlp.cs.nyu.edu/irex/index-j.html">こちら&lt;/a>&lt;/p>
+&lt;p>このHPに詳しく各フォルダの中身について解説がされている&lt;/p>
+&lt;h1 id="京都大学ウェブ文書リードコーパス">京都大学ウェブ文書リードコーパス&lt;/h1>
+&lt;p>さまざまな種類のテキストに対する固有表現抽出を行なったデータセット&lt;/p>
+&lt;p>具体的にはWebやニュース、百科事典、ブログ、広告といった幅広いジャンルのテキストから固有表現を抽出したデータセット&lt;/p>
+&lt;p>データの形式は以下の通り&lt;/p>
+&lt;p>&lt;img src="5311df33ea6c50b11acc76db8f3507d4544c4fdcef59162ae737bb1f77a40cd7.png" alt="picture 9">&lt;/p>
+&lt;ul>
+&lt;li>最初の行は文章のIDを表す&lt;/li>
+&lt;li>*は文節を表す
+&lt;ul>
+&lt;li>文節は１つもしくは複数の単語で構成されている&lt;/li>
+&lt;li>はじめの数字は先頭のIDをあらわし、アルファベットは依存関係の種類を表す&lt;/li>
+&lt;li>D 普通の依存関係&lt;/li>
+&lt;li>P 調整依存&lt;/li>
+&lt;li>I　不完全調整依存関係&lt;/li>
+&lt;li>A 同格依存関係&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>+はフレーズを表す
+&lt;ul>
+&lt;li>基本的なフレーズを表す&lt;/li>
+&lt;li>文節と一致するかあるいは文節の一部になる&lt;/li>
+&lt;li>はじめの数字は先頭のIDを表し、アルファベットは文節と同様に定義される&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>その他の行は形態素を表す
+&lt;ul>
+&lt;li>形態素の行は、JUMANで形態素解析を行った結果と一致する&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>固有表現のアノテーションは $&lt;NE>$ タグで与えられる。$&lt;NE>$ タグは４つの属性を持つ。&lt;/p></description></item><item><title>Viterbiアルゴリズム解説</title><link>https://macho000.github.io/research_blog/20220920_viterbi%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0%E8%A7%A3%E8%AA%AC/</link><pubDate>Tue, 20 Sep 2022 09:27:38 +0900</pubDate><guid>https://macho000.github.io/research_blog/20220920_viterbi%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0%E8%A7%A3%E8%AA%AC/</guid><description>&lt;h1 id="viterbiアルゴリズムとは">Viterbiアルゴリズムとは&lt;/h1>
+&lt;p>動的計画法の一種である。&lt;/p>
+&lt;p>数式で表すと下記のような数式を再帰的に計算し、&lt;/p>
+&lt;p>$$
+\delta_{t+1}(j)=max_{i}[\delta_i(i)a_{ij}]b_j(o_{t+1})
+$$
+$$
+\psi_{i+1}(j)=argmax_{i}[\delta_i(i)a_{ij}]
+$$&lt;/p>
+&lt;p>時刻 $t=1,2,&amp;hellip;,T-1$ として、状態 $q_j(j=1,&amp;hellip;,N)$の最大の確率値 $\delta_{t+1}(j)$を再帰的に計算する。&lt;/p>
+&lt;p>そして、最大の確率値 $\delta_{t+1}(j)$ の直前の状態iを記録している $\psi$ も更新する&lt;/p>
+&lt;p>$ a_{ij} $ は、状態iから状態jに遷移する際の確率を表し
+$ b_j(o_{t+1}) $ は、時刻t+1における値 $ o_{t+1} $ を状態jで取りうる確率を表す&lt;/p>
+&lt;p>この再帰計算により、尤もらしい（最も確率の高い）状態のみを保存していくことで、全ての状態に対する組み合わせを考えなくて済む。&lt;/p>
+&lt;h1 id="参考文献">参考文献&lt;/h1>
+&lt;p>&lt;a href="https://mieruca-ai.com/ai/viterbi_algorithm/">https://mieruca-ai.com/ai/viterbi_algorithm/&lt;/a>&lt;/p></description></item><item><title>STM+CRF解説</title><link>https://macho000.github.io/research_blog/20220911_lstmcrf/</link><pubDate>Sun, 11 Sep 2022 10:45:36 +0900</pubDate><guid>https://macho000.github.io/research_blog/20220911_lstmcrf/</guid><description>&lt;h1 id="要約">要約&lt;/h1>
+&lt;p>下の図のように埋め込み表現と両方向LSTMを使用してCRF層に出力するモデルを提案&lt;/p>
+&lt;p>&lt;img src="0f9035421654bf88fb39ebfbdce6449921964626d0f44de2de9d5bcd8cc6a59b.png" alt="picture 1">&lt;/p>
+&lt;h1 id="lstm-crfモデルとは">LSTM-CRFモデルとは&lt;/h1>
+&lt;h2 id="lstm">LSTM&lt;/h2>
+&lt;p>RNNはニューラルネットワークの一部で有、連続データを扱う。しかし、 RNNの問題点として、長い文章を扱う際に最も直近の入力に注目してしまうという問題点があった。&lt;/p>
+&lt;p>この問題に対処するためにLSTMモデルが提案された。LSTMは（Long Short-term Memory Networks）の略である。&lt;/p>
+&lt;p>LSTMでは、入力の情報を貯めるメモリー機構とそのメモリーをどの用いた機構である。&lt;/p>
+&lt;p>数式で表すと下記のようになる。&lt;/p>
+&lt;p>$$
+\begin{aligned}
+\mathbf i_t=&amp;amp; \sigma\left(\mathbf W_{x i} \mathbf x_t+\mathbf W_{h i} \mathbf h_{t-1}+\mathbf W_{c i} \mathbf c_{t-1}+\mathbf b_i\right) \
+\mathbf c_t=&amp;amp;\left(1-\mathbf i_t\right) \odot \mathbf c_{t-1}+\
+&amp;amp; \mathbf i_t \odot \tanh \left(\mathbf W_{x c} \mathbf x_t+\mathbf W_{h c} \mathbf h_{t-1}+\mathbf b_c\right) \
+\mathbf o_t=&amp;amp; \sigma\left(\mathbf W_{x o} \mathbf x_t+\mathbf W_{h o} \mathbf h_{t-1}+\mathbf W_{c o} \mathbf c_t+\mathbf b_o\right) \
+\mathbf h_t=&amp;amp; \mathbf o_t \odot \tanh \left(\mathbf c_t\right)
+\end{aligned}
+$$&lt;/p></description></item><item><title> Beam Search解説</title><link>https://macho000.github.io/research_blog/20220818_beamsearch%E8%A7%A3%E8%AA%AC/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/research_blog/20220818_beamsearch%E8%A7%A3%E8%AA%AC/</guid><description>&lt;script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax:{inlineMath:[['\$','\$'],['\\(','\\)']],processEscapes:true},CommonHTML: {matchFontHeight:false}});&lt;/script>
+&lt;script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">&lt;/script>
+&lt;h1 id="はじめに">はじめに&lt;/h1>
+&lt;p>ここでは、&lt;/p>
+&lt;ul>
+&lt;li>Greedy Search(貪欲法)&lt;/li>
+&lt;li>Exhaustive Search（しらみつぶし探索）&lt;/li>
+&lt;li>Beam Search(ビームサーチ)&lt;/li>
+&lt;/ul>
+&lt;p>これらのアルゴリズムを解説する&lt;/p>
+&lt;h1 id="用語解説">用語解説&lt;/h1>
+&lt;p>$ \mathcal{V} $ : ボキャブラリー&lt;/p>
+&lt;p>$ |\mathcal{V}| $ : ボキャブラリー数&lt;/p>
+&lt;p>$\mathcal{T}$ : 文章の単語数&lt;/p>
+&lt;p>これらの $\mathcal{V}$ と $\mathcal{T}$ から得られる単語列は $ |\mathcal{V}|^\mathcal{T}$ の組み合わせがある。&lt;/p>
+&lt;p>仮に、ボキャブラリー $\mathcal{V}$ が[I, am, japanese]でボキャブラリー数 $|\mathcal{V}|$ が3個で、文章の単語数が3の場合を考えると、このとき文字列の候補は $3^3=27$ 個存在する。&lt;/p>
+&lt;p>具体的には&lt;/p>
+&lt;ul>
+&lt;li>I I I&lt;/li>
+&lt;li>I I am&lt;/li>
+&lt;li>I I japanese&lt;/li>
+&lt;li>I am I&lt;/li>
+&lt;li>I am am&lt;/li>
+&lt;li>I am japanese&lt;/li>
+&lt;li>I japanse I&lt;/li>
+&lt;li>I japanese am&lt;/li>
+&lt;li>I japanese japanese&lt;/li>
+&lt;li>am I I
+&amp;hellip;.
+&amp;hellip;.
+&amp;hellip;.&lt;/li>
+&lt;li>japanese japanese japanese
+の計27個である&lt;/li>
+&lt;/ul>
+&lt;p>ここで、今回はボキャブラリー数が3個で、文章の単語数が3個と小さい値であったが、実際はボキャブラリー数が10,000個、単語数は500個ほどで合計で $10,000^500=1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000&amp;hellip;$ の組み合わせを考える必要がある。&lt;/p></description></item><item><title> BLEU解説</title><link>https://macho000.github.io/research_blog/20220813_bleu%E8%A7%A3%E8%AA%AC/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/research_blog/20220813_bleu%E8%A7%A3%E8%AA%AC/</guid><description>&lt;script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax:{inlineMath:[['\$','\$'],['\\(','\\)']],processEscapes:true},CommonHTML: {matchFontHeight:false}});&lt;/script>
+&lt;script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">&lt;/script>
+&lt;p>BLEUスコアのスコアの算出方法はズバリ以下のとおりです
+$BLEU=BP \cdot exp(\Sigma_{n=1}^{N}w_nlogp_n)$
+でスコアを算出します。&lt;/p>
+&lt;p>簡単に説明するとモデルの出力の1-gram, 2-gram, 3-gram, 4-gramが正解質問(Reference)がどの程度含まれているかを表す指標です&lt;/p>
+&lt;p>用語の説明をしていきます&lt;/p>
+&lt;h2 id="p_nの定義">$p_n$の定義&lt;/h2>
+&lt;p>$p_n$ はprecisionスコアと呼ばれるもので以下の式で計算される
+$p_n= \frac{\Sigma_{C\in {Candidates}} \Sigma_{n-gram \in C} Count_{clip}(n-gram)}{\Sigma_{C&amp;rsquo;\in {Candidates}} \Sigma_{n-gram&amp;rsquo; \in C&amp;rsquo;} Count(n-gram&amp;rsquo;)}$
+で定義される&lt;/p>
+&lt;p>ここで、$Count_{clip}(n-gram)=min(Count(n-gram), MaxRefCount(n-gram))$
+と定義される&lt;/p>
+&lt;p>$Count(n-gram)$は、Candidateに含まれるn-gramの数を表す .例えば、$Count(1-gram)$は、Candidateに含まれる1-gramの数を表す .&lt;/p>
+&lt;p>$MaxRefCount(n-gram)$は、candidateに含まれるn-gramがReference文中に観測される回数を表す&lt;/p>
+&lt;p>例えばCandidateに「the cat sat at chair」、Referenceに「the cat sat on the table」だったら1-gramのときは $Count(1-gram)=5, MaxRefCount(1-gram)=3$となるので $Count_{clip}(n-gram)=3$となる。したがって、このような状況の場合precisionは　$p_n=\frac{3}{5}=0.6$となる。&lt;/p>
+&lt;p>簡単に言えば、precisionは、candidateに含まれるn-gramがreferenceに含まれる割合を表す
+precisionが高い場合は、n-gram単位でreferenceと単語の一致度が高いということを意味する
+一方precisionが低い場合は、n-gram単位でreferenceと単語の一致度が低いということを意味し、関係のない単語が出力されている可能性が高い。&lt;/p>
+&lt;h2 id="bpとは">BPとは&lt;/h2>
+&lt;p>BPとは下記の式で定義されます&lt;/p>
+&lt;p>$
+\text{BP}
+\begin{cases}
+1 &amp;amp; c &amp;gt; r \
+e^{1-r/c} &amp;amp; c \leqq r
+\end{cases}
+$&lt;/p>
+&lt;p>$c:candidate$の長さ
+$r:reference$の長さ&lt;/p></description></item><item><title>BART解説</title><link>https://macho000.github.io/research_blog/20220822_bart%E8%A7%A3%E8%AA%AC/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/research_blog/20220822_bart%E8%A7%A3%E8%AA%AC/</guid><description>&lt;h1 id="要約">要約&lt;/h1>
+&lt;p>BARTでのBERTとの違いは以下の３つの特徴&lt;/p>
+&lt;ul>
+&lt;li>エンコーダーとデコーダーの両方を用いて事前学習&lt;/li>
+&lt;li>デコーダーのそれぞれのレイヤーでエンコーダーの最後の層との隠れ状態とのクロスアテンションレイヤーを追加&lt;/li>
+&lt;li>BERTでは単語予測のためにFEED-FORWARDネットワークを取り入れていたが、BEATでは行わなかった。&lt;/li>
+&lt;/ul>
+&lt;h3 id="事前学習">事前学習&lt;/h3>
+&lt;p>　
+&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/554239/86f0a71f-d691-47f1-a166-62c604ff7aa8.png" alt="image.png">&lt;/p>
+&lt;p>図のようにエンコーダーとデコーダーの両方を使って事前学習を行った。
+事前学習の手法は以下の７つを行った&lt;/p>
+&lt;ol>
+&lt;li>単語マスキング&lt;/li>
+&lt;li>単語削除&lt;/li>
+&lt;li>単語列のマスキング&lt;/li>
+&lt;li>単語の並び替え&lt;/li>
+&lt;li>文章回転&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://macho000.github.io/d8c6be80cbf6981910e502008ee3a6255b1c773f6251d2207e249301fc3ae54b.png" alt="picture 2">&lt;/p>
+&lt;p>図にあらあわすと上図の通り。&lt;/p>
+&lt;p>単語マスキングでは予測する単語に＿というマスキングを施す
+単語削除では任意の単語を削除して.で置き換える
+単語列のマスキングでは複数単語（BC）に＿というマスキングを施す
+単語の並び替えでは単語の順番を入れ替える。
+文章回転では、単語の並びを保持したまま最初の単語を入れ替える&lt;/p></description></item><item><title>BERTSCore解説</title><link>https://macho000.github.io/research_blog/20220808_bertscore%E8%A7%A3%E8%AA%AC/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/research_blog/20220808_bertscore%E8%A7%A3%E8%AA%AC/</guid><description>&lt;script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax:{inlineMath:[['\$','\$'],['\\(','\\)']],processEscapes:true},CommonHTML: {matchFontHeight:false}});&lt;/script>
+&lt;script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">&lt;/script>
+&lt;h1 id="bertscoreとは">BERTScoreとは&lt;/h1>
+&lt;p>テキスト生成に対する自動評価指標のこと&lt;/p>
+&lt;h1 id="bertscore計算方法">BERTScore計算方法&lt;/h1>
+&lt;h2 id="準備">準備&lt;/h2>
+&lt;p>入力として正解文字列を$$x=&amp;lt;x_1, x_2, &amp;hellip;, x_k &amp;gt; $$
+出力文字列を$$ \hat{x}=&amp;lt;\hat{x_1}, \hat{x_2},&amp;hellip;,\hat{x_m}&amp;gt; $$
+と置く。&lt;/p>
+&lt;h2 id="bertscore">BERTSCORE&lt;/h2>
+&lt;p>$$
+R_{BERT}=\frac{1}{|x|} \Sigma_{x_i \in x}max_{\hat{x}_j \in \hat{x}} \mathbf x_i^T \mathbf{\hat{x}}_j
+$$&lt;/p>
+&lt;p>$$
+P_{BERT}=\frac{1}{|\hat{x}|}\Sigma_{\hat x_j \in \hat x} max_{x_i \in x} \mathbf x_i^T \mathbf{\hat{x}}_j
+$$&lt;/p>
+&lt;p>$$
+F_{BERT}=2\frac{P_{BERT}\cdot R_{BERT}}{P_{BERT}+R_{BERT}}
+$$&lt;/p>
+&lt;h2 id="計算例">計算例&lt;/h2>
+&lt;p>例えば正解文字列(TARGET)が&amp;quot;alphabet&amp;quot;で、生成文字列(OUTPUT)が”writing system”である場合を考える。&lt;/p>
+&lt;p>数式で表すと
+正解文字列を$x=&amp;lt;x_1&amp;gt;=&amp;lt;alphabet&amp;gt; $
+出力文字列を$ \hat{x}=&amp;lt;\hat{x_1}, \hat{x_2}&amp;gt;=&amp;lt;writing, system&amp;gt; $と表せる&lt;/p>
+&lt;h3 id="recallの計算例">Recallの計算例&lt;/h3>
+&lt;p>このときまず&lt;/p>
+&lt;p>$$
+R_{BERT}=
+\frac{1}{|x|} \Sigma_{x_i \in x}max_{\hat{x}_j \in \hat x} \mathbf x_i^T \mathbf{\hat{x}}_j
+$$&lt;/p></description></item><item><title>JointGT解説</title><link>https://macho000.github.io/research_blog/20220822_jointgt%E8%A7%A3%E8%AA%AC/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/research_blog/20220822_jointgt%E8%A7%A3%E8%AA%AC/</guid><description>&lt;script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax:{inlineMath:[['\$','\$'],['\\(','\\)']],processEscapes:true},CommonHTML: {matchFontHeight:false}});&lt;/script>
+&lt;script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">&lt;/script>
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+&lt;script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous">&lt;/script>
+&lt;!-- Automatically render math in text elements -->
+&lt;script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous">&lt;/script>
+&lt;script>
+document.addEventListener("DOMContentLoaded", function() {
+ renderMathInElement(document.body, {
+ delimiters: [
+ {left: "$$", right: "$$", display: true},
+ {left: "$", right: "$", display: false},
+ ]
+ });
+});
+&lt;/script>
+# JointGTとは
+2021年にKeが発表した論文
+&lt;p>Ke, Pei, Haozhe Ji, Yu Ran, Xin Cui, Liwei Wang, Linfeng Song, Xiaoyan Zhu, and Minlie Huang. &amp;ldquo;JointGT: Graph-Text Joint Representation Learning for Text Generation from Knowledge Graphs.&amp;rdquo; In Findings of the Association for Computational Linguistics: ACL-IJCNLP 2021, pp. 2526-2538. 2021.&lt;/p></description></item><item><title>Precision Recall F1スコア解説</title><link>https://macho000.github.io/research_blog/20220830_precisionrecallf1%E3%82%B9%E3%82%B3%E3%82%A2%E8%A7%A3%E8%AA%AC/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/research_blog/20220830_precisionrecallf1%E3%82%B9%E3%82%B3%E3%82%A2%E8%A7%A3%E8%AA%AC/</guid><description>&lt;script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax:{inlineMath:[['\$','\$'],['\\(','\\)']],processEscapes:true},CommonHTML: {matchFontHeight:false}});&lt;/script>
+&lt;script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">&lt;/script>
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+&lt;script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous">&lt;/script>
+&lt;!-- Automatically render math in text elements -->
+&lt;script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous">&lt;/script>
+&lt;script>
+document.addEventListener("DOMContentLoaded", function() {
+ renderMathInElement(document.body, {
+ delimiters: [
+ {left: "$$", right: "$$", display: true},
+ {left: "$", right: "$", display: false},
+ ]
+ });
+});
+&lt;/script>
+&lt;h1 id="1-前提知識">1. 前提知識&lt;/h1>
+&lt;h2 id="11-分類問題における正解不正解パターン">1.1. 分類問題における正解・不正解パターン&lt;/h2>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: center">&lt;/th>
+ &lt;th style="text-align: center">正解（実測）&lt;/th>
+ &lt;th style="text-align: center">不正解（実測）&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: center">正解（予測）&lt;/td>
+ &lt;td style="text-align: center">TP&lt;/td>
+ &lt;td style="text-align: center">FP&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: center">不正解（予測）&lt;/td>
+ &lt;td style="text-align: center">FN&lt;/td>
+ &lt;td style="text-align: center">TN&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;p>TP (True Positive): 実測値、予測値がともに正であるもの&lt;/p>
+&lt;p>FP (False Positive)： 実測値が負なのに、間違えて予測値が正であると予測したもの&lt;/p>
+&lt;p>FN (True Negative)： 実測値が正なのに、間違えて予測値が負であると予測したもの&lt;/p>
+&lt;p>TN (False Negative)： 実測値、予測値がともに負であるもの&lt;/p>
+&lt;h1 id="2-precisionとは">2. Precisionとは&lt;/h1>
+&lt;p>Precisionは日本語だと適合率のことを言います。
+Precisionでは、「&lt;em>&lt;strong>正と予測したものが、どれだけ正しかったか&lt;/strong>&lt;/em>」を測る指標&lt;/p>
+&lt;p>数式にすると
+$$
+\frac{TP}{TP+FP}
+$$&lt;/p></description></item><item><title>T5とBARTモデルの結果比較</title><link>https://macho000.github.io/research_blog/20220823_t5%E3%81%A8bart%E3%81%AE%E7%B5%90%E6%9E%9C%E6%AF%94%E8%BC%83/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/research_blog/20220823_t5%E3%81%A8bart%E3%81%AE%E7%B5%90%E6%9E%9C%E6%AF%94%E8%BC%83/</guid><description>&lt;h1 id="t5結果">T5結果&lt;/h1>
+&lt;p>&lt;img src="e89abc292cb8dd54b135ba3825ecd6bde260e9818b70678bad09ce4e41957eb0.png" alt="picture 1">&lt;/p>
+&lt;p>Raffel, Colin, Noam Shazeer, Adam Roberts, Katherine Lee, Sharan Narang, Michael Matena, Yanqi Zhou, Wei Li, and Peter J. Liu. &amp;ldquo;Exploring the limits of transfer learning with a unified text-to-text transformer.&amp;rdquo; J. Mach. Learn. Res. 21, no. 140 (2020): 1-67.&lt;/p>
+&lt;h1 id="bart結果">BART結果&lt;/h1>
+&lt;p>&lt;img src="51a8bb813457a7f442dbb611afc0652c9a5450da1dbae497b2439f7e2864471e.png" alt="picture 2">&lt;/p>
+&lt;p>Lewis, Mike, Yinhan Liu, Naman Goyal, Marjan Ghazvininejad, Abdelrahman Mohamed, Omer Levy, Ves Stoyanov, and Luke Zettlemoyer. &amp;ldquo;Bart: Denoising sequence-to-sequence pre-training for natural language generation, translation, and comprehension.&amp;rdquo; arXiv preprint arXiv:1910.13461 (2019).&lt;/p></description></item><item><title>日本語形態素解析比較</title><link>https://macho000.github.io/research_blog/20220824_%E6%97%A5%E6%9C%AC%E8%AA%9E%E5%BD%A2%E6%85%8B%E7%B4%A0%E8%A7%A3%E6%9E%90%E6%AF%94%E8%BC%83/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/research_blog/20220824_%E6%97%A5%E6%9C%AC%E8%AA%9E%E5%BD%A2%E6%85%8B%E7%B4%A0%E8%A7%A3%E6%9E%90%E6%AF%94%E8%BC%83/</guid><description>&lt;script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax:{inlineMath:[['\$','\$'],['\\(','\\)']],processEscapes:true},CommonHTML: {matchFontHeight:false}});&lt;/script>
+&lt;script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">&lt;/script>
+&lt;h1 id="日本語形態素解析の紹介">日本語形態素解析の紹介&lt;/h1>
+&lt;p>このページでは、日本語形態素解析であるJUMAN、ChaSen、MeCab、KyTea、Sudachiについて紹介、比較をしていく&lt;/p>
+&lt;h1 id="juman">JUMAN&lt;/h1>
+&lt;p>最も歴史が古い日本語形態素解析で1992年にリリースされた。JUMANは構文解析システムKNPと組み合わせて利用されることを想定している。&lt;/p>
+&lt;p>JUMANの特徴として、単語間の接続コストといった解析用のパラメーターは人でによる処理で行われている。最新の日本語形態素解析と比較すると精度は落ちるが、長い歴史をかけてチューニングされていることもあり、分野依存性が低い形態素解析が特徴である。&lt;/p>
+&lt;h1 id="chasen">ChaSen&lt;/h1>
+&lt;p>2006年に初めて登場した日本語形態素解析である。&lt;/p>
+&lt;p>C言語で実装されており、コードはJUMANのバージョン2.0.0を参考に作られている。&lt;/p>
+&lt;p>ChaSenの特徴として、統計的手法を用いることにより解析速度と使い勝手の向上を目指したことである。具体的には、JUMANでは解析用のパラメーターを人手でチューニングをしていたのに対してChaSenでは、正しく解析されたデータつまり注釈済みコーパスを用いて推定している。&lt;/p>
+&lt;h1 id="mecab">MeCab&lt;/h1>
+&lt;p>MeCabは2006年3月に初めてリリースされた日本語形態素解析である。&lt;/p>
+&lt;p>MeCabはC++言語で実装されており、ChaSenをもともとは再実装したものであった。&lt;/p>
+&lt;p>MeCabの特徴として、ダブル配列の活用と条件付き確率場の利用が挙げられる。&lt;/p>
+&lt;h1 id="kytea">KyTea&lt;/h1>
+&lt;p>2009年に初リリースされた日本語形態素解析である。&lt;/p>
+&lt;p>KyTeaは、単語分割、品詞推定、読み推定を行うだけで、活用処理は行わないため形態素解析ではない。&lt;/p>
+&lt;p>KyTeaの特徴として、点推測を用いた単語分割である。&lt;/p>
+&lt;h1 id="sudachi">Sudachi&lt;/h1>
+&lt;p>2017年にリリースされた日本で最も新しい日本語形態素解析である。&lt;/p>
+&lt;p>Sudachiは企業のサポートにより商業利用を目的とした利用促進のため今後10年開発し続けることを目標としている。&lt;/p>
+&lt;p>Sudachiの特徴として、分割単位の異なる３つのモードで動作することである。３つのモード（A,B,C単位）は、Aは、短い単位（UniDic短単位相当）、Cは固有表現相当（NEologd相当）、BはAとCの中間相当（IPAdic相当）である。&lt;/p>
+&lt;h1 id="参考文献">参考文献&lt;/h1>
+&lt;p>工藤拓. 形態素解析の理論と実装. 近代科学社, 2018.
+&lt;a href="https://ja.wikipedia.org/wiki/JUMAN">https://ja.wikipedia.org/wiki/JUMAN&lt;/a>
+&lt;a href="https://ja.wikipedia.org/wiki/ChaSen">https://ja.wikipedia.org/wiki/ChaSen&lt;/a>
+&lt;a href="https://ja.osdn.net/projects/chasen-legacy/">https://ja.osdn.net/projects/chasen-legacy/&lt;/a>
+&lt;a href="https://ja.wikipedia.org/wiki/MeCab">https://ja.wikipedia.org/wiki/MeCab&lt;/a>
+&lt;a href="http://www.phontron.com/kytea/index-ja.html">http://www.phontron.com/kytea/index-ja.html&lt;/a>
+&lt;a href="https://qiita.com/hi-asano/items/aaf406db875f1c81530e#sudachi">https://qiita.com/hi-asano/items/aaf406db875f1c81530e#sudachi&lt;/a>&lt;/p></description></item><item><title>条件付き確率場を使った品詞タグづけ解説</title><link>https://macho000.github.io/research_blog/20220907_%E6%9D%A1%E4%BB%B6%E4%BB%98%E3%81%8D%E7%A2%BA%E7%8E%87%E5%A0%B4%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%9F%E5%93%81%E8%A9%9E%E3%82%BF%E3%82%B0%E4%BB%98%E3%81%91%E8%A7%A3%E8%AA%AC/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/research_blog/20220907_%E6%9D%A1%E4%BB%B6%E4%BB%98%E3%81%8D%E7%A2%BA%E7%8E%87%E5%A0%B4%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%9F%E5%93%81%E8%A9%9E%E3%82%BF%E3%82%B0%E4%BB%98%E3%81%91%E8%A7%A3%E8%AA%AC/</guid><description>&lt;h1 id="条件付き確率場とは">条件付き確率場とは&lt;/h1>
+&lt;p>条件付き確率場は、入力xに対して品詞ラベルの系列yを出力する条件付き確率 $P(y|x)$　を計算するモデルのこと&lt;/p>
+&lt;p>例えば、{私,は,日本人,です}という形態素に分割された文字列集合を入力として、出力に{名詞、助詞、名詞、助詞}という出力をするモデルを表す&lt;/p>
+&lt;p>条件付き確率は以下のように与えられる&lt;/p>
+&lt;p>$$
+P(y|x)=\frac{exp(h(x,y))}{Z}=\frac{exp(w \cdot \phi(x,y))}{Z}
+$$&lt;/p>
+&lt;p>$\textbf{w}$は$K$次元のパラメータ・ベクトルのこと&lt;/p>
+&lt;p>また、$\phi(\cdot)$は素性関数と呼ばれるもので、例えば以下のような特性を持つ関数のことである。&lt;/p>
+&lt;p>$$
+\phi_k(x,y)=
+\begin{cases}
+1 &amp;amp; t-1番目の品詞が名詞かつt番目の品詞が動詞 \
+0 &amp;amp; それ以外
+\end{cases}
+$$&lt;/p>
+&lt;p>というように特定の条件に合致する場合は１をそれ以外の場合は０を出力する関数のことをすじょう関数という。&lt;/p>
+&lt;p>この素性関数はモデルごとに適切な条件を指定する&lt;/p>
+&lt;p>そして、こういった素性を$K$個並べた$K$次元のベクトルが $\phi(x,y) \in \mathbb{R}^k$と表し、これを&lt;code>素性ベクトル&lt;/code>という。&lt;/p>
+&lt;p>$Z$ は、$\Sigma_{\textbf y \in \mathcal{Y(\textbf x)}}P(\textbf y | \textbf x) = 1$ となる正規化項である&lt;/p>
+&lt;p>そして、具体的には&lt;/p>
+&lt;p>$$
+Z := \Sigma_{\mathbf y \in \mathcal Y_{(\mathbf x)}} exp(\mathbf w \cdot \phi (\mathbf x, \mathbf y))
+$$&lt;/p>
+&lt;p>と表すことができる&lt;/p>
+&lt;p>#　条件付き確率場の過程&lt;/p>
+&lt;p>条件付き確率馬ではこれらを単純化して&lt;code>１階のマルコフ性と素性関数の線形性を仮定する&lt;/code>&lt;/p>
+&lt;p>つまり
+$$
+\phi (\mathbf x , \mathbf y)= \Sigma_{x} \phi_t (\mathbf x , y_{t-1}, y_t)
+$$&lt;/p></description></item></channel></rss>

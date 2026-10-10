@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Github on Macho000</title><link>https://macho000.github.io/tags/github/</link><description>Recent content in Github on Macho000</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Fri, 09 Sep 2022 11:28:39 +0900</lastBuildDate><atom:link href="https://macho000.github.io/tags/github/index.xml" rel="self" type="application/rss+xml"/><item><title>Github Pagesとカスタムドメイン（Google Domain）の紐付け</title><link>https://macho000.github.io/blogs/202207150940/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/blogs/202207150940/</guid><description>&lt;h1 id="github-pagesとカスタムドメインgoogle-domainの紐付け">Github Pagesとカスタムドメイン（Google Domain）の紐付け&lt;/h1>
+&lt;h2 id="用語解説">用語解説&lt;/h2>
+&lt;p>&lt;strong>Apexドメイン&lt;/strong>
+Apexドメインとは、サブドメインではないドメインのこと。たとえば、Google Domainでmacho000.comというドメインを購入した場合macho000.comがApexドメインになる。www.macho000.comはサブドメインとなる。&lt;/p>
+&lt;h2 id="apexドメインの設定">Apexドメインの設定&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>Google DomainのDNSの設定&lt;/strong>
+&lt;img src="6e058426a3c4ba8d072a1a2fee34e710e31ca71957b1a7b219448bf7832bfef8.jpg" alt="picture 4">&lt;/li>
+&lt;/ul>
+&lt;p>Data(Ipv4アドレス)には[Github Doc](&lt;a href="https://docs.github.com/ja/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site">Github Doc&lt;/a>)にかかれているIPアドレスを指定。
+今回の場合は、以下の画像より&lt;/p>
+&lt;pre tabindex="0">&lt;code>185.199.108.153
+185.199.109.153
+185.199.110.153
+185.199.111.153
+&lt;/code>&lt;/pre>&lt;p>を指定する。
+&lt;img src="3dc6ace52e2dda9487e6470d9b0764a1e665531f687afb5d42da2e7dd4d976b4.jpg" alt="picture 5">&lt;/p>
+&lt;ul>
+&lt;li>DNSレコードが更新されたことを確認する
+以下のコマンドを打ち、DNSのレコードの更新を確認する。&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>dig &amp;lt;your domain&amp;gt; +noall +answer
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>GithubのSettingで、Custom Domainを登録する
+&lt;img src="a993b84c53e7b6dd42626fd1dcfbc76a6641b810e16f12323c8f3404fb69df66.jpg" alt="picture 6">&lt;br>
+まず、Setting画面を開き、次にPagesをクリック、最後にCustom Domainに先程登録したApexドメインを登録する&lt;/li>
+&lt;/ul>
+&lt;h2 id="サブドメインの設定">サブドメインの設定&lt;/h2>
+&lt;ul>
+&lt;li>Google DomainのCustom RecordにCNAME Typeを追加
+&lt;img src="f2072f250fd764efd3e7af350df6295123c4d2390ebba8ac2b1bd2161eee15f8.jpg" alt="picture 7">&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="6e18aaeec4116aca26985470d03121e199db577c5989932653b3ced99758fa25.jpg" alt="picture 8">&lt;/p>
+&lt;p>&lt;img src="2aa3e34f07709411cb5e12faa784fc36c7cf31e9526747daefc98a0db998f9a8.jpg" alt="picture 9">&lt;/p>
+&lt;h2 id="参考情報">参考情報&lt;/h2>
+&lt;p>&lt;a href="https://dev-moyashi.hatenablog.com/entry/2021/01/10/222249">GitHub Pages に Google Domains で購入した独自ドメインを設定する&lt;/a>&lt;/p></description></item><item><title>Githubを利用したMarkdownでの記事執筆</title><link>https://macho000.github.io/blogs/202207150918/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/blogs/202207150918/</guid><description>&lt;h1 id="githubを利用したmarkdownでの記事執筆">Githubを利用したMarkdownでの記事執筆&lt;/h1>
+&lt;h2 id="環境一覧">環境一覧&lt;/h2>
+&lt;ul>
+&lt;li>VSCode&lt;/li>
+&lt;li>Github&lt;/li>
+&lt;/ul>
+&lt;h2 id="vscode">VSCode&lt;/h2>
+&lt;p>VSCodeに必要な拡張機能をインストール&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="%5Bshd101wyy.markdown-preview-enhanced%5D(https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced)">Markdown Preview&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://marketplace.visualstudio.com/items?itemName=hancel.markdown-image">Markdown Image&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="github">Github&lt;/h2>
+&lt;p>下記のディレクトリ構成のフォルダを作成&lt;/p>
+&lt;pre tabindex="0">&lt;code>blogs/
+images/
+index.md
+&lt;/code>&lt;/pre>&lt;p>index.mdには以下のファイルの内容&lt;/p>
+&lt;pre tabindex="0">&lt;code>- [Blogs](blogs/home.md)
+
+
+
+# 自己紹介
+&lt;/code>&lt;/pre>&lt;p>下記のようにアップロードできたら、Settingsをクリック&lt;/p>
+&lt;p>&lt;img src="35588db314599393b397f22688cc673ef197cfde11e0eef32fceda20daed7d43.jpg" alt="picture 2">&lt;/p>
+&lt;p>1,2,3の順番で以下のとおりに設定
+３番目のURLをクリックするとindex.mdの内容が表示される。
+&lt;img src="8ed5daa0e8c9ec2ac2d3f00fcb396531639233b3264579dd42bd46c55611d337.jpg" alt="picture 3">&lt;/p></description></item></channel></rss>

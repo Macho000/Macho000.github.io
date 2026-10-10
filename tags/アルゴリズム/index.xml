@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>アルゴリズム on Macho000</title><link>https://macho000.github.io/tags/%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0/</link><description>Recent content in アルゴリズム on Macho000</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Fri, 09 Sep 2022 11:28:39 +0900</lastBuildDate><atom:link href="https://macho000.github.io/tags/%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0/index.xml" rel="self" type="application/rss+xml"/><item><title> Beam Search解説</title><link>https://macho000.github.io/research_blog/20220818_beamsearch%E8%A7%A3%E8%AA%AC/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/research_blog/20220818_beamsearch%E8%A7%A3%E8%AA%AC/</guid><description>&lt;script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax:{inlineMath:[['\$','\$'],['\\(','\\)']],processEscapes:true},CommonHTML: {matchFontHeight:false}});&lt;/script>
+&lt;script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">&lt;/script>
+&lt;h1 id="はじめに">はじめに&lt;/h1>
+&lt;p>ここでは、&lt;/p>
+&lt;ul>
+&lt;li>Greedy Search(貪欲法)&lt;/li>
+&lt;li>Exhaustive Search（しらみつぶし探索）&lt;/li>
+&lt;li>Beam Search(ビームサーチ)&lt;/li>
+&lt;/ul>
+&lt;p>これらのアルゴリズムを解説する&lt;/p>
+&lt;h1 id="用語解説">用語解説&lt;/h1>
+&lt;p>$ \mathcal{V} $ : ボキャブラリー&lt;/p>
+&lt;p>$ |\mathcal{V}| $ : ボキャブラリー数&lt;/p>
+&lt;p>$\mathcal{T}$ : 文章の単語数&lt;/p>
+&lt;p>これらの $\mathcal{V}$ と $\mathcal{T}$ から得られる単語列は $ |\mathcal{V}|^\mathcal{T}$ の組み合わせがある。&lt;/p>
+&lt;p>仮に、ボキャブラリー $\mathcal{V}$ が[I, am, japanese]でボキャブラリー数 $|\mathcal{V}|$ が3個で、文章の単語数が3の場合を考えると、このとき文字列の候補は $3^3=27$ 個存在する。&lt;/p>
+&lt;p>具体的には&lt;/p>
+&lt;ul>
+&lt;li>I I I&lt;/li>
+&lt;li>I I am&lt;/li>
+&lt;li>I I japanese&lt;/li>
+&lt;li>I am I&lt;/li>
+&lt;li>I am am&lt;/li>
+&lt;li>I am japanese&lt;/li>
+&lt;li>I japanse I&lt;/li>
+&lt;li>I japanese am&lt;/li>
+&lt;li>I japanese japanese&lt;/li>
+&lt;li>am I I
+&amp;hellip;.
+&amp;hellip;.
+&amp;hellip;.&lt;/li>
+&lt;li>japanese japanese japanese
+の計27個である&lt;/li>
+&lt;/ul>
+&lt;p>ここで、今回はボキャブラリー数が3個で、文章の単語数が3個と小さい値であったが、実際はボキャブラリー数が10,000個、単語数は500個ほどで合計で $10,000^500=1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000&amp;hellip;$ の組み合わせを考える必要がある。&lt;/p></description></item><item><title>数式で理解するソートアルゴリズム</title><link>https://macho000.github.io/blogs/202207151245/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/blogs/202207151245/</guid><description>&lt;h1 id="数式で理解するソートアルゴリズム">数式で理解するソートアルゴリズム&lt;/h1>
+&lt;p>ここでは、ソートアルゴリズムを数式を使って解説する。ソートアルゴリズムの解説では、手順を追って説明することが多い。ここでは、数式を使ってソートアルゴリズムを解説していく。&lt;/p>
+&lt;p>では、さっそく以下に解説していく&lt;/p>
+&lt;h2 id="入力">入力&lt;/h2>
+&lt;p>入力として以下の順不同な長さnの入力が与えられる。
+$$ a_8, a_2, a_1, &amp;hellip;, a_k = b_1, b_2, &amp;hellip; , b_k, .. , b_n=B $$
+$$ (1 \leq k \leq n, \quad len(B)=n) $$
+これを昇順に並び替えることがゴールである。数式で表すと以下の通り。&lt;/p>
+&lt;h2 id="ゴール">ゴール&lt;/h2>
+&lt;p>$$ a_1, a_2, &amp;hellip;, a_k, .. a_n $$
+$$ (a_k \leq a_{k+1}, \quad 1\leq k\leq n )$$&lt;/p>
+&lt;h2 id="選択ソート">選択ソート&lt;/h2>
+&lt;h3 id="数式による解説">数式による解説&lt;/h3>
+&lt;p>$$ REP_{i=1}^n swap(b_i, \argmin_{b_k}[b_i, b_{i+1}, &amp;hellip;, b_k,&amp;hellip;,b_n]) $$
+ここで、$REP_{i=1}^n$は、iを1からnまで繰り返すことを意味する。&lt;/p>
+&lt;h3 id="文字による解説">文字による解説&lt;/h3>
+&lt;p>選択ソートは配列の中から最小値を探し、ソート済み配列に格納することを繰り返すことによりソートを行う手法のことである。&lt;/p>
+&lt;h2 id="バブルソート">バブルソート&lt;/h2>
+&lt;h3 id="数式による解説-1">数式による解説&lt;/h3>
+&lt;p>$$ REP+&lt;em>{i=0}^{n-1}REP-&lt;/em>{j=n-1}^{i+1} \begin{cases}
+swap(b_j,b_{j-1}) &amp;amp; (if \quad b_j &amp;lt; b_{j-1}) \
+nothing &amp;amp; (else)
+\end{cases}
+$$
+ここで、$REP+&lt;em>{i=0}^n$は、iを１ずつ加算していきiが0からnをなるまで繰り返すことを意味する。$REP-&lt;/em>{j=n-1}^{i+1}$は、jを1ずつ減算していきjがn-1からi+1になるまでまで繰り返すことを意味する。&lt;/p></description></item><item><title>条件付き確率場を使った品詞タグづけ解説</title><link>https://macho000.github.io/research_blog/20220907_%E6%9D%A1%E4%BB%B6%E4%BB%98%E3%81%8D%E7%A2%BA%E7%8E%87%E5%A0%B4%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%9F%E5%93%81%E8%A9%9E%E3%82%BF%E3%82%B0%E4%BB%98%E3%81%91%E8%A7%A3%E8%AA%AC/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/research_blog/20220907_%E6%9D%A1%E4%BB%B6%E4%BB%98%E3%81%8D%E7%A2%BA%E7%8E%87%E5%A0%B4%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%9F%E5%93%81%E8%A9%9E%E3%82%BF%E3%82%B0%E4%BB%98%E3%81%91%E8%A7%A3%E8%AA%AC/</guid><description>&lt;h1 id="条件付き確率場とは">条件付き確率場とは&lt;/h1>
+&lt;p>条件付き確率場は、入力xに対して品詞ラベルの系列yを出力する条件付き確率 $P(y|x)$　を計算するモデルのこと&lt;/p>
+&lt;p>例えば、{私,は,日本人,です}という形態素に分割された文字列集合を入力として、出力に{名詞、助詞、名詞、助詞}という出力をするモデルを表す&lt;/p>
+&lt;p>条件付き確率は以下のように与えられる&lt;/p>
+&lt;p>$$
+P(y|x)=\frac{exp(h(x,y))}{Z}=\frac{exp(w \cdot \phi(x,y))}{Z}
+$$&lt;/p>
+&lt;p>$\textbf{w}$は$K$次元のパラメータ・ベクトルのこと&lt;/p>
+&lt;p>また、$\phi(\cdot)$は素性関数と呼ばれるもので、例えば以下のような特性を持つ関数のことである。&lt;/p>
+&lt;p>$$
+\phi_k(x,y)=
+\begin{cases}
+1 &amp;amp; t-1番目の品詞が名詞かつt番目の品詞が動詞 \
+0 &amp;amp; それ以外
+\end{cases}
+$$&lt;/p>
+&lt;p>というように特定の条件に合致する場合は１をそれ以外の場合は０を出力する関数のことをすじょう関数という。&lt;/p>
+&lt;p>この素性関数はモデルごとに適切な条件を指定する&lt;/p>
+&lt;p>そして、こういった素性を$K$個並べた$K$次元のベクトルが $\phi(x,y) \in \mathbb{R}^k$と表し、これを&lt;code>素性ベクトル&lt;/code>という。&lt;/p>
+&lt;p>$Z$ は、$\Sigma_{\textbf y \in \mathcal{Y(\textbf x)}}P(\textbf y | \textbf x) = 1$ となる正規化項である&lt;/p>
+&lt;p>そして、具体的には&lt;/p>
+&lt;p>$$
+Z := \Sigma_{\mathbf y \in \mathcal Y_{(\mathbf x)}} exp(\mathbf w \cdot \phi (\mathbf x, \mathbf y))
+$$&lt;/p>
+&lt;p>と表すことができる&lt;/p>
+&lt;p>#　条件付き確率場の過程&lt;/p>
+&lt;p>条件付き確率馬ではこれらを単純化して&lt;code>１階のマルコフ性と素性関数の線形性を仮定する&lt;/code>&lt;/p>
+&lt;p>つまり
+$$
+\phi (\mathbf x , \mathbf y)= \Sigma_{x} \phi_t (\mathbf x , y_{t-1}, y_t)
+$$&lt;/p></description></item></channel></rss>

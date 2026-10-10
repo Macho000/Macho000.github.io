@@ -1,0 +1,98 @@
+<!doctype html><html lang=ja><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>k8sで用いるコマンド一覧 · Macho000</title><meta name=description content="クラスターの作成 ## start k8s minikube start ## see running cluster-info kubectl cluster-info ## shows all nodes that can be used to host application kubectl get nodes  …"><link rel=canonical href=https://macho000.github.io/blogs/20220901_k8s%E3%81%A7%E7%94%A8%E3%81%84%E3%82%8B%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E4%B8%80%E8%A6%A7/><link rel=stylesheet href=/css/site.css><link rel=alternate type=application/rss+xml title="Macho000 RSS" href=/index.xml></head><body><a class=skip href=#main>本文へ</a><div class=shell><header><a class=brand href=/>Macho000<span class=dot>.</span></a><nav aria-label=メインナビゲーション><a href=/>Home</a><a href=/blog/ aria-current=page>Blog</a><a href=https://github.com/Macho000>GitHub ↗</a></nav></header><main id=main><article><div class=article-heading><a class=muted href=/blog/>← Blog</a><p class=eyebrow>2022.09.09</p><h1>k8sで用いるコマンド一覧</h1><div class=tags><a href=/tags/kubernetes/>kubernetes</a></div></div><div class=prose><h1 id=クラスターの作成>クラスターの作成</h1><div class=highlight><pre tabindex=0 class=chroma><code class=language-cmd data-lang=cmd><span class=line><span class=cl>## start k8s
+</span></span><span class=line><span class=cl>minikube start
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>## see running cluster-info
+</span></span><span class=line><span class=cl>kubectl cluster-info 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>## shows all nodes that can be used to host application
+</span></span><span class=line><span class=cl>kubectl get nodes 
+</span></span></code></pre></div><h1 id=アプリケーションのデプロイ>アプリケーションのデプロイ</h1><div class=highlight><pre tabindex=0 class=chroma><code class=language-cmd data-lang=cmd><span class=line><span class=cl>## deploy app on kubernetes
+</span></span><span class=line><span class=cl>kubectl create deployment 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>## deploy and set app image location
+</span></span><span class=line><span class=cl>kubectl create deployment kubernetes-bootcamp --image=gcr.io/google-samples/kubernetes-bootcamp:v1
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>## list your deployments
+</span></span><span class=line><span class=cl>kubectl get deployments
+</span></span></code></pre></div><p>Open second window</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-cmd data-lang=cmd><span class=line><span class=cl># to run proxy
+</span></span><span class=line><span class=cl><span class=k>echo</span> -e <span class=s2>&#34;\n\n\n\e[92mStarting Proxy. After starting it will not output a response. Please click the first Terminal Tab\n&#34;</span>; 
+</span></span><span class=line><span class=cl>kubectl proxy
+</span></span></code></pre></div><p>and then we have a connection between our host and k8s cluster.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-cmd data-lang=cmd><span class=line><span class=cl># see all those APIs through the proxy endpoint
+</span></span><span class=line><span class=cl>curl http://localhost:8001/version
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># get the pod name
+</span></span><span class=line><span class=cl>export POD_NAME=$(kubectl get pods -o go-template --template &#39;{{range .items}}{{.metadata.name}}{{<span class=s2>&#34;\n&#34;</span>}}{{end}}&#39;)
+</span></span><span class=line><span class=cl><span class=k>echo</span> Name of the Pod: $POD_NAME
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># access the pod through the API 
+</span></span><span class=line><span class=cl>curl http://localhost:8001/api/v1/namespaces/default/pods/$POD_NAME/
+</span></span></code></pre></div><h1 id=アプリケーションの探索>アプリケーションの探索</h1><div class=highlight><pre tabindex=0 class=chroma><code class=language-cmd data-lang=cmd><span class=line><span class=cl># retrieve logs
+</span></span><span class=line><span class=cl>kubectl logs $POD_NAME
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># execute commands directly on the container
+</span></span><span class=line><span class=cl>kubectl exec $POD_NAME -- env
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># start a bash session in the Pod&#39;s container
+</span></span><span class=line><span class=cl>kubectl exec -ti $POD_NAME -- bash
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># see source code
+</span></span><span class=line><span class=cl>cat server.js
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># check the application output
+</span></span><span class=line><span class=cl>curl localhost:8080
+</span></span></code></pre></div><h1 id=アプリケーションの公開>アプリケーションの公開</h1><div class=highlight><pre tabindex=0 class=chroma><code class=language-cmd data-lang=cmd><span class=line><span class=cl># list the current Services from our cluster
+</span></span><span class=line><span class=cl>kubectl get services
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># create a new service and expose it to external traffic
+</span></span><span class=line><span class=cl>kubectl expose deployment/kubernetes-bootcamp --type=<span class=s2>&#34;NodePort&#34;</span> --port 8080
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># find out what port was opened externally
+</span></span><span class=line><span class=cl>kubectl describe services/kubernetes-bootcamp
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># create an environment variable that has node port value
+</span></span><span class=line><span class=cl>export NODE_PORT=$(kubectl get services/kubernetes-bootcamp -o go-template=&#39;{{(index .spec.ports 0).nodePort}}&#39;)
+</span></span><span class=line><span class=cl><span class=k>echo</span> NODE_PORT=$NODE_PORT
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># test the app is exposed outside of the cluster
+</span></span><span class=line><span class=cl>curl $(minikube ip):$NODE_PORT
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># see the created label
+</span></span><span class=line><span class=cl>kubectl describe deployment
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># use the label to query our list of Pods
+</span></span><span class=line><span class=cl>kubectl get pods -l app=kubernetes-bootcamp
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># use the label to query our list of Services
+</span></span><span class=line><span class=cl>kubectl get services -l app=kubernetes-bootcamp
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># get the name of the pod and store it to POD_NAME
+</span></span><span class=line><span class=cl>export POD_NAME=$(kubectl get pods -o go-template --template &#39;{{range .items}}{{.metadata.name}}{{<span class=s2>&#34;\n&#34;</span>}}{{end}}&#39;)
+</span></span><span class=line><span class=cl><span class=k>echo</span> Name of the Pod: $POD_NAME
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># apply a new label
+</span></span><span class=line><span class=cl>kubectl label pods $POD_NAME version=v1
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># check the new label
+</span></span><span class=line><span class=cl>kubectl describe pods $POD_NAME
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># check the label is attached to our Pod
+</span></span><span class=line><span class=cl>kubectl get pods -l version=v1
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># delete service
+</span></span><span class=line><span class=cl>kubectl delete service -l app=kubernetes-bootcamp
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># Confirm that the service is gone:
+</span></span><span class=line><span class=cl>kubectl get services
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># confirm that route is not exposed anymore 
+</span></span><span class=line><span class=cl># ---<span class=p>&gt;</span> app is not reachable
+</span></span><span class=line><span class=cl>curl $(minikube ip):$NODE_PORT
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># confirm that the app is still runnning inside the pod
+</span></span><span class=line><span class=cl>kubectl exec -ti $POD_NAME -- curl localhost:8080
+</span></span></code></pre></div><h1 id=オートスケーリング>オートスケーリング</h1><div class=highlight><pre tabindex=0 class=chroma><code class=language-cmd data-lang=cmd><span class=line><span class=cl># see the ReplicaSet created by the Deployment
+</span></span><span class=line><span class=cl>kubectl get rs
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># scale to 4 replicas
+</span></span><span class=line><span class=cl>kubectl scale deployments/kubernetes-bootcamp --replicas=4
+</span></span></code></pre></div></div><script type=text/x-mathjax-config>MathJax.Hub.Config({tex2jax:{inlineMath:[["$","$"],["\\(","\\)"]],processEscapes:true}});</script><script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><div class=article-end><a href=/blog/>← 記事一覧へ</a></div></article></main><footer><span>© 2026 Macho000</span><a href=/index.xml>RSS ↗</a></footer></div></body></html>

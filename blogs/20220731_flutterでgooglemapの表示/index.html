@@ -1,0 +1,41 @@
+<!doctype html><html lang=ja><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>FlutterでGoogleMapの表示 · Macho000</title><meta name=description content="FlutterでGoogle Mapの表示を行う Google Cloud Platformでプロジェクトを作成する 1 2 3 4 5 Maps SDK for iOS/Android APIを有効にする 6 7 8 9 10 11 12 13 14 APIキーが登録されたら完了！！ パッケージをインストー …"><link rel=canonical href=https://macho000.github.io/blogs/20220731_flutter%E3%81%A7googlemap%E3%81%AE%E8%A1%A8%E7%A4%BA/><link rel=stylesheet href=/css/site.css><link rel=alternate type=application/rss+xml title="Macho000 RSS" href=/index.xml></head><body><a class=skip href=#main>本文へ</a><div class=shell><header><a class=brand href=/>Macho000<span class=dot>.</span></a><nav aria-label=メインナビゲーション><a href=/>Home</a><a href=/blog/ aria-current=page>Blog</a><a href=https://github.com/Macho000>GitHub ↗</a></nav></header><main id=main><article><div class=article-heading><a class=muted href=/blog/>← Blog</a><p class=eyebrow>2022.09.09</p><h1>FlutterでGoogleMapの表示</h1><div class=tags><a href=/tags/flutter/>Flutter</a></div></div><details class=toc><summary>目次</summary><nav id=TableOfContents><ul><li><a href=#google-cloud-platformでプロジェクトを作成する>Google Cloud Platformでプロジェクトを作成する</a></li><li><a href=#maps-sdk-for-iosandroid-apiを有効にする>Maps SDK for iOS/Android APIを有効にする</a></li><li><a href=#パッケージをインストールする>パッケージをインストールする</a><ul><li><a href=#androidの設定>Androidの設定</a></li><li><a href=#iosの設定>iOSの設定</a></li></ul></li></ul></nav></details><div class=prose><h1 id=flutterでgoogle-mapの表示を行う>FlutterでGoogle Mapの表示を行う</h1><h2 id=google-cloud-platformでプロジェクトを作成する>Google Cloud Platformでプロジェクトを作成する</h2><p>1
+<img src=d56e446aecc7b28b2d3db68d9f76356bee4918cb491ad8982caffb627afc02cd.png alt="picture 3"></p><p>2
+<img src=d25cf4e10af84416aa9747bc343ae4c73fc28c138e7bd79eae7739363c56f2e3.png alt="picture 4"></p><p>3
+<img src=ce9f7f4a3d2fbfaac1e953c19c38b36c5ede3f4117d740b916f7b9bce1af5b96.png alt="picture 5"></p><p>4
+<img src=a841a729833b5938229d71fe91a88a3da0c78173e96b6dbdd6c20864fbd05782.png alt="picture 9"></p><p>5
+<img src=a9a906c63c599f7dc26242b40e7b0ae05304741744a70c1ea484e99b22b8541d.png alt="picture 10"></p><h2 id=maps-sdk-for-iosandroid-apiを有効にする>Maps SDK for iOS/Android APIを有効にする</h2><p>6
+<img src=0a71bc228c2566522a185f99cc2aebad9be20535ffaaccd7ec88334517ca30bd.png alt="picture 11"></p><p>7
+<img src=5238e8b249b404f3275171aadd87d8d1ccba939399d9729ef500e92c4c7325da.png alt="picture 12"></p><p>8
+<img src=4c714f575fd5c81c9cb4b8ad6bb0161bbdaa116ad4fde23739f56777b13516f7.png alt="picture 13"></p><p>9
+<img src=09e20a9c3e323cede5eef685b7621f72101e1e0c00bab877e374d3940fd91d8b.png alt="picture 14"></p><p>10
+<img src=ad579f6b26da97b736614326ff1c5e49566d30e9ef33a748a2de32c995e8f60e.png alt="picture 15"></p><p>11
+<img src=e4d7e3554e2e5e915d5cad515d9d62b743c8cf7608d47f2709dc02c32f9cdc15.png alt="picture 16"></p><p>12
+<img src=dc606c95426acff15b4032601db2c6cd8e0520b194f128b359d04ff9e7657534.png alt="picture 17"></p><p>13
+<img src=500483beec451aecdfb21921770fa2b4768378d41de1b4818090c375d11bb3ed.png alt="picture 18"></p><p>14
+APIキーが登録されたら完了！！
+<img src=2444664ddcbb68f1485284f0f3de6b6f9c40067d676e0a6057dd874ecc41a2d5.png alt="picture 19"></p><h2 id=パッケージをインストールする>パッケージをインストールする</h2><p><a href=https://pub.dev/packages/google_maps_flutter>flutter google maps</a></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-cmd data-lang=cmd><span class=line><span class=cl>flutter pub add google_maps_flutter
+</span></span></code></pre></div><p>を実施</p><p>pubspec.yamlに下記のようにgoogle_maps_flutterが格納されていることを確認</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>dependencies</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>google_maps_flutter</span><span class=p>:</span><span class=w> </span><span class=l>^2.1.10</span><span class=w>
+</span></span></span></code></pre></div><h3 id=androidの設定>Androidの設定</h3><ol><li>Android/app/build.gradle内のminSdkVersionを20以上に設定する</li></ol><div class=highlight><pre tabindex=0 class=chroma><code class=language-gradle data-lang=gradle><span class=line><span class=cl><span class=n>android</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>defaultConfig</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>minSdkVersion</span> <span class=mi>20</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></div><ol start=2><li>android/app/src/main/AndroidManifest.xmlで先程取得したAPIキーを設定する</li></ol><div class=highlight><pre tabindex=0 class=chroma><code class=language-xml data-lang=xml><span class=line><span class=cl><span class=nt>&lt;manifest</span> <span class=err>...</span>
+</span></span><span class=line><span class=cl>  <span class=err>&lt;application</span> <span class=err>...</span>
+</span></span><span class=line><span class=cl>    <span class=err>&lt;meta-data</span> <span class=na>android:name=</span><span class=s>&#34;com.google.android.geo.API_KEY&#34;</span>
+</span></span><span class=line><span class=cl>               <span class=na>android:value=</span><span class=s>&#34;YOUR KEY HERE&#34;</span><span class=nt>/&gt;</span>
+</span></span></code></pre></div><h3 id=iosの設定>iOSの設定</h3><ol><li>ios/Runner/AppDelegate.swiftに先程設定したAPIキーを設定する</li></ol><div class=highlight><pre tabindex=0 class=chroma><code class=language-swift data-lang=swift><span class=line><span class=cl><span class=p>#</span><span class=n>include</span> <span class=s>&#34;AppDelegate.h&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>#</span><span class=n>include</span> <span class=s>&#34;GeneratedPluginRegistrant.h&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>#</span><span class=kd>import</span> <span class=s>&#34;GoogleMaps/GoogleMaps.h&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>@</span><span class=n>implementation</span> <span class=n>AppDelegate</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>-</span> <span class=p>(</span><span class=n>BOOL</span><span class=p>)</span><span class=n>application</span><span class=p>:(</span><span class=n>UIApplication</span> <span class=o>*</span><span class=p>)</span><span class=n>application</span>
+</span></span><span class=line><span class=cl>    <span class=n>didFinishLaunchingWithOptions</span><span class=p>:(</span><span class=n>NSDictionary</span> <span class=o>*</span><span class=p>)</span><span class=n>launchOptions</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=p>[</span><span class=n>GMSServices</span> <span class=n>provideAPIKey</span><span class=p>:@</span><span class=s>&#34;YOUR KEY HERE&#34;</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>  <span class=p>[</span><span class=n>GeneratedPluginRegistrant</span> <span class=n>registerWithRegistry</span><span class=p>:</span><span class=kc>self</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>[</span><span class=kc>super</span> <span class=n>application</span><span class=p>:</span><span class=n>application</span> <span class=n>didFinishLaunchingWithOptions</span><span class=p>:</span><span class=n>launchOptions</span><span class=p>];</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>@</span><span class=n>end</span>
+</span></span></code></pre></div></div><script type=text/x-mathjax-config>MathJax.Hub.Config({tex2jax:{inlineMath:[["$","$"],["\\(","\\)"]],processEscapes:true}});</script><script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><div class=article-end><a href=/blog/>← 記事一覧へ</a></div></article></main><footer><span>© 2026 Macho000</span><a href=/index.xml>RSS ↗</a></footer></div></body></html>

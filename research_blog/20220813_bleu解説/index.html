@@ -1,0 +1,29 @@
+<!doctype html><html lang=ja><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>BLEU解説 · Macho000</title><meta name=description content=" BLEUスコアのスコアの算出方法はズバリ以下のとおりです $BLEU=BP \cdot exp(\Sigma_{n=1}^{N}w_nlogp_n)$ でスコアを算出します。
+簡単に説明するとモデルの出力の1-gram, 2-gram, 3-gram, 4-gramが正解質問(Reference)がどの程度含まれてい …"><link rel=canonical href=https://macho000.github.io/research_blog/20220813_bleu%E8%A7%A3%E8%AA%AC/><link rel=stylesheet href=/css/site.css><link rel=alternate type=application/rss+xml title="Macho000 RSS" href=/index.xml></head><body><a class=skip href=#main>本文へ</a><div class=shell><header><a class=brand href=/>Macho000<span class=dot>.</span></a><nav aria-label=メインナビゲーション><a href=/>Home</a><a href=/blog/ aria-current=page>Blog</a><a href=https://github.com/Macho000>GitHub ↗</a></nav></header><main id=main><article><div class=article-heading><a class=muted href=/blog/>← Blog</a><p class=eyebrow>2022.09.09</p><h1>BLEU解説</h1><div class=tags><a href=/tags/%E8%A9%95%E4%BE%A1%E6%8C%87%E6%A8%99/>評価指標</a></div></div><details class=toc><summary>目次</summary><nav id=TableOfContents><ul><li><a href=#p_nの定義>$p_n$の定義</a></li><li><a href=#bpとは>BPとは</a></li></ul></nav></details><div class=prose><script type=text/x-mathjax-config>MathJax.Hub.Config({tex2jax:{inlineMath:[['\$','\$'],['\\(','\\)']],processEscapes:true},CommonHTML: {matchFontHeight:false}});</script><script type=text/javascript async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><p>BLEUスコアのスコアの算出方法はズバリ以下のとおりです
+$BLEU=BP \cdot exp(\Sigma_{n=1}^{N}w_nlogp_n)$
+でスコアを算出します。</p><p>簡単に説明するとモデルの出力の1-gram, 2-gram, 3-gram, 4-gramが正解質問(Reference)がどの程度含まれているかを表す指標です</p><p>用語の説明をしていきます</p><h2 id=p_nの定義>$p_n$の定義</h2><p>$p_n$ はprecisionスコアと呼ばれるもので以下の式で計算される
+$p_n= \frac{\Sigma_{C\in {Candidates}} \Sigma_{n-gram \in C} Count_{clip}(n-gram)}{\Sigma_{C&rsquo;\in {Candidates}} \Sigma_{n-gram&rsquo; \in C&rsquo;} Count(n-gram&rsquo;)}$
+で定義される</p><p>ここで、$Count_{clip}(n-gram)=min(Count(n-gram), MaxRefCount(n-gram))$
+と定義される</p><p>$Count(n-gram)$は、Candidateに含まれるn-gramの数を表す .例えば、$Count(1-gram)$は、Candidateに含まれる1-gramの数を表す .</p><p>$MaxRefCount(n-gram)$は、candidateに含まれるn-gramがReference文中に観測される回数を表す</p><p>例えばCandidateに「the cat sat at chair」、Referenceに「the cat sat on the table」だったら1-gramのときは $Count(1-gram)=5, MaxRefCount(1-gram)=3$となるので $Count_{clip}(n-gram)=3$となる。したがって、このような状況の場合precisionは　$p_n=\frac{3}{5}=0.6$となる。</p><p>簡単に言えば、precisionは、candidateに含まれるn-gramがreferenceに含まれる割合を表す
+precisionが高い場合は、n-gram単位でreferenceと単語の一致度が高いということを意味する
+一方precisionが低い場合は、n-gram単位でreferenceと単語の一致度が低いということを意味し、関係のない単語が出力されている可能性が高い。</p><h2 id=bpとは>BPとは</h2><p>BPとは下記の式で定義されます</p><p>$
+\text{BP}
+\begin{cases}
+1 & c > r \
+e^{1-r/c} & c \leqq r
+\end{cases}
+$</p><p>$c:candidate$の長さ
+$r:reference$の長さ</p><p>例えば、candidateが極端に短い場合$e^{1-r/c}$が0に近くなる。そのときBLEUスコアは低い値を出す。
+逆に、candidateが十分に長い場合,c>rのときBPは1であり、その時のBLEUスコアは$BLEU=exp(\Sigma_{n=1}^{N}w_nlogp_n)$で計算することができる</p><p>このBPを導入する理由は、Candidateに「the cat」、Referenceに「the cat sat on the table」
+などのCandidateの文の長さが短い場合でも、candidateに含まれるn-gramがreferenceに含まれる割合が高くなってしまいます。今回の場合、$precision=1.0$になってしまう。このような場合に罰則としてBPを導入する</p><h1 id=例>例</h1><p>例えば、正解文として[I have a pen]という文を考える。一方で生成文として[I have pen]という文を考える。</p><p>この際に、1-gramのBLEUスコアを考える。
+正解文、生成分はそれぞれ{I, have, a, pen}と{I have pen}という2つの集合に分けられる。</p><p>1-gramのBLEUスコアは以下の通りに表される
+$BLEU=BP \cdot exp(logp_n)$</p><p>BPの値を考える
+まず、上式のBPの値を考える。</p><p>$$
+\text{BP=}
+\begin{array}
+1 & c > r \
+e^{1-r/c} & c \leqq r
+\end{array}
+$$</p><p>の定義より、正解分の長さrは4, 生成分の長さcは3になるので、$BP=e^{1-r/c}=e^{1-4/3}\approx0.716531$</p><p>次に$p_n$について考える。
+正解分の長さが4、正解文のトークンが生成分に含まれる数は3なので、$p_n=3/4=0.75$になる</p><p>したがって、
+$BLEU=BP \cdot exp(logp_n)=0.716531 \cdot exp(log(0.75))\approx0.53739825$</p><h1 id=参考文献>参考文献</h1><p><a href=https://jp.mathworks.com/help/textanalytics/ref/bleuevaluationscore.html>Mathwork BLEUスコア算出方法</a></p></div><div class=article-end><a href=/blog/>← 記事一覧へ</a></div></article></main><footer><span>© 2026 Macho000</span><a href=/index.xml>RSS ↗</a></footer></div></body></html>

@@ -1,0 +1,135 @@
+<!doctype html><html lang=ja><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Flutterタブで画面を切り替える方法 · Macho000</title><meta name=description content="Flutterでタブを使って画面を切り替える方法の紹介 Version flutter 3.0.5 Dart 2.17.6
+全体像 ソースコードは以下の通り
+import 'package:flutter/material.dart'; void main() { runApp(const …"><link rel=canonical href=https://macho000.github.io/blogs/20220731_flutter%E3%82%BF%E3%83%96%E3%81%A7%E7%94%BB%E9%9D%A2%E3%82%92%E5%88%87%E3%82%8A%E6%9B%BF%E3%81%88%E3%82%8B%E6%96%B9%E6%B3%95/><link rel=stylesheet href=/css/site.css><link rel=alternate type=application/rss+xml title="Macho000 RSS" href=/index.xml></head><body><a class=skip href=#main>本文へ</a><div class=shell><header><a class=brand href=/>Macho000<span class=dot>.</span></a><nav aria-label=メインナビゲーション><a href=/>Home</a><a href=/blog/ aria-current=page>Blog</a><a href=https://github.com/Macho000>GitHub ↗</a></nav></header><main id=main><article><div class=article-heading><a class=muted href=/blog/>← Blog</a><p class=eyebrow>2022.09.09</p><h1>Flutterタブで画面を切り替える方法</h1><div class=tags><a href=/tags/flutter/>Flutter</a></div></div><details class=toc><summary>目次</summary><nav id=TableOfContents><ul><li><a href=#version>Version</a></li><li><a href=#全体像>全体像</a></li><li><a href=#タブを下に持ってくる>タブを下に持ってくる</a></li><li><a href=#タブをボタンをみなす方法>タブをボタンをみなす方法</a></li></ul></nav></details><div class=prose><h1 id=flutterでタブを使って画面を切り替える方法の紹介>Flutterでタブを使って画面を切り替える方法の紹介</h1><h2 id=version>Version</h2><p>flutter 3.0.5
+Dart 2.17.6</p><h2 id=全体像>全体像</h2><p><img src=5be321f028ddb3ba2cf0688b6eeff5ddeb85472a6645ea046b19a92b16f4c613.gif alt="picture 1"></p><p>ソースコードは以下の通り</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-Dart data-lang=Dart><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:flutter/material.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>void</span> <span class=n>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>runApp</span><span class=p>(</span><span class=kd>const</span> <span class=n>MyApp</span><span class=p>());</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>MyApp</span> <span class=kd>extends</span> <span class=n>StatelessWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>MyApp</span><span class=p>({</span><span class=n>Key</span><span class=o>?</span> <span class=n>key</span><span class=p>})</span> <span class=o>:</span> <span class=k>super</span><span class=p>(</span><span class=nl>key:</span> <span class=n>key</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>MaterialApp</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>home:</span> <span class=n>DefaultTabController</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>length:</span> <span class=m>3</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nl>child:</span> <span class=n>Scaffold</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=nl>appBar:</span> <span class=n>AppBar</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>title:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;タブ画面移動サンプル&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=nl>bottom:</span> <span class=kd>const</span> <span class=n>TabBar</span><span class=p>(</span><span class=nl>tabs:</span> <span class=o>&lt;</span><span class=n>Widget</span><span class=o>&gt;</span><span class=p>[</span>
+</span></span><span class=line><span class=cl>              <span class=n>Tab</span><span class=p>(</span><span class=nl>icon:</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>cloud_outlined</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>              <span class=n>Tab</span><span class=p>(</span><span class=nl>icon:</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>beach_access_sharp</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>              <span class=n>Tab</span><span class=p>(</span><span class=nl>icon:</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>brightness_5_sharp</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>            <span class=p>]),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=nl>body:</span> <span class=kd>const</span> <span class=n>TabBarView</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>children:</span> <span class=o>&lt;</span><span class=n>Widget</span><span class=o>&gt;</span><span class=p>[</span>
+</span></span><span class=line><span class=cl>              <span class=n>Center</span><span class=p>(</span><span class=nl>child:</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;くもり&#39;</span><span class=p>,</span> <span class=nl>style:</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontSize:</span> <span class=m>50</span><span class=p>))),</span>
+</span></span><span class=line><span class=cl>              <span class=n>Center</span><span class=p>(</span><span class=nl>child:</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;雨&#39;</span><span class=p>,</span> <span class=nl>style:</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontSize:</span> <span class=m>50</span><span class=p>))),</span>
+</span></span><span class=line><span class=cl>              <span class=n>Center</span><span class=p>(</span><span class=nl>child:</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;晴れ&#39;</span><span class=p>,</span> <span class=nl>style:</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontSize:</span> <span class=m>50</span><span class=p>))),</span>
+</span></span><span class=line><span class=cl>            <span class=p>],</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><h2 id=タブを下に持ってくる>タブを下に持ってくる</h2><p><img src=8635dd4678d6754cbbb87bc39cd58eb7b80a5c0a27c4ae9cf3927cec0b7acad0.gif alt="picture 2"></p><p>先程はAppBarにWidgetを配置していたが、bottomNavigationBarにWidgetを配置し直す</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-Dart data-lang=Dart><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:flutter/material.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>void</span> <span class=n>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>runApp</span><span class=p>(</span><span class=kd>const</span> <span class=n>MyApp</span><span class=p>());</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>MyApp</span> <span class=kd>extends</span> <span class=n>StatelessWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>MyApp</span><span class=p>({</span><span class=n>Key</span><span class=o>?</span> <span class=n>key</span><span class=p>})</span> <span class=o>:</span> <span class=k>super</span><span class=p>(</span><span class=nl>key:</span> <span class=n>key</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>MaterialApp</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>home:</span> <span class=n>DefaultTabController</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>length:</span> <span class=m>3</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nl>child:</span> <span class=n>Scaffold</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=nl>appBar:</span> <span class=n>AppBar</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>title:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;タブ画面移動サンプル&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=nl>bottomNavigationBar:</span> <span class=n>Container</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>color:</span> <span class=n>Theme</span><span class=p>.</span><span class=n>of</span><span class=p>(</span><span class=n>context</span><span class=p>).</span><span class=n>primaryColor</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>child:</span> <span class=kd>const</span> <span class=n>TabBar</span><span class=p>(</span><span class=nl>tabs:</span> <span class=o>&lt;</span><span class=n>Widget</span><span class=o>&gt;</span><span class=p>[</span>
+</span></span><span class=line><span class=cl>              <span class=n>Tab</span><span class=p>(</span><span class=nl>icon:</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>cloud_outlined</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>              <span class=n>Tab</span><span class=p>(</span><span class=nl>icon:</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>beach_access_sharp</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>              <span class=n>Tab</span><span class=p>(</span><span class=nl>icon:</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>brightness_5_sharp</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>            <span class=p>]),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=nl>body:</span> <span class=kd>const</span> <span class=n>TabBarView</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>children:</span> <span class=o>&lt;</span><span class=n>Widget</span><span class=o>&gt;</span><span class=p>[</span>
+</span></span><span class=line><span class=cl>              <span class=n>Center</span><span class=p>(</span><span class=nl>child:</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;くもり&#39;</span><span class=p>,</span> <span class=nl>style:</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontSize:</span> <span class=m>50</span><span class=p>))),</span>
+</span></span><span class=line><span class=cl>              <span class=n>Center</span><span class=p>(</span><span class=nl>child:</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;雨&#39;</span><span class=p>,</span> <span class=nl>style:</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontSize:</span> <span class=m>50</span><span class=p>))),</span>
+</span></span><span class=line><span class=cl>              <span class=n>Center</span><span class=p>(</span><span class=nl>child:</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;晴れ&#39;</span><span class=p>,</span> <span class=nl>style:</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontSize:</span> <span class=m>50</span><span class=p>))),</span>
+</span></span><span class=line><span class=cl>            <span class=p>],</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><h2 id=タブをボタンをみなす方法>タブをボタンをみなす方法</h2><p>ソースコードは以下の通り</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-Dart data-lang=Dart><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:flutter/material.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>void</span> <span class=n>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>runApp</span><span class=p>(</span><span class=n>MyApp</span><span class=p>());</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>MyApp</span> <span class=kd>extends</span> <span class=n>StatelessWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>MaterialApp</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>home:</span> <span class=n>Scaffold</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>appBar:</span> <span class=n>AppBar</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=nl>title:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Sample1&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=nl>floatingActionButtonLocation:</span> <span class=n>FloatingActionButtonLocation</span><span class=p>.</span><span class=n>centerDocked</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nl>floatingActionButton:</span> <span class=n>FloatingActionButton</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=nl>backgroundColor:</span> <span class=n>Theme</span><span class=p>.</span><span class=n>of</span><span class=p>(</span><span class=n>context</span><span class=p>).</span><span class=n>accentColor</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nl>onPressed:</span> <span class=p>()</span> <span class=p>{},</span>
+</span></span><span class=line><span class=cl>          <span class=nl>child:</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>add</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=nl>bottomNavigationBar:</span> <span class=n>BottomAppBar</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=nl>color:</span> <span class=n>Theme</span><span class=p>.</span><span class=n>of</span><span class=p>(</span><span class=n>context</span><span class=p>).</span><span class=n>primaryColor</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nl>notchMargin:</span> <span class=m>6.0</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nl>shape:</span> <span class=n>AutomaticNotchedShape</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=n>RoundedRectangleBorder</span><span class=p>(),</span>
+</span></span><span class=line><span class=cl>            <span class=n>StadiumBorder</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>side:</span> <span class=n>BorderSide</span><span class=p>(),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=nl>child:</span> <span class=n>Padding</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>padding:</span> <span class=kd>const</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>symmetric</span><span class=p>(</span><span class=nl>horizontal:</span> <span class=m>8.0</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=nl>child:</span> <span class=k>new</span> <span class=n>Row</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>mainAxisSize:</span> <span class=n>MainAxisSize</span><span class=p>.</span><span class=n>max</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=c1>// mainAxisAlignment: MainAxisAlignment.spaceBetween,
+</span></span></span><span class=line><span class=cl><span class=c1></span>              <span class=nl>mainAxisAlignment:</span> <span class=n>MainAxisAlignment</span><span class=p>.</span><span class=n>spaceAround</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>children:</span> <span class=o>&lt;</span><span class=n>Widget</span><span class=o>&gt;</span><span class=p>[</span>
+</span></span><span class=line><span class=cl>                <span class=n>IconButton</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>icon:</span> <span class=n>Icon</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                    <span class=n>Icons</span><span class=p>.</span><span class=n>person_outline</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>white</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                  <span class=p>),</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>onPressed:</span> <span class=p>()</span> <span class=p>{},</span>
+</span></span><span class=line><span class=cl>                <span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=n>IconButton</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>icon:</span> <span class=n>Icon</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                    <span class=n>Icons</span><span class=p>.</span><span class=n>info_outline</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>white</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                  <span class=p>),</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>onPressed:</span> <span class=p>()</span> <span class=p>{},</span>
+</span></span><span class=line><span class=cl>                <span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=p>],</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div></div><script type=text/x-mathjax-config>MathJax.Hub.Config({tex2jax:{inlineMath:[["$","$"],["\\(","\\)"]],processEscapes:true}});</script><script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><div class=article-end><a href=/blog/>← 記事一覧へ</a></div></article></main><footer><span>© 2026 Macho000</span><a href=/index.xml>RSS ↗</a></footer></div></body></html>

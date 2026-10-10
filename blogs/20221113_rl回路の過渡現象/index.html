@@ -1,0 +1,60 @@
+<!doctype html><html lang=ja><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>交流RL回路の過渡現象 · Macho000</title><meta name=description content="回路方程式 下図に交流RL回路の回路図を示す。抵抗R,インダクタンスLのコイルで構成され、波高値$E_m$、周波数$\omega$である交流電源$e=E_msin\omega t$が接続されたRL回路を考える。
+この回路にキルヒホッフの第２法則を適用すると、回路方程式は下記のようになる。
+$$ …"><link rel=canonical href=https://macho000.github.io/blogs/20221113_rl%E5%9B%9E%E8%B7%AF%E3%81%AE%E9%81%8E%E6%B8%A1%E7%8F%BE%E8%B1%A1/><link rel=stylesheet href=/css/site.css><link rel=alternate type=application/rss+xml title="Macho000 RSS" href=/index.xml></head><body><a class=skip href=#main>本文へ</a><div class=shell><header><a class=brand href=/>Macho000<span class=dot>.</span></a><nav aria-label=メインナビゲーション><a href=/>Home</a><a href=/blog/ aria-current=page>Blog</a><a href=https://github.com/Macho000>GitHub ↗</a></nav></header><main id=main><article><div class=article-heading><a class=muted href=/blog/>← Blog</a><p class=eyebrow>2022.11.13</p><h1>交流RL回路の過渡現象</h1><div class=tags></div></div><details class=toc><summary>目次</summary><nav id=TableOfContents><ul><li><a href=#過渡解と定常解>過渡解と定常解</a></li></ul></nav></details><div class=prose><h1 id=回路方程式>回路方程式</h1><p>下図に交流RL回路の回路図を示す。抵抗R,インダクタンスLのコイルで構成され、波高値$E_m$、周波数$\omega$である交流電源$e=E_msin\omega t$が接続されたRL回路を考える。</p><p><img src=cb21f29bb0982774a6da5a6e0da1e6181abd5a3e479ad23b6bcb320ac6266512.png alt="picture 1"></p><p>この回路にキルヒホッフの第２法則を適用すると、回路方程式は下記のようになる。</p><p>$$
+L\frac{di}{dt}+Ri=E_msin\omega t \label{eq1}\tag{1}
+$$</p><h1 id=回路方程式の解法>回路方程式の解法</h1><h2 id=過渡解と定常解>過渡解と定常解</h2><p>($\ref{eq1}$)式を電流iについて解く場合、過渡解を$it$,定常解を$i_s$とすると（１）式の解は</p><p>$$
+i=i_t+i_s \label{eq2}\tag{2}
+$$</p><p>($\ref{eq2}$)式を($\ref{eq1}$)式に代入すると</p><p>$$
+L(\frac{di_t}{dt}+\frac{di_s}{dt})+R(i_t+i_s)=E_msin\omega t
+$$
+$$
+(L\frac{di_t}{dt}+Ri_t)+(L\frac{di_s}{dt}+Ri_s)=E_msin\omega t \label{eq3}\tag{3}
+$$</p><p>($\ref{eq3}$)式をそれぞれ$i_t$と$i_s$について２つの式に分離する。過渡状態では電源の電圧が０、定常状態では時間微分の値が０になる。</p><p>$$
+\begin{equation}
+\begin{cases}
+L\frac{di_t}{dt}+Ri_t=0 &\\<br>L\frac{di_s}{dt}+Ri_s=E_msin\omega t &　\label{eq4}\tag{4}
+\end{cases}
+\end{equation}
+$$</p><h1 id=過渡解の導出>過渡解の導出</h1><p>($\ref{eq1}$)式を解くために、
+$$
+L\frac{di_t}{dt}+Ri_t=0
+$$
+を解き過渡解を求める。</p><p>この式を変形すると
+$$
+\begin{aligned}
+L\frac{di_t}{dt} &= -Ri_t \\
+\frac{di_t}{i_t} &= -\frac{R}{L}dt \\
+\int{\frac{di_t}{i_t}} &= -\frac{R}{L}\int{dt} \\
+\ln |i_t| &= -\frac{R}{L}t+C \\
+i_t &= Ae^{-\frac{R}{L}t}(A=\pm e^C)
+\end{aligned}
+$$</p><h1 id=定常解の導出>定常解の導出</h1><p>次に
+$$
+L\frac{di_s}{dt}+Ri_s=E_msin\omega t \label{eq5}\tag{5}
+$$
+をとき、定常解を求める。</p><p>過渡解$i_t$と同様に、定常解$i_s$が減衰項$e^{-\frac{R}{L}t}$をもち、かつ係数Aが時間tの関数A(t)であるとした式</p><p>$$
+i_s=A(t)e^{-\frac{R}{L}t}
+$$</p><p>になる。この式を($\ref{eq5}$)式に代入して、</p><p>$$
+\begin{aligned}
+L(\frac{dA(t)}{dt}e^{-\frac{R}{L}t}-\frac{R}{L}A(t)e^{-\frac{R}{L}t})+RA(t)e^{-\frac{R}{L}t}&=E_msin\omega t \\
+L\frac{dA(t)}{dt}e^{-\frac{R}{L}t}&=E_msin\omega t \\
+dA(t)&=\frac{E_m}{L}e^{\frac{R}{L}t}sin\omega t dt \\
+A(t)&=\frac{E_m}{L}\int e^{\frac{R}{L}t}sin\omega t dt
+\end{aligned}
+$$</p><p>この、積分の部分のみを計算すると</p><p>$$
+\begin{aligned}
+\int e^{\frac{R}{L}t}sin\omega t dt &= \frac{L}{R}e^{\frac{R}{L}t}sin\omega t-\frac{\omega L}{R}\int e^{\frac{R}{L}t}cos\omega t dt \\
+&=\frac{L}{R}e^{\frac{R}{L}t}sin\omega t - \frac{\omega L}{R}(\frac{L}{R}e^{\frac{R}{L}t}cos\omega t + \frac{\omega L}{R}\int e^{\frac{R}{L}t}sin\omega t dt) \\
+\lbrace 1+(\frac{\omega L}{R})^2\ \rbrace \int e^{\frac{R}{L}t}sin\omega t dt &= \frac{L}{R}e^{\frac{R}{L}t}sin\omega t - \omega (\frac{L}{R})^2e^{\frac{R}{L}t}cos\omega t \\
+\int e^{\frac{R}{L}t}sin\omega t dt &= \frac{L}{R^2+(\omega L)^2}e^{\frac{R}{L}t}(Rsin\omega t- \omega L cos \omega t)
+\end{aligned}
+$$</p><p>したがって、係数A(t)は、(
+$$
+A(t)=\frac{E_m}{R^2+(\omega L)^2}e^{\frac{R}{L}t}(Rsin\omega t-\omega L cos\omega t)
+$$</p><p>ゆえに定常解$i_s$は、
+$$
+\begin{aligned}
+i_s&=\frac{E_m}{R^2+(\omega L)^2}(Rsin\omega t- \omega L cos \omega t) \\
+&= \frac{E_m}{\sqrt{R^2+(\omega L)^2}}sin(\omega t - \phi)
+\end{aligned}
+$$</p><p>ただし$\phi=tan^{-1}\frac{\omega L}{R}$</p><h1 id=参考文献>参考文献</h1><p><a href=https://denki-no-shinzui.com/transient-rl-s-ac/>https://denki-no-shinzui.com/transient-rl-s-ac/</a></p><p><a href=https://www.ishikawa-nct.ac.jp/lab/E/y_kawai/www/data/course/CT2/21CT2/handouts/21CT2_f_lect01/21CT2_f_lect01_slide.pdf>https://www.ishikawa-nct.ac.jp/lab/E/y_kawai/www/data/course/CT2/21CT2/handouts/21CT2_f_lect01/21CT2_f_lect01_slide.pdf</a></p></div><script type=text/x-mathjax-config>MathJax.Hub.Config({tex2jax:{inlineMath:[["$","$"],["\\(","\\)"]],processEscapes:true}});</script><script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><div class=article-end><a href=/blog/>← 記事一覧へ</a></div></article></main><footer><span>© 2026 Macho000</span><a href=/index.xml>RSS ↗</a></footer></div></body></html>

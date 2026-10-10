@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pyenv on Macho000</title><link>https://macho000.github.io/tags/pyenv/</link><description>Recent content in Pyenv on Macho000</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Fri, 09 Sep 2022 11:28:39 +0900</lastBuildDate><atom:link href="https://macho000.github.io/tags/pyenv/index.xml" rel="self" type="application/rss+xml"/><item><title>Pyenvのコマンド一覧</title><link>https://macho000.github.io/blogs/202200905_pyenv%E3%81%AE%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E4%B8%80%E8%A6%A7/</link><pubDate>Fri, 09 Sep 2022 11:28:39 +0900</pubDate><guid>https://macho000.github.io/blogs/202200905_pyenv%E3%81%AE%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E4%B8%80%E8%A6%A7/</guid><description>&lt;h1 id="インストール可能なバージョン一覧表示">インストール可能なバージョン一覧表示&lt;/h1>
+&lt;p>pyenv install &amp;ndash;list&lt;/p>
+&lt;h1 id="特定のバージョンをインストール">特定のバージョンをインストール&lt;/h1>
+&lt;p>pyenv install 3.6.1 # python 3.6.1をインストール&lt;/p>
+&lt;h1 id="インストールされているpythonバージョン一覧を表示">インストールされているPythonバージョン一覧を表示&lt;/h1>
+&lt;p>pyenv versions&lt;/p>
+&lt;h1 id="現在のバージョンを確認">現在のバージョンを確認&lt;/h1>
+&lt;p>python &amp;ndash;version&lt;/p>
+&lt;h1 id="globalコマンドを使ってデフォルトのpythonバージョンを変更">globalコマンドを使ってデフォルトのPythonバージョンを変更&lt;/h1>
+&lt;p>pyenv global 3.6.1 # デフォルトバージョンを3.6.1に変更&lt;/p></description></item></channel></rss>
