@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Park変換 on Macho000</title><link>https://macho000.github.io/tags/park%E5%A4%89%E6%8F%9B/</link><description>Recent content in Park変換 on Macho000</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Sat, 24 Oct 2026 17:00:00 +0900</lastBuildDate><atom:link href="https://macho000.github.io/tags/park%E5%A4%89%E6%8F%9B/index.xml" rel="self" type="application/rss+xml"/><item><title>振幅不変Park変換と電力不変Park変換の違い ― PMSMの電流・磁束・トルク定数・電力</title><link>https://macho000.github.io/blogs/20261024_park-transform-normalization/</link><pubDate>Sat, 24 Oct 2026 17:00:00 +0900</pubDate><guid>https://macho000.github.io/blogs/20261024_park-transform-normalization/</guid><description>&lt;p>振幅不変Park変換と電力不変Park変換における電流・電圧・永久磁石磁束鎖交数・トルク定数・電力の違いをまとめます。&lt;/p>
+&lt;p>前提は、平衡三相PMSM、零相成分なし、同一のd軸・q軸方向および電気角、SPMSM（$L_d=L_q$）です。d軸を永久磁石磁束の方向とし、正のq軸電流が正のトルクを生む規約を使います。&lt;/p>
+&lt;h2 id="1-振幅不変dq軸と電力不変dq軸の比較表">1. 振幅不変dq軸と電力不変dq軸の比較表&lt;/h2>
+&lt;p>上付きの $(A)$ は振幅不変、$(P)$ は電力不変を表します。以下では、&lt;/p>
+&lt;div>
+$$
+s=\sqrt{\frac32},\qquad
+I_{dq}^{(A)}=\sqrt{(i_d^{(A)})^2+(i_q^{(A)})^2},\qquad
+I_{dq}^{(P)}=\sqrt{(i_d^{(P)})^2+(i_q^{(P)})^2}
+$$
+&lt;/div>
+&lt;p>と定義します。表のPark変換係数は、三相abcからdqへ直接変換する場合の係数です。&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>項目&lt;/th>
+ &lt;th>振幅不変（A）&lt;/th>
+ &lt;th>電力不変（P）&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>Park変換係数&lt;/td>
+ &lt;td>$\frac23$&lt;/td>
+ &lt;td>$\sqrt{\frac23}$&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>dq軸電流&lt;/td>
+ &lt;td>$i_d^{(A)},\ i_q^{(A)}$&lt;/td>
+ &lt;td>$i_d^{(P)}=s i_d^{(A)},\ i_q^{(P)}=s i_q^{(A)}$&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>dq軸電圧&lt;/td>
+ &lt;td>$v_d^{(A)},\ v_q^{(A)}$&lt;/td>
+ &lt;td>$v_d^{(P)}=s v_d^{(A)},\ v_q^{(P)}=s v_q^{(A)}$&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>dq電流と相電流ピークの関係&lt;/td>
+ &lt;td>$I_{dq}^{(A)}=I_{\mathrm{phase,peak}}$&lt;/td>
+ &lt;td>$I_{dq}^{(P)}=\sqrt{\frac32}I_{\mathrm{phase,peak}}$&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>dq電流と相電流RMSの関係&lt;/td>
+ &lt;td>$I_{dq}^{(A)}=\sqrt2 I_{\mathrm{phase,RMS}}$&lt;/td>
+ &lt;td>$I_{dq}^{(P)}=\sqrt3 I_{\mathrm{phase,RMS}}$&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>永久磁石磁束鎖交数&lt;/td>
+ &lt;td>$\psi_f^{(A)}$&lt;/td>
+ &lt;td>$\psi_f^{(P)}=s\psi_f^{(A)}$&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>逆起電力q軸成分&lt;/td>
+ &lt;td>$e_q^{(A)}=\omega_e\psi_f^{(A)}$&lt;/td>
+ &lt;td>$e_q^{(P)}=\omega_e\psi_f^{(P)}=s e_q^{(A)}$&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>トルク定数（Nm/dq-A）&lt;/td>
+ &lt;td>$K_t^{(A)}=\frac32 p\psi_f^{(A)}$&lt;/td>
+ &lt;td>$K_t^{(P)}=p\psi_f^{(P)}$&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>トルク定数の比&lt;/td>
+ &lt;td>$K_t^{(A)}$&lt;/td>
+ &lt;td>$K_t^{(P)}=\sqrt{\frac23}K_t^{(A)}$&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>電磁トルク&lt;/td>
+ &lt;td>$T_e=\frac32 p\psi_f^{(A)}i_q^{(A)}$&lt;/td>
+ &lt;td>$T_e=p\psi_f^{(P)}i_q^{(P)}$&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>電力&lt;/td>
+ &lt;td>$P_{\mathrm{el}}=\frac32(v_d^{(A)}i_d^{(A)}+v_q^{(A)}i_q^{(A)})$&lt;/td>
+ &lt;td>$P_{\mathrm{el}}=v_d^{(P)}i_d^{(P)}+v_q^{(P)}i_q^{(P)}$&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>銅損&lt;/td>
+ &lt;td>$P_{\mathrm{Cu}}=\frac32 R_s[(i_d^{(A)})^2+(i_q^{(A)})^2]$&lt;/td>
+ &lt;td>$P_{\mathrm{Cu}}=R_s[(i_d^{(P)})^2+(i_q^{(P)})^2]$&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>インダクタンス&lt;/td>
+ &lt;td>$L_d,\ L_q$&lt;/td>
+ &lt;td>同じ $L_d,\ L_q$&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>相抵抗&lt;/td>
+ &lt;td>$R_s$&lt;/td>
+ &lt;td>同じ $R_s$&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;p>電流とピーク値・RMSの関係は、平衡三相正弦波でdq電流が一定の場合です。$i_d=0$ のときは $I_{dq}=|i_q|$ となります。$p$ は極対数、$R_s$ は相抵抗、$\omega_e=p\omega_m$ は電気角速度、$\omega_m$ は機械角速度です。&lt;/p></description></item></channel></rss>
